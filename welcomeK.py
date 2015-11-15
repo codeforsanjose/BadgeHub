@@ -18,11 +18,12 @@ def printQRCode(name, email):
 	os.system("lpr -o landscape -o PageSize=Custom.60x100mm " + email + ".png")
 	
 while True:
-	print "If you have your QR code enter 'n' if you don't have your QR code enter 'y' \n"
-	newUser = raw_input("[y]\[n]")
+	print "If you have your QR code enter 'y' if you don't have your QR code enter 'n' \n"
+	print "When finished with user registration enter '0' \n" 
+	newUser = raw_input("[y]\[n]\[0]\n")
 
-	if newUser  == "y":
-	
+	if newUser  == "n":
+		#New User
 		#User input process
 		os.system("clear")
 		print "Hi!\n"
@@ -33,10 +34,10 @@ while True:
 			userName = raw_input("What's your name? ")
 			userEmail = raw_input("What's your email? ")
 			print "Is your name and email correct?"
-			correctName = raw_input("[y]\[n]")
+			correctName = raw_input("[y]\[n]\n")
 	
 		f = open("newUser.txt", "a")
-		f.write(userName + "\n" + userEmail + "\n")
+		f.write(userName + "\n" + userEmail + "\n" + "\n")
 		f.close()
 	
 		os.system ("clear")
@@ -47,7 +48,8 @@ while True:
 		printNameBadge(userName)
 		printQRCode(userName, userEmail)
 		
-	if newUser == "n":
+	if newUser == "y":
+		#Returning user
 		#User input process
 		os.system("clear")
 		print "Hi!\n"
@@ -69,7 +71,7 @@ while True:
 		splitPosition = userName.find(";");
 		if splitPosition != -1:
 			userName = userName[:splitPosition]
-			
+		0	
 		splitPosition = barcodedata.find(";");
 		if splitPosition != -1:
 			userEmail = barcodedata[splitPosition + 1:]
@@ -77,7 +79,7 @@ while True:
 		y = open("returningUser.txt", "a")
 		y.write(userName + " " + userEmail)
 		
-		#printNameBadge(userName)
+		printNameBadge(userName)
 
 		if barcodedata:
 			print "{0}".format(barcodedata)
@@ -85,3 +87,7 @@ while True:
 			os.system("v4l2-ctl --overlay=0")
 			y.close()
 		os.system("clear\n")
+
+	if newUser =="0":
+		#End program
+		exit()
