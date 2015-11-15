@@ -10,4 +10,5 @@ shell script to terminate zbar and camera
 QR Encoder:
 
 Printer:
-CUPS
+CUPS - edited filter.conf file... changed ps_accounting:1 to ps_accounting:0
+      sudo nano /etc/foomatic/filter.conf
