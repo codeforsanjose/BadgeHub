@@ -71,7 +71,7 @@ while True:
 		splitPosition = userName.find(";");
 		if splitPosition != -1:
 			userName = userName[:splitPosition]
-		0	
+			
 		splitPosition = barcodedata.find(";");
 		if splitPosition != -1:
 			userEmail = barcodedata[splitPosition + 1:]
