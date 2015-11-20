@@ -7,6 +7,8 @@ zbar and qrencode
 To install zbar and qrencode, type
 sudo apt-get install zbar-tools
 sudo apt-get install qrencode
+into lxterminal
+
 
 Printer:
 Tutorial used for CUPS installation: http://www.hmazter.com/2013/05/raspberry-pi-printer-server-for-labelwriter
