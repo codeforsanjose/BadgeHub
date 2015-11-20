@@ -5,10 +5,11 @@ Repositories used:
 
 QR Scanner:
 zbar
-shell script to terminate zbar and camera
 
 QR Encoder:
 
 Printer:
-CUPS - edited filter.conf file... changed ps_accounting:1 to ps_accounting:0
-      sudo nano /etc/foomatic/filter.conf
+Tutorial used for CUPS installation.
+CUPS - http://www.hmazter.com/2013/05/raspberry-pi-printer-server-for-labelwriter
+      
+
