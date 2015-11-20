@@ -9,7 +9,6 @@ zbar
 QR Encoder:
 
 Printer:
-Tutorial used for CUPS installation.
-CUPS - http://www.hmazter.com/2013/05/raspberry-pi-printer-server-for-labelwriter
+Tutorial used for CUPS installation: http://www.hmazter.com/2013/05/raspberry-pi-printer-server-for-labelwriter
       
 
