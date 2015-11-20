@@ -29,8 +29,8 @@ def userResponse(name):
 	
 while True:
 	print "If you have your QR code enter 'y' if you don't have your QR code enter 'n' \n"
-	print "When finished with user registration enter '0' \n" 
-	newUser = raw_input("[y]\[n]\[0]\n")
+	#if the event is over, enter 0 to exit program.
+	newUser = raw_input("[y]\[n]\n")
 
 	if newUser  == "n":
 		#New User
@@ -57,7 +57,6 @@ while True:
 		
 		printNameBadge(userName)
 		printQRCode(userName, userEmail)
-		userResponse(userName)
 		
 	if newUser == "y":
 		#Returning user
@@ -99,8 +98,7 @@ while True:
 			os.system("v4l2-ctl --overlay=0")
 			y.close()
 		os.system("clear\n")
-
-		userResponse(userName)
+		
 	if newUser =="0":
 		#End program
 		print "Thank you, and goodbye!"
