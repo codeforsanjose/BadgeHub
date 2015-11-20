@@ -5,18 +5,27 @@ import time
 os.system("clear")
 
 def printNameBadge(name):
-	p = open("printCurrentUser.txt", "w")
+	p = open("printNameBadge.txt", "w")
 	p.write("Hello My Name Is:")
 	p.write("\n")
 	p.write("\n")
 	p.write(name)
 	p.close()
 	
-	os.system("lpr -o landscape -o lpi=2 -o cpi=5 -o  PageSize=Custom.50x100mm printCurrentUser.txt")
+	os.system("lpr -o landscape -o lpi=2 -o cpi=5 -o  PageSize=Custom.50x100mm printNameBadge.txt")
 
 def printQRCode(name, email):
 	os.system("qrencode -o " + email + ".png " + " '" + name + ";" + email + "' " )
 	os.system("lpr -o landscape -o PageSize=Custom.60x100mm " + email + ".png")
+
+def userResponse(name):
+	print "Why did you come out to this meeting tonight?"
+	response = raw_input("")
+	g = open("userResponse.txt", "a")
+	g.write(name)
+	g.write(";")
+	g.write(response)
+	g.write("\n")
 	
 while True:
 	print "If you have your QR code enter 'y' if you don't have your QR code enter 'n' \n"
@@ -45,9 +54,10 @@ while True:
 		print "Thank you for checking in, " + userName + "!"
 		print "Please wait a moment, your Name Badge and QR code are printing!\n"
 		print "\n"
-	
+		
 		printNameBadge(userName)
 		printQRCode(userName, userEmail)
+		userResponse(userName)
 		
 	if newUser == "y":
 		#Returning user
@@ -80,6 +90,7 @@ while True:
 		y = open("returningUser.txt", "a")
 		y.write(userName + " " + userEmail)
 		
+		
 		printNameBadge(userName)
 
 		if barcodedata:
@@ -89,6 +100,7 @@ while True:
 			y.close()
 		os.system("clear\n")
 
+		userResponse(userName)
 	if newUser =="0":
 		#End program
 		print "Thank you, and goodbye!"
