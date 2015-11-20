@@ -1,5 +1,6 @@
 import os
 import sys
+import time
 		
 os.system("clear")
 
@@ -90,4 +91,5 @@ while True:
 
 	if newUser =="0":
 		#End program
+		print "Thank you, and goodbye!"
 		exit()
