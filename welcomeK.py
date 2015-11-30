@@ -19,17 +19,19 @@ def printQRCode(name, email):
 	os.system("lpr -o landscape -o PageSize=Custom.60x100mm " + email + ".png")
 
 def userResponse(name):
-	print "Why did you come out to this meeting tonight?"
+	#add questions to the login system and record answers
+	print "Why did you come out here tonight?"
 	response = raw_input("")
 	g = open("userResponse.txt", "a")
 	g.write(name)
 	g.write(";")
 	g.write(response)
 	g.write("\n")
+	os.system("clear")
 	
 while True:
 	print "If you have your QR code enter 'y' if you don't have your QR code enter 'n' \n"
-	#if the event is over, enter 0 to exit program.
+	#print "When finished with user registration enter '0' \n" 
 	newUser = raw_input("[y]\[n]\n")
 
 	if newUser  == "n":
@@ -57,6 +59,7 @@ while True:
 		
 		printNameBadge(userName)
 		printQRCode(userName, userEmail)
+		#userResponse(userName)
 		
 	if newUser == "y":
 		#Returning user
@@ -87,8 +90,8 @@ while True:
 			userEmail = barcodedata[splitPosition + 1:]
 		
 		y = open("returningUser.txt", "a")
-		y.write(userName + " " + userEmail)
-		
+		y.write(userName + "\n" + userEmail + "\n" + "\n")
+		y.close()
 		
 		printNameBadge(userName)
 
@@ -98,7 +101,8 @@ while True:
 			os.system("v4l2-ctl --overlay=0")
 			y.close()
 		os.system("clear\n")
-		
+
+		#userResponse(userName)
 	if newUser =="0":
 		#End program
 		print "Thank you, and goodbye!"
