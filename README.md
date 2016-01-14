@@ -1,6 +1,7 @@
 *note* everytime you see "pi@raspberrypi ~ $" in this tutorial, it means it's a command line function, just copy what you see after "pi@raspberrypi ~ $" into the lxterminal and hit enter
 
 Directions at a glance
+
 	1) Install QR scanning and generating repositories
 		a. pi@raspberrypi ~ $ sudo apt-get install zbar-tools
 		b. pi@raspberrypi ~ $ sudo apt-get install qrencode
