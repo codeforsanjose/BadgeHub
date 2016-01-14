@@ -4,6 +4,7 @@ Preliminary information:
 	This guide is under the assumption that you have a Raspberry pi 1 or 2 with your Dymo printer connected to it via USB. Also this guide was created with a Raspberry Pi 2 with Raspbian installed - your mileage may vary depending on your Raspberry Pi model and OS.
 
 Directions at a glance
+
 	1) Install QR scanning and generating repositories
 		a. pi@raspberrypi ~ $ sudo apt-get install zbar-tools
 		b. pi@raspberrypi ~ $ sudo apt-get install qrencode
