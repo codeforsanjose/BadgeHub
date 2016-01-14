@@ -35,7 +35,7 @@ def csvInitialization(): #initializes the CSV file and creates fields and names 
 		writer = csv.DictWriter (csvfile, fieldnames=fieldnames)
 		writer.writeheader()
 
-def userInput():
+def userInput():#newuser function
 	correctName = "no"
 	while correctName == "no":
 		userName = raw_input("What's your name? ")
@@ -47,19 +47,20 @@ def userInput():
 	printNameBadge(userName)
 	printQRCode(userName, userEmail)
 
-def userInformation(name, email):
+def userInformation(name, email): #puts information such as name, email and when they logged in into the CSV file
 	with open("userInformation.csv", "a") as csvfile:
 		fieldnames = ['Name', 'Email', 'Time Stamp', 'User Response 1', 'User Response 2', 'User Response 3']
 		writer = csv.DictWriter (csvfile, fieldnames=fieldnames)
 		writer.writerow({'Name': name, 'Email': email, 'Time Stamp': datetime.datetime.now()})
 
-def thankYouMessage(name):
+def thankYouMessage(name): #takes name parameter and puts it in a thank you message
 	os.system("clear")
 	print "Thank you for checking in, " + name + "!"
-	print "Please wait a moment, your Name Badge and QR code are printing!\n"
+	print "Please wait a moment, your Name Badge and/or QR code are printing!\n"
 	print "\n"
 
-def qrScanProcess():#QR scan process - turns on the camera, then calls functions userinformation to store information into CSV file, qrTurnOffProcess to turn off camera and thankYouMessage to say thanks
+def qrScanProcess():#returning user function
+#QR scan process - turns on the camera, then calls functions userinformation to store information into CSV file, qrTurnOffProcess to turn off camera and thankYouMessage to say thanks
         os.system("sudo modprobe bcm2835-v4l2")
         os.system("v4l2-ctl --overlay=1")
         x = os.popen("zbarcam -v --nodisplay --prescale=640x480","r")
@@ -80,10 +81,10 @@ def qrScanProcess():#QR scan process - turns on the camera, then calls functions
 
 	userInformation(userName, userEmail)
 	qrTurnOffProcess(barcodedata)
+	printNameBadge(userName)
 	thankYouMessage(userName)
-	#printNameBadge(userName)
 
-def qrTurnOffProcess(barcodedata): #turns of camera
+def qrTurnOffProcess(barcodedata): #turns off camera
         if barcodedata:
                 print "{0}".format(barcodedata)
                 os.system("/home/pi/kill.sh")
@@ -113,7 +114,7 @@ while True:
 		qrScanProcess()
 		#surveyQuestions(userName)
 
-	if newUser =="0":
+	if newUser == "0":
  		#End program
 		print "Thank you, and goodbye!"
 		exit()
