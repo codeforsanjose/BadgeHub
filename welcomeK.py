@@ -16,7 +16,7 @@ def printNameBadge(name): #prints name badge from user's inputted information
 	os.system("lpr -o landscape -o lpi=2 -o cpi=5 -o  PageSize=Custom.48x100mm printNameBadge.txt")
 
 def printQRCode(name, email): #prints QR code from user's inputted information
-	os.system("qrencode -o " + email + ".png " + " '" + name + ";" + email + "' " )
+	os.system("qrencode -o " + email + ".png " + "'"+ name + ";" + email +"'" )
 	os.system("lpr -o landscape -o PageSize=Custom.45x100mm " + email + ".png")
 
 def surveyQuestions(name): #survey questions segment, can be expanded to more than one question
@@ -36,16 +36,16 @@ def csvInitialization(): #initializes the CSV file and creates fields and names 
 		writer.writeheader()
 
 def userInput():
-	correctName = "n"
-	while correctName == "n":
+	correctName = "no"
+	while correctName == "no":
 		userName = raw_input("What's your name? ")
 		userEmail = raw_input("What's your email? ")
 		print "Is the information you see above entered correctly?"
 		correctName = raw_input("[yes]\[no]\n")
 	userInformation(userName, userEmail)
 	thankYouMessage(userName)
-	#printNameBadge(userName)
-	#printQRCode(userName, userEmail)
+	printNameBadge(userName)
+	printQRCode(userName, userEmail)
 
 def userInformation(name, email):
 	with open("userInformation.csv", "a") as csvfile:
