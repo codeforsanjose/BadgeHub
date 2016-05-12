@@ -49,3 +49,15 @@ Directions at a glance
 Side note- emergency camera shutoff function:
 	V4l2-ctl --overlay=0
 
+How to run the program:
+
+	1) After booting the system enter "pi" as the user ID and "raspberry" as the password (no quotations)
+	2) Enter "python welcome.py" to run the program
+	3) to exit the program press the keys "ctrl" and "c" about 3 or 4 times consecutively
+
+To access your CSV file:
+
+	1) after booting the system and logging in, simply enter "startx" in the command line to bring up the GUI
+	2) at the top click on the file cabinet icon
+	3) at the sidebar to your left click on the "pi" directory - your csv file should be there titled consecutively "userInformation.csv"
+
