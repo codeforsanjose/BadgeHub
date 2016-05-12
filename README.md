@@ -59,5 +59,5 @@ To access your CSV file:
 
 	1) after booting the system and logging in, simply enter "startx" in the command line to bring up the GUI
 	2) at the top click on the file cabinet icon
-	3) at the sidebar to your left click on the "pi" directory - your csv file should be there titled consecutively "userInformation.csv"
+	3) at the sidebar to your left click on the "pi" directory - your csv file should be there titled "userInformation.csv"
 
