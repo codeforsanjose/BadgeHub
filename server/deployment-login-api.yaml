@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: login-api
+spec:
+  template:
+    metadata:
+      labels:
+        app: login-api
+    spec:
+      containers:
+      - name: login-api
+        image: gcr.io/code-for-san-jose-login/login-api:v1
+        ports:
+        - containerPort: 80
