@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: login-api
 spec:
+  replicas: 2
   template:
     metadata:
       labels:
