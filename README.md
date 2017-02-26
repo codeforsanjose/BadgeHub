@@ -34,7 +34,7 @@ Directions at a glance
 			ii. Click on the DYMO LabelWriter 450 Turbo and then continue
 			iii. For the next page you can customize the information of the printer and then hit continue
 			iv. On this page it'll ask for the model of the printer, ensure that the model is the model of your printer then hit add printer
-			v. Verify everything through the admin interface - click Manage Printers and the LabelWriter should appear in the list.
+			v. Verify everything through the admin interface - click Manage Printers and the LabelWriter should appear in the list. A common media size used for printing name badges is the 30857 Badge Label (2-1/4¨ x 4¨)
 			vi. Finally, we must make the labelwriter the default printer 
 				1) Click on printers and then click on the name of your printer
 				2) On the new page click on administration and then click on set as server default
