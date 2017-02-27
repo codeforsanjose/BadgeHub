@@ -82,8 +82,10 @@ var nametag = {
         
         var text = this.name_elem.value;
         var font_size = 48;
-        if (text.length > 15){
+        if (text.length > 15 && text.length < 23) {
           font_size = 30;
+        } else if (text.length >= 23) {
+          font_size = 25;
         }
         ctx.font = font_size+'px sans-serif';
         ctx.fillText(text, this.margin, this.margin+font_size);
@@ -110,13 +112,19 @@ var nametag = {
         // 5 : 368
         // 9 : 800
         var typeNumber = 3;
-        if (qr_text.length < 25){
+        if (qr_text.length < 5) {
+            typeNumber = 1;
+        } else if (qr_text.length >= 5 && qr_text.length < 15) {
+            typeNumber = 2;
+        } else if (qr_text.length >= 15 && qr_text.length < 25) {
            typeNumber  = 3;
         } else if (qr_text.length >= 25 && qr_text.length < 35) {
             typeNumber = 4;
-        } else if (qr_text.length >= 35) {
+        } else if (qr_text.length >= 35 && qr_text.length < 45) {
             typeNumber = 5;
-        } 
+        } else if (qr_text.length >= 45 && qr_text.length < 55) {
+            typeNumber = 6;
+        }
         var qr = new QRCode(typeNumber, QRErrorCorrectLevel.H);
         qr.addData(qr_text);
         qr.make();
