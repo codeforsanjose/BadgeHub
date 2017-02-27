@@ -9,20 +9,21 @@
     <link rel="stylesheet" href="static/styles/main.css" type="text/css">
 
     <script src="static/js/qrcode.js" type="text/javascript"></script>
-
   </head>
   <body>
     <div class="header">
-      <h1>Welcome to Code For San Jose</h1>
-      <p>Please sign in.</p>
+      <h1><img src="static/images/c4sj_logo.jpg" alt="Code For San Jose" id="c4sj_logo"></h1>
+      <p>Welcome! Please sign in.</p>
     </div>
     <form id="login_form" action="/print" method="post">
       <input type="text" name="nametag_img" hidden>
       <label>
-        <input type="text" name="name" placeholder="your name">
+        <span>Name</span>
+        <input type="text" name="name" placeholder="your name" required>
       </label>
       <label>
-        <input type="text" name="email" placeholder="your email address">
+        <span>Email address</span>
+        <input type="text" name="email" placeholder="your email address" required>
       </label>
       <label>
         <button type="submit" value="print">print</button>
@@ -30,9 +31,8 @@
     </form>
     <div class="nametag_preview">
       <h2>Nametag preview:</h2>
-      <canvas id="nametag_canvas" width="500" height="225" ></canvas>
+      <canvas id="nametag_canvas" width="400" height="220" ></canvas>
     </div>
-    <img src="" alt="nametag preview" id="n_preview"/>
     <script src="static/js/nametag.js" type="text/javascript"></script>
   </body>
 </html>

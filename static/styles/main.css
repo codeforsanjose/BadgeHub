@@ -2,4 +2,6 @@
 body, h1, h2, h3, h4, p {font-family: sans-serif;}
 h1 {font-size:3em;}
 
+h1 img {height:10rem;}
+
 canvas {border: 1px solid #3c3c3c;}

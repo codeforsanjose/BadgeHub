@@ -3,12 +3,14 @@ var SERVER_ENDPOINT = '/print';
 
 var nametag = {
     canvas : null,
+    margin : 10,
 
-    init : function (canvas_id, form_id){
+    init : function (canvas_id, form_id, logo_elem){
         this.canvas = document.getElementById(canvas_id);
         this.canvas_height = this.canvas.height;
         this.canvas_width = this.canvas.width;
 
+        this.logo = document.getElementById(logo_elem);
         this.form = document.getElementById(form_id);
         this.name_elem = this.form.elements["name"];
         this.email_elem = this.form.elements["email"];
@@ -18,8 +20,9 @@ var nametag = {
             var self = this;
             function createNametag(){
                 self.draw();
-                self.print();
             }
+            this.name_elem.onkeyup = createNametag;
+            this.email_elem.onkeyup = createNametag;
             this.form.addEventListener('change', createNametag);
         } else {
           console.error('unsupported browser');
@@ -27,6 +30,29 @@ var nametag = {
     },
 
     draw : function(){
+        this.clear_canvas();
+
+        // top-center
+        this.draw_text();
+        this.reset_context();
+
+        // lower-left corner
+        this.draw_qr();
+        this.reset_context();
+
+        // lower-right
+        this.draw_logo();
+        this.reset_context();
+
+        this.save_canvas();
+    },
+
+    reset_context : function(){
+        var ctx = this.canvas.getContext('2d');
+        ctx.fillStyle = "rgb(0,0,0)";
+    },
+    
+    clear_canvas : function(){
         var ctx = this.canvas.getContext('2d');
         var c_height = this.canvas.height;
         var c_width = this.canvas.width;
@@ -36,68 +62,77 @@ var nametag = {
         ctx.webkitImageSmoothingEnabled = false;
         ctx.msImageSmoothingEnabled = false;
         ctx.imageSmoothingEnabled = false;
-
-        var img = new Image();
-        img.onload = function() {
-            // TODO: adjust image height/width based on a percentage
-            // of the canvas height/width and image height/width
-            var i_width = parseInt(img.width)/4;
-            var i_height = parseInt(img.height)/4;
-            var x_pos = c_width - i_width;
-            var y_pos = c_height - i_height;
-            console.log('drawing c4sj logo', {'x' : x_pos, 'y' : y_pos, 'w': i_width, 'h':i_height})
-            ctx.drawImage(img, x_pos, y_pos, i_width, i_height);
-        };
-        img.src = 'static/images/c4sj_logo.jpg';
-
-        ctx.font = '48px serif';
-        ctx.fillText(this.name_elem.value, 10, 50);
-        this.print();
     },
 
-    print : function(){
-        console.log('sending to the server for printing...')
+    save_canvas : function(){
         var img = this.canvas.toDataURL("image/png");
-        document.getElementById("n_preview").src=img;
         this.nametag_img_elem.value=img;
+    },
+
+    draw_text : function(){
+        var ctx = this.canvas.getContext('2d');
+        var c_height = this.canvas.height;
+        var c_width = this.canvas.width;
+
+        ctx.font = '48px sans-serif';
+        ctx.fillText(this.name_elem.value, 10, 50);
+    },
+
+    draw_qr : function(){
+        var ctx = this.canvas.getContext('2d');
+        var c_height = this.canvas.height;
+        var c_width = this.canvas.width;
+
+        var cs=4; // cell size
+        var typeNumber = 4;  // 4 or 9
+        var qr_text = this.name_elem.value + ';' + this.email_elem.value;
+        var qr = new QRCode(typeNumber, QRErrorCorrectLevel.H);
+        qr.addData(qr_text);
+        qr.make();
+        var qr_pos = [0 + this.margin, c_height - this.margin - (qr.getModuleCount()*cs)];
+        for (var r = 0; r < qr.getModuleCount(); r++) {
+            for (var c = 0; c < qr.getModuleCount(); c++) {
+                if (qr.isDark(r, c) ) {
+                    ctx.fillStyle = "rgb(0,0,0)";  
+                } else {
+                    ctx.fillStyle = "rgb(255,255,255)";  
+                }
+                ctx.fillRect (c*cs + qr_pos[0], r*cs + qr_pos[1],cs,cs);  
+            }   
+        }
+    },
+
+    draw_logo : function(){
+        var ctx = this.canvas.getContext('2d');
+        var c_height = this.canvas.height;
+        var c_width = this.canvas.width;
+
+        // TODO: adjust image height/width based on a percentage
+        // of the canvas height/width and image height/width
+        var img = this.logo;
+        var i_width = parseInt(img.width)/2;
+        var i_height = parseInt(img.height)/2;
+        // lower-right corner
+        var x_pos = c_width - i_width - this.margin;
+        var y_pos = c_height - i_height - this.margin;
+        ctx.drawImage(img, x_pos, y_pos, i_width, i_height);
+
+        // convert to greyscale
+        // http://www.htmlgoodies.com/html5/javascript/display-images-in-black-and-white-using-the-html5-canvas.html
+        var px = ctx.getImageData(x_pos, y_pos, i_width, i_height);
+        var pixels  = px.data;
+        for (var i = 0, n = pixels.length; i < n; i += 4) {
+            var grayscale = pixels[i] * .3 + pixels[i+1] * .59 + pixels[i+2] * .11;
+            pixels[i  ] = grayscale;        // red
+            pixels[i+1] = grayscale;        // green
+            pixels[i+2] = grayscale;        // blue
+            //pixels[i+3]              is alpha
+        }
+        ctx.putImageData(px, x_pos, y_pos);
     }
 };
 
-/*
-function append_qrcode(typeNumber,elem_id,text) {
-    // typeNumber is 4 or 9
-    var e=document.getElementById(elem_id);
-    if (e) {
-        var canvas=document.createElement('canvas');
-        
-        var ctx = canvas.getContext('2d');
-        
-        var cs=4;// cell size
-        var qr = new QRCode(typeNumber, QRErrorCorrectLevel.H);
-        qr.addData(text);
-        qr.make();
-
-        canvas.setAttribute('width',qr.getModuleCount()*cs);
-        canvas.setAttribute('height',qr.getModuleCount()*cs);
-        e.appendChild(canvas);
-
-        if (canvas.getContext){
-            for (var r = 0; r < qr.getModuleCount(); r++) {
-                for (var c = 0; c < qr.getModuleCount(); c++) {
-                    if (qr.isDark(r, c) ) {
-                        ctx.fillStyle = "rgb(0,0,0)";  
-                    } else {
-                        ctx.fillStyle = "rgb(255,255,255)";  
-                    }
-                    ctx.fillRect (c*cs,r*cs,cs,cs);  
-                }   
-            }
-
-        }
-    }
-}
-*/
 
 (function(){
-    nametag.init('nametag_canvas', 'login_form');
+    nametag.init('nametag_canvas', 'login_form', 'c4sj_logo');
 })();
