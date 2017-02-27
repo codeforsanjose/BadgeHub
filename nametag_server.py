@@ -2,7 +2,7 @@ import os, base64, csv, datetime
 from flask import Flask, request, redirect, url_for, send_from_directory
 from werkzeug.utils import secure_filename
 
-PAGE_SIZE = "Custom.45x100mm"
+PAGE_SIZE = "Custom.54x100mm"
 IMAGE_FILE = "temp.png"
 UPLOAD_FOLDER = 'user_uploads'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
@@ -28,7 +28,7 @@ def save_user_info(name, email):
         writer.writerow({"Name":name, "Email":email, "Timestamp":datetime.datetime.now()})
 
 def send_to_printer():
-    os.system("lpr -o landscape -o PageSize={} {}".format(PAGE_SIZE, IMAGE_FILE))
+    os.system("lpr -o landscape -o PageSize={} -o fit-to-page  {}".format(PAGE_SIZE, IMAGE_FILE))
 
 @app.route('/')
 def root():
@@ -48,7 +48,7 @@ def upload_file():
             f.write(base64.b64decode(data))
         save_user_info(request.form['name'], request.form['email'])
         send_to_printer()
-        return redirect("/printing", code=200)
+        return redirect(url_for("printing"))
 
 
 app.run(host= '0.0.0.0')

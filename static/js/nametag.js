@@ -3,7 +3,7 @@ var SERVER_ENDPOINT = '/print';
 
 var nametag = {
     canvas : null,
-    margin : 10,
+    margin : 15,
 
     init : function (canvas_id, form_id, logo_elem){
         this.canvas = document.getElementById(canvas_id);
@@ -79,9 +79,14 @@ var nametag = {
         var ctx = this.canvas.getContext('2d');
         var c_height = this.canvas.height;
         var c_width = this.canvas.width;
-
-        ctx.font = '48px sans-serif';
-        ctx.fillText(this.name_elem.value, 10, 50);
+        
+        var text = this.name_elem.value;
+        var font_size = 48;
+        if (text.length > 15){
+          font_size = 30;
+        }
+        ctx.font = font_size+'px sans-serif';
+        ctx.fillText(text, this.margin, this.margin+font_size);
     },
 
     draw_qr : function(){
@@ -89,7 +94,7 @@ var nametag = {
         var c_height = this.canvas.height;
         var c_width = this.canvas.width;
 
-        var cs=4; // cell size
+        var cs=3; // cell size
         
         // max bit limit for types:
         // 2 : 128
@@ -97,7 +102,7 @@ var nametag = {
         // 4 : 288
         // 5 : 368
         // 9 : 800
-        var typeNumber = 4;
+        var typeNumber = 5;
         if (this.name_elem.value === '' &&
             this.email_elem.value === ''){
             return;
@@ -127,8 +132,8 @@ var nametag = {
         // TODO: adjust image height/width based on a percentage
         // of the canvas height/width and image height/width
         var img = this.logo;
-        var i_width = parseInt(img.width)/2;
-        var i_height = parseInt(img.height)/2;
+        var i_width = parseInt(img.width)*.8;
+        var i_height = parseInt(img.height)*.8;
         // lower-right corner
         var x_pos = c_width - i_width - this.margin;
         var y_pos = c_height - i_height - this.margin;
