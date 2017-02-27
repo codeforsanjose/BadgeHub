@@ -34,8 +34,11 @@ def send_to_printer():
 def root():
     return app.send_static_file('index.html')
 
+@app.route('/printing')
+def printing():
+    return app.send_static_file('printing.html')
 
-@app.route('/print', methods=['POST', 'GET'])
+@app.route('/print', methods=['POST'])
 def upload_file():
     if request.method == 'POST':
         print ("'name = '{}' email = '{}' nametag_img = '{}'".format( str(request.form['name']), str(request.form['email']), str(request.form['nametag_img']) ) )
@@ -45,9 +48,7 @@ def upload_file():
             f.write(base64.b64decode(data))
         save_user_info(request.form['name'], request.form['email'])
         send_to_printer()
-        return "OK"
-    else:
-        return "Working"
+        return redirect("/printing", code=200)
 
 
 app.run(host= '0.0.0.0')
