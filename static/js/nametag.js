@@ -19,6 +19,12 @@ var nametag = {
         if (this.canvas.getContext) {
             var self = this;
             function createNametag(){
+                if (self.name_elem.value === '' &&
+                    self.email_elem.value === ''){
+                    self.canvas.parentElement.classList.add('hidden')
+                    return;
+                }
+                self.canvas.parentElement.classList.remove('hidden')
                 self.draw();
             }
             this.name_elem.onkeyup = createNametag;
@@ -84,7 +90,18 @@ var nametag = {
         var c_width = this.canvas.width;
 
         var cs=4; // cell size
-        var typeNumber = 4;  // 4 or 9
+        
+        // max bit limit for types:
+        // 2 : 128
+        // 3 : 208
+        // 4 : 288
+        // 5 : 368
+        // 9 : 800
+        var typeNumber = 4;
+        if (this.name_elem.value === '' &&
+            this.email_elem.value === ''){
+            return;
+        }
         var qr_text = this.name_elem.value + ';' + this.email_elem.value;
         var qr = new QRCode(typeNumber, QRErrorCorrectLevel.H);
         qr.addData(qr_text);

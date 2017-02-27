@@ -1,7 +1,16 @@
 
+
 body, h1, h2, h3, h4, p {font-family: sans-serif;}
 h1 {font-size:3em;}
 
-h1 img {height:10rem;}
+h1, h1 img {display: inline-block;height:10rem;}
+.header p {display: inline-block; font-size: 2em; line-height: 2.2em; position: absolute; top: 0;}
+
+form { width:800px; font-size:1.1em;line-height: 1.5em;}
+form label {display:block; margin: 1rem 2rem;font-size:1.1em;line-height: 1.5em;}
+form label input {width:15rem;font-size:1.1em;line-height: 1.5em;padding:3px;}
+form button {display:inline-block; margin: 1rem 2rem;font-size: 1.1em;}
 
 canvas {border: 1px solid #3c3c3c;}
+
+.nametag_preview.hidden {display:none;}

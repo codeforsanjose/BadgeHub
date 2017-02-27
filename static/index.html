@@ -13,7 +13,7 @@
   <body>
     <div class="header">
       <h1><img src="static/images/c4sj_logo.jpg" alt="Code For San Jose" id="c4sj_logo"></h1>
-      <p>Welcome! Please sign in.</p>
+      <p>Welcome!<br/>Please sign in.</p>
     </div>
     <form id="login_form" action="/print" method="post">
       <input type="text" name="nametag_img" hidden>
@@ -25,11 +25,9 @@
         <span>Email address</span>
         <input type="text" name="email" placeholder="your email address" required>
       </label>
-      <label>
-        <button type="submit" value="print">print</button>
-      </label>
+      <button type="submit" value="print">print name tag</button>
     </form>
-    <div class="nametag_preview">
+    <div class="nametag_preview hidden">
       <h2>Nametag preview:</h2>
       <canvas id="nametag_canvas" width="400" height="220" ></canvas>
     </div>
