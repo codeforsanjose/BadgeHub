@@ -5,3 +5,4 @@ venv/
 # output from the program
 printNameBadge.txt
 userInformation.csv
+temp.png
