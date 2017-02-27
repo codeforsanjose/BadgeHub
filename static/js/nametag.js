@@ -48,7 +48,7 @@ var nametag = {
             console.log('drawing c4sj logo', {'x' : x_pos, 'y' : y_pos, 'w': i_width, 'h':i_height})
             ctx.drawImage(img, x_pos, y_pos, i_width, i_height);
         };
-        img.src = 'images/c4sj_logo.jpg';
+        img.src = 'static/images/c4sj_logo.jpg';
 
         ctx.font = '48px serif';
         ctx.fillText(this.name_elem.value, 10, 50);
@@ -60,19 +60,6 @@ var nametag = {
         var img = this.canvas.toDataURL("image/png");
         document.getElementById("n_preview").src=img;
         this.nametag_img_elem.value=img;
-
-        var opts = {
-          method: 'POST',
-          body: this.form,
-          headers: {}
-        };
-        fetch(SERVER_ENDPOINT, opts).then(function (response) {
-          return response.json();
-        })
-        .then(function (body) {
-          //doSomething with body;
-          console.log('sent data to server.');
-        });
     }
 };
 
