@@ -20,3 +20,5 @@ sudo make install
 
 sudo usermod -a -G lpadmin pi
 
+cp /home/pi/.config/lxsession/LXDE-pi/autostart /home/pi/.config/lxsession/LXDE-pi/autostart.orig
+cp autostart /home/pi/.config/lxsession/LXDE-pi/autostart

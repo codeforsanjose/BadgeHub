@@ -1,0 +1,10 @@
+@lxpanel --profile LXDE-pi
+@pcmanfm --desktop --profile LXDE-pi
+#@xscreensaver -no-splash  # comment this line out to disable screensaver
+@xset s off
+@xset -dpms
+@xset s noblank
+@point-rpi
+@python /home/pi/GitHub/CFSJ-Login-System/nametag_Server.py
+@chromium-browser --incognito --kiosk http://localhost/5000/
+

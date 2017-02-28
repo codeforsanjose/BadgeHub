@@ -12,12 +12,20 @@ h1, h1 img {display: inline-block;height:8rem;}
 .header p {display: inline-block; font-size: 2.5em; line-height: 2.5em;}
 
 form {display: inline-block; float: left; padding: 1.5rem; box-sizing: border-box; top: 27px; width: 50%; font-size: 1.1em; line-height: 1.5em; position: relative;}
-form label {display:flex; justify-content: space-between; margin:1rem;font-size:1em;line-height: 1.1em;}
+form label {display:flex; justify-content: space-between; margin:1rem;font-size:1em;line-height: 1.5rem;}
 form label span {width:auto; text-align:left;}
-form label input {width: 13rem; font-size: 1.0em; line-height: 1.1em; padding: 3px;border: 1px solid #a9a9a9;}
+form label input {
+    font-size: 1.0em;
+    line-height: 1.5em;
+    padding: 3px;
+    border: 1px solid #a9a9a9;
+    height: 1.5rem;
+    width: 11.5rem;}
 form button {display:inline-block;float: right; margin: 1rem 2rem;font-size: 1em;}
 
 
 .nametag_preview {display:inline-block;width: 50%;float:right; padding: 2rem; box-sizing: border-box;}
 .nametag_preview.hidden {display:none;}
 #nametag_preview_surrogate {display:inline-block; border: 1px solid #3c3c3c; width: 100%;}
+
+.thankyou_text {display: block; text-align:center;font-size: 2.3em; line-height: 2.5em;}

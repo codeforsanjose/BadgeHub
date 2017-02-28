@@ -1,63 +1,43 @@
-*note* everytime you see "pi@raspberrypi ~ $" in this tutorial, it means it's a command line function, just copy what you see after "pi@raspberrypi ~ $" into the lxterminal and hit enter
+The **Code For San Jose Log-In** system prints out nametags which contain the guests' name and email address as a QR code, name in plain text, and the Code For San Jose Brigade logo.
 
-Preliminary information:
-	This guide is under the assumption that you have a Raspberry pi 1 or 2 with your Dymo printer connected to it via USB. Also this guide was created with a Raspberry Pi 2 with Raspbian installed - your mileage may vary depending on your Raspberry Pi model and OS.
+![creating a nametag](static/images/nametag_web.gif)
 
-Directions at a glance
+Pre-requisites
+--------------
+* Raspberry Pi 2 or 3 running Raspbian in desktop mode.  
+* DYMO LabelWriter 450 printer connected to the Raspberry Pi via USB.
+For a complete list of equipments, pricing, and links to recommended products, see the [Bill of Materials](Bill of Materials.xlsx).
 
-	1) Install QR scanning and generating repositories
-		a. pi@raspberrypi ~ $ sudo apt-get install zbar-tools
-		b. pi@raspberrypi ~ $ sudo apt-get install qrencode
-		
-	2) Download the repository from Github and unzip the contents into your Raspberry Pi's root directory
-		a. Make the kill.sh an executable by running the chmod command
-			i. pi@raspberrypi ~ $ chmod 755 kill.sh
-	3) Run sudo apt-get update to initialize before we install the printer repositories
-		a. pi@raspberrypi ~ $ sudo apt-get update
-	4) Install the printer repositories
-		a.  CUPS libraries and other necessary libraries to build: 
-			i. pi@raspberrypi ~ $ sudo apt-get install libcups2-dev libcupsimage2-dev g++ cups cups-client 
-		b. Download Dymo LabelWriter SDK for Linux:
-			i. pi@raspberrypi ~ $ wget http://download.dymo.com/Download%20Drivers/Linux/Download/dymo-cups-drivers-1.4.0.tar.gz 
-		c. Unpack, configure and install the drivers.
-			i. pi@raspberrypi ~ $ tar xvf dymo-cups-drivers-1.4.0.tar.gz 
-			ii. pi@raspberrypi ~ $ cd dymo-cups-drivers-1.4.0.5/ 
-			iii. pi@raspberrypi ~/dymo-cups-drivers-1.4.0.5 $ sudo ./configure 
-			iv. pi@raspberrypi ~/dymo-cups-drivers-1.4.0.5 $ sudo make 
-			v. pi@raspberrypi ~/dymo-cups-drivers-1.4.0.5 $ sudo make install 
-	5) Add the printer
-		a. Add the pi user to the printer admin group to allowed to login to the printer admin
-			i. pi@raspberrypi ~ $ sudo usermod -a -G lpadmin pi 
-		b. Navigate to http://localhost:631/
-			i. Click on administration at the top and then click on add printer in this new page
-				1) If it asks for a password enter pi as the user and raspberry as the password
-			ii. Click on the DYMO LabelWriter 450 Turbo and then continue
-			iii. For the next page you can customize the information of the printer and then hit continue
-			iv. On this page it'll ask for the model of the printer, ensure that the model is the model of your printer then hit add printer
-			v. Verify everything through the admin interface - click Manage Printers and the LabelWriter should appear in the list. A common media size used for printing name badges is the 30857 Badge Label (2-1/4¨ x 4¨)
-			vi. Finally, we must make the labelwriter the default printer 
-				1) Click on printers and then click on the name of your printer
-				2) On the new page click on administration and then click on set as server default
-			vii. You're done!
-	6) Enable camera 
-		a. pi@raspberrypi ~ $ sudo raspi-config 
-			i. Once here, choose #6 and enable the camera. 
-	7) Finally, Reboot the device!
-	8) After everything is said and done run the command python welcomek.py to test the program.
+Setting up your Raspberry Pi as a nametag kiosk
+-------------------------------------------------
+1. Open terminal and create a new folder called "GitHub". Run: `mkdir ~/GitHub`
+    **NOTE:** Ensure that the folder name is "GitHub" since the folder name is referenced in the install script. 
+2. Clone the git repository from GitHub. Run:
+    ```
+    cd ~/GitHub
+    git clone https://github.com/codeforsanjose/CFSJ-Login-System.git
+    ```
+ 
+3. Run the install script: `chmod +x ./install/install_deps.sh`
 
-
-Side note- emergency camera shutoff function:
-	V4l2-ctl --overlay=0
-
-How to run the program:
-
-	1) After booting the system enter "pi" as the user ID and "raspberry" as the password (no quotations)
-	2) Enter "python welcome.py" to run the program
-	3) to exit the program press the keys "ctrl" and "c" about 3 or 4 times consecutively
-
-To access your CSV file:
-
-	1) after booting the system and logging in, simply enter "startx" in the command line to bring up the GUI
-	2) at the top click on the file cabinet icon
-	3) at the sidebar to your left click on the "pi" directory - your csv file should be there titled "userInformation.csv"
+Adding the DYMO LabelWriter 450 printer
+-------------------------------------------
+1. Open Chromium and browse to [http://localhost:631/](http://localhost:631/).
+2. Click **Administration** tab at the top and then click **Add Printer** under Printers.
+3. In the **Authentication Required** dialog box, enter `pi` as the user name and `raspberry` as the password.
+4. Click **Log In**.
+5. In the Add Printer page, select **DYMO LabelWriter 450 (DYMO LabelWriter 450)** and then click **Continue**.
+6. On the Add Printer page, review the Name and Description. Click **Continue**.
+7. Select **DYMO LabelWriter 450** from the Model list.
+8. Click **Add Printer**.
+9. In the Set Default Options for DYMO_LabelWriter_450 page, set the following:
+	* Media size: **30857 Badge Label**
+	* Output Resolution: **300x600 DPI**
+	* Halftoning: **Error Diffusion**
+	* Print Density: **Normal**
+	* Print Quality: **Barcodes and Graphics**
+10. Click **Set Defaut Options**. You will be redirected to the Printers tab.
+11. Click the **Administration** drop-down and select **Set As Server Default**.
+12. Finally, close the browser and reboot the device.
+After the Raspberry Pi startsup, Chromium should automatically open and display the login system.
 
