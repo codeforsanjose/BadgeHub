@@ -6,7 +6,24 @@ Pre-requisites
 --------------
 * Raspberry Pi 2 or 3 running Raspbian in desktop mode.  
 * DYMO LabelWriter 450 printer connected to the Raspberry Pi via USB.
-For a complete list of equipments, pricing, and links to recommended products, see the [Bill of Materials](Bill of Materials.xlsx).
+
+The Bill of Materials provides the complete list of equipments, pricing, and links to recommended products.
+
+<details><summary>**Bill of Materials (click to open)**</summary><p>
+
+| Item No. | Description | Quantity | Price | Link |
+|----------|---------------|----------|-------|------|
+| 1 | Raspberry Pi 3 Model B | 1 | $38.31 | [Amazon link](https://www.amazon.com/Raspberry-Pi-RASPBERRYPI3-MODB-1GB-Model-Motherboard/dp/B01CD5VC92) |
+| 2 | Raspberry Pi 7" Touchscreen Display | 1 | $66.99 | [Amazon link](https://www.amazon.com/Raspberry-Pi-7-Touchscreen-Display/dp/B0153R2A9I/) |
+| 3 | Power Adapter | 1| $9.99| [Amazon link](https://www.amazon.com/CanaKit-Raspberry-Supply-Adapter-Charger/dp/B00MARDJZ4/) |
+| 4 | Keyboard | 1 | $14.99| [Amazon link](https://www.amazon.com/Anker-Bluetooth-Ultra-Slim-Keyboard-Devices/dp/B005ONMDYE/) |
+| 5 | Micro SD Card | 1| $15.95| [Amazon link](https://www.amazon.com/Samsung-Class-Micro-Adapter-MB-MC32DA/dp/B00WR4IJBE/) |
+| 6 | DYMO LabelWriter 450 | 1| $66.95| [Amazon link](https://www.amazon.com/DYMO-LabelWriter-Thermal-Printer-1752264/dp/B0027JBLV4) |
+| 7 | DYMO 2-1/4" x 4" labels (30857) | 1 | $10.00 | [Amazon link](https://www.amazon.com/DYMO-Adhesive-LabelWriter-Printers-30857/dp/B00009WO6F) |
+
+**Total Cost:** $223.18
+
+</p></details>
 
 Setting up your Raspberry Pi as a nametag kiosk
 -------------------------------------------------
