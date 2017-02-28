@@ -36,7 +36,7 @@ Setting up your Raspberry Pi as a nametag kiosk involves two steps:
 
 ### <a name="installing_login">Installing the login system</a>
 
-1. Open terminal and create a new folder called "GitHub". Run: `mkdir ~/GitHub`
+1. Open a terminal and create a new folder called "GitHub". Run: `mkdir ~/GitHub`
     
     **NOTE:** Ensure that the folder name is "GitHub" since the folder name is referenced in the install script. 
 2. Clone the git repository from GitHub. Run:
@@ -50,11 +50,11 @@ Setting up your Raspberry Pi as a nametag kiosk involves two steps:
 ### <a name="adding_printer">Adding the DYMO LabelWriter 450 printer</a>
 
 1. Open Chromium and browse to [http://localhost:631/](http://localhost:631/).
-2. Click **Administration** tab at the top and then click **Add Printer** under Printers.
+2. Click the **Administration** tab at the top and click **Add Printer** under Printers.
 3. In the **Authentication Required** dialog box, enter `pi` as the user name and `raspberry` as the password.
 4. Click **Log In**.
-5. In the Add Printer page, select **DYMO LabelWriter 450 (DYMO LabelWriter 450)** and then click **Continue**.
-6. Review the Name and Description. Click **Continue**.
+5. In the Add Printer page, select **DYMO LabelWriter 450 (DYMO LabelWriter 450)** and click **Continue**.
+6. Review the Name and Description and click **Continue**.
 7. Select **DYMO LabelWriter 450** from the Model list.
 8. Click **Add Printer**.
 9. In the Set Default Options for DYMO_LabelWriter_450 page, set the following:
@@ -67,5 +67,5 @@ Setting up your Raspberry Pi as a nametag kiosk involves two steps:
 11. Click the **Administration** drop-down and select **Set As Server Default**.
 12. Finally, close the browser and reboot the device.
 
-After the Raspberry Pi startsup, Chromium should automatically open and display the login system.
+After the Raspberry Pi is up and running, Chromium should automatically open and display the login system.
 
