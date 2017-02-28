@@ -37,6 +37,7 @@ Setting up your Raspberry Pi as a nametag kiosk involves two steps:
 ### <a name="installing_login">Installing the login system</a>
 
 1. Open terminal and create a new folder called "GitHub". Run: `mkdir ~/GitHub`
+    
     **NOTE:** Ensure that the folder name is "GitHub" since the folder name is referenced in the install script. 
 2. Clone the git repository from GitHub. Run:
     ```
