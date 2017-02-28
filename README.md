@@ -1,6 +1,6 @@
 # Code For San Jose Login System
 
-The **Code For San Jose Login System** prints out nametags which contain the guests' name and email address as a QR code, name in plain text, and the Code For San Jose Brigade logo. The guest information is recorded in a `.csv` file.
+The **Code For San Jose Login System** prints out nametags which contain the guest's name and email address as a QR code, name in plain text, and the Code For San Jose Brigade logo. The guest information is recorded in a `.csv` file.
 
 ![creating a nametag](static/images/nametag_web.gif)
 
@@ -54,7 +54,7 @@ Setting up your Raspberry Pi as a nametag kiosk involves two steps:
 3. In the **Authentication Required** dialog box, enter `pi` as the user name and `raspberry` as the password.
 4. Click **Log In**.
 5. In the Add Printer page, select **DYMO LabelWriter 450 (DYMO LabelWriter 450)** and then click **Continue**.
-6. On the Add Printer page, review the Name and Description. Click **Continue**.
+6. Review the Name and Description. Click **Continue**.
 7. Select **DYMO LabelWriter 450** from the Model list.
 8. Click **Add Printer**.
 9. In the Set Default Options for DYMO_LabelWriter_450 page, set the following:
@@ -66,5 +66,6 @@ Setting up your Raspberry Pi as a nametag kiosk involves two steps:
 10. Click **Set Defaut Options**. You will be redirected to the Printers tab.
 11. Click the **Administration** drop-down and select **Set As Server Default**.
 12. Finally, close the browser and reboot the device.
+
 After the Raspberry Pi startsup, Chromium should automatically open and display the login system.
 
