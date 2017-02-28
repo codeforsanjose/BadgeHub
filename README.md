@@ -28,10 +28,11 @@ The Bill of Materials provides the complete list of equipments, pricing, and lin
 Setting up your Raspberry Pi as a nametag kiosk
 -------------------------------------------------
 Setting up your Raspberry Pi as a nametag kiosk involves two steps:
+
 1. [Installing the login system](#installing_login)
 2. [Adding the DYMO LabelWriter 450 printer](#adding_printer)
 
-### <a name="installing_login"></a>Installing the login system
+### <a name="installing_login">Installing the login system</a>
 
 1. Open terminal and create a new folder called "GitHub". Run: `mkdir ~/GitHub`
     **NOTE:** Ensure that the folder name is "GitHub" since the folder name is referenced in the install script. 
@@ -43,7 +44,7 @@ Setting up your Raspberry Pi as a nametag kiosk involves two steps:
  
 3. Run the install script: `chmod +x ./install/install_deps.sh`
 
-### <a name="adding_printer"></a>Adding the DYMO LabelWriter 450 printer
+### <a name="adding_printer">Adding the DYMO LabelWriter 450 printer</a>
 
 1. Open Chromium and browse to [http://localhost:631/](http://localhost:631/).
 2. Click **Administration** tab at the top and then click **Add Printer** under Printers.
