@@ -1,8 +1,8 @@
 # Code For San Jose Login System
 
-The **Code For San Jose Login System** prints out nametags which contain the guest's name and email address as a QR code, name in plain text, and the Code For San Jose Brigade logo. The guest information is recorded in a `.csv` file.
+The **Code For San Jose Login System** prints out name tags which contain the guest's name and email address as a QR code, name in plain text, and the Code For San Jose Brigade logo. The guest information is recorded in a `.csv` file.
 
-![creating a nametag](static/images/nametag_web.gif)
+![creating a name tag](static/images/nametag_web.gif)
 
 Pre-requisites
 --------------
@@ -27,9 +27,9 @@ The Bill of Materials provides the complete list of equipments, pricing, and lin
 
 </p></details>
 
-Setting up your Raspberry Pi as a nametag kiosk
+Setting up your Raspberry Pi as a name tag kiosk
 -------------------------------------------------
-Setting up your Raspberry Pi as a nametag kiosk involves two steps:
+Setting up your Raspberry Pi as a name tag kiosk involves two steps:
 
 1. [Installing the login system](#installing_login)
 2. [Adding the DYMO LabelWriter 450 printer](#adding_printer)
@@ -63,7 +63,7 @@ Setting up your Raspberry Pi as a nametag kiosk involves two steps:
 	* Halftoning: **Error Diffusion**
 	* Print Density: **Normal**
 	* Print Quality: **Barcodes and Graphics**
-10. Click **Set Defaut Options**. You will be redirected to the Printers tab.
+10. Click **Set Default Options**. You will be redirected to the Printers tab.
 11. Click the **Administration** drop-down and select **Set As Server Default**.
 12. Finally, close the browser and reboot the device.
 
