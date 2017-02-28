@@ -1,6 +1,6 @@
-# Code For San Jose Log-In System
+# Code For San Jose Login System
 
-The **Code For San Jose Log-In System** prints out nametags which contain the guests' name and email address as a QR code, name in plain text, and the Code For San Jose Brigade logo. The guest information is recorded in a `.csv` file.
+The **Code For San Jose Login System** prints out nametags which contain the guests' name and email address as a QR code, name in plain text, and the Code For San Jose Brigade logo. The guest information is recorded in a `.csv` file.
 
 ![creating a nametag](static/images/nametag_web.gif)
 
