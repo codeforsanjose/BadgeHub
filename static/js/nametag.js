@@ -1,14 +1,16 @@
 
 var SERVER_ENDPOINT = '/print';
 
+
 var nametag = {
     canvas : null,
-    margin : 15,
+    margin_pct : 0.05,
 
     init : function (canvas_id, form_id, logo_elem, img_preview_id){
         this.canvas = document.getElementById(canvas_id);
         this.canvas_height = this.canvas.height;
         this.canvas_width = this.canvas.width;
+        this.margin = this.margin_pct * this.canvas.width;
 
         this.logo = document.getElementById(logo_elem);
         this.form = document.getElementById(form_id);
@@ -83,14 +85,21 @@ var nametag = {
         var c_width = this.canvas.width;
         
         var text = this.name_elem.value;
-        var font_size = 48;
-        if (text.length > 15 && text.length < 23) {
-          font_size = 30;
-        } else if (text.length >= 23) {
-          font_size = 25;
-        }
-        ctx.font = font_size+'px sans-serif';
-        ctx.fillText(text, this.margin, this.margin+font_size);
+        var fontface = 'sans-serif';
+
+        // fit text on canvas
+        // http://stackoverflow.com/a/20552063
+	// start with a large font size
+        var fontsize=Math.floor(c_height/4);
+
+        // lower the font size until the text fits the canvas
+        do{
+          fontsize = fontsize - 1;
+          ctx.font=fontsize+"px "+fontface;
+        } while (ctx.measureText(text).width > (c_width - (this.margin*2)))
+
+        // draw the text
+        ctx.fillText(text,this.margin, this.margin+fontsize);
     },
 
     draw_qr : function(){
@@ -105,7 +114,8 @@ var nametag = {
                                  
         var qr_text = this.name_elem.value + ';' + this.email_elem.value;
   
-        var cs=3; // cell size
+        // cell size
+        var cs=Math.floor(c_height/70);
         
         // max bit limit for types:
         // 2 : 128
@@ -113,6 +123,7 @@ var nametag = {
         // 4 : 288
         // 5 : 368
         // 9 : 800
+        // library max typeNumber is 40
         var typeNumber = 3;
         if (qr_text.length < 5) {
             typeNumber = 1;
@@ -151,16 +162,15 @@ var nametag = {
         // TODO: adjust image height/width based on a percentage
         // of the canvas height/width and image height/width
         var img = this.logo;
-        var i_width = parseInt(img.width)*.8;
-        var i_height = parseInt(img.height)*.8;
         // lower-right corner
-        var x_pos = c_width - i_width - this.margin;
-        var y_pos = c_height - i_height - this.margin;
-        ctx.drawImage(img, x_pos, y_pos, i_width, i_height);
+	var image_size = this.calculateAspectRatioFit(img.width, img.height, (c_width*.5), (c_height*.5))
+        var x_pos = c_width - image_size.width - this.margin;
+        var y_pos = c_height - image_size.height - this.margin;
+        ctx.drawImage(img, x_pos, y_pos, image_size.width, image_size.height);
 
         // convert to greyscale
         // http://www.htmlgoodies.com/html5/javascript/display-images-in-black-and-white-using-the-html5-canvas.html
-        var px = ctx.getImageData(x_pos, y_pos, i_width, i_height);
+        var px = ctx.getImageData(x_pos, y_pos, image_size.width, image_size.height);
         var pixels  = px.data;
         for (var i = 0, n = pixels.length; i < n; i += 4) {
             var grayscale = pixels[i] * .3 + pixels[i+1] * .59 + pixels[i+2] * .11;
@@ -170,6 +180,12 @@ var nametag = {
             //pixels[i+3]              is alpha
         }
         ctx.putImageData(px, x_pos, y_pos);
+    },
+
+    calculateAspectRatioFit : function(srcWidth, srcHeight, maxWidth, maxHeight) {
+        // http://stackoverflow.com/a/14731922
+        var ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
+        return { width: srcWidth*ratio, height: srcHeight*ratio };
     }
 };
 
