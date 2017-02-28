@@ -5,13 +5,14 @@ var nametag = {
     canvas : null,
     margin : 15,
 
-    init : function (canvas_id, form_id, logo_elem){
+    init : function (canvas_id, form_id, logo_elem, img_preview_id){
         this.canvas = document.getElementById(canvas_id);
         this.canvas_height = this.canvas.height;
         this.canvas_width = this.canvas.width;
 
         this.logo = document.getElementById(logo_elem);
         this.form = document.getElementById(form_id);
+        this.img_preview = document.getElementById(img_preview_id);
         this.name_elem = this.form.elements["name"];
         this.email_elem = this.form.elements["email"];
         this.nametag_img_elem = this.form.elements["nametag_img"];
@@ -72,6 +73,7 @@ var nametag = {
 
     save_canvas : function(){
         var img = this.canvas.toDataURL("image/png");
+        this.img_preview.src=img;
         this.nametag_img_elem.value=img;
     },
 
@@ -173,5 +175,5 @@ var nametag = {
 
 
 (function(){
-    nametag.init('nametag_canvas', 'login_form', 'c4sj_logo');
+    nametag.init('nametag_canvas', 'login_form', 'c4sj_logo', 'nametag_preview_surrogate');
 })();

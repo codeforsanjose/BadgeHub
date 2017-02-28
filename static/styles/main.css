@@ -1,16 +1,23 @@
 
-
+html, body {position:absolute;top:0;left:0;display: block;width: 800px;
+    height: 480px;
+    margin:0;padding:0;overflow: hidden;}
 body, h1, h2, h3, h4, p {font-family: sans-serif;}
 h1 {font-size:3em;}
+h2{font-size: 1.2em; margin-top: .4rem; margin-bottom: .6rem;}
 
-h1, h1 img {display: inline-block;height:10rem;}
-.header p {display: inline-block; font-size: 2em; line-height: 2.2em; position: absolute; top: 0;}
+h1, h1 img {display: inline-block;height:8rem;}
+.header {display: flex; position:relative; top:0; left:0;align-items: center; justify-content: center;float: left;width: 100%;height:8rem;margin:1rem;}
+.header h1 { position: absolute; left: 0;margin: 1rem;}
+.header p {display: inline-block; font-size: 2.5em; line-height: 2.5em;}
 
-form { width:800px; font-size:1.1em;line-height: 1.5em;}
-form label {display:block; margin: 1rem 2rem;font-size:1.1em;line-height: 1.5em;}
-form label input {width:15rem;font-size:1.1em;line-height: 1.5em;padding:3px;}
-form button {display:inline-block; margin: 1rem 2rem;font-size: 1.1em;}
+form {display: inline-block; float: left; padding: 1.5rem; box-sizing: border-box; top: 27px; width: 50%; font-size: 1.1em; line-height: 1.5em; position: relative;}
+form label {display:flex; justify-content: space-between; margin:1rem;font-size:1em;line-height: 1.1em;}
+form label span {width:auto; text-align:left;}
+form label input {width: 13rem; font-size: 1.0em; line-height: 1.1em; padding: 3px;border: 1px solid #a9a9a9;}
+form button {display:inline-block;float: right; margin: 1rem 2rem;font-size: 1em;}
 
-canvas {border: 1px solid #3c3c3c;}
 
+.nametag_preview {display:inline-block;width: 50%;float:right; padding: 2rem; box-sizing: border-box;}
 .nametag_preview.hidden {display:none;}
+#nametag_preview_surrogate {display:inline-block; border: 1px solid #3c3c3c; width: 100%;}

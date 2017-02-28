@@ -13,7 +13,7 @@
   <body>
     <div class="header">
       <h1><img src="static/images/c4sj_logo.jpg" alt="Code For San Jose" id="c4sj_logo"></h1>
-      <p>Welcome!<br/>Please sign in.</p>
+      <p>Welcome! Please sign in.</p>
     </div>
     <form id="login_form" action="/print" method="post">
       <input type="text" name="nametag_img" hidden>
@@ -29,7 +29,8 @@
     </form>
     <div class="nametag_preview hidden">
       <h2>Nametag preview:</h2>
-      <canvas id="nametag_canvas" width="400" height="220" ></canvas>
+      <img id="nametag_preview_surrogate" alt="nametag preview"/>
+      <canvas id="nametag_canvas" width="400" height="220" style="display:none" ></canvas>
     </div>
     <script src="static/js/nametag.js" type="text/javascript"></script>
   </body>
