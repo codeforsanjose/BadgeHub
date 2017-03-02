@@ -8,6 +8,7 @@ Pre-requisites
 --------------
 * Raspberry Pi 2 or 3 running Raspbian in desktop mode.  
 * DYMO LabelWriter 450 printer connected to the Raspberry Pi via USB.
+* Internet access for the Raspberry Pi.
 
 The Bill of Materials provides the complete list of equipments, pricing, and links to recommended products.
 
@@ -40,12 +41,15 @@ Setting up your Raspberry Pi as a name tag kiosk involves two steps:
     
     **NOTE:** Ensure that the folder name is "GitHub" since the folder name is referenced in the install script. 
 2. Clone the git repository from GitHub. Run:
+    
     ```
     cd ~/GitHub
     git clone https://github.com/codeforsanjose/CFSJ-Login-System.git
+    cd CFSJ-Login-System/
     ```
- 
-3. Run the install script: `chmod +x ./install/install_deps.sh`
+3. Run the install script: `./install/install.sh`
+
+The installation process may take several minutes to complete. The script installs all the dependencies required for the program including the driver for the DYMO LabelWriter 450 printer. The script also configures the Raspberry Pi to start Chromium automatically on startup.
 
 ### <a name="adding_printer">Adding the DYMO LabelWriter 450 printer</a>
 
@@ -55,7 +59,7 @@ Setting up your Raspberry Pi as a name tag kiosk involves two steps:
 4. Click **Log In**.
 5. In the Add Printer page, select **DYMO LabelWriter 450 (DYMO LabelWriter 450)** and click **Continue**.
 6. Review the Name and Description and click **Continue**.
-7. Select **DYMO LabelWriter 450** from the Model list.
+7. Select **DYMO LabelWriter 450 (en)** from the Model list.
 8. Click **Add Printer**.
 9. In the Set Default Options for DYMO_LabelWriter_450 page, set the following:
 	* Media size: **30857 Badge Label**
@@ -67,5 +71,5 @@ Setting up your Raspberry Pi as a name tag kiosk involves two steps:
 11. Click the **Administration** drop-down and select **Set As Server Default**.
 12. Finally, close the browser and reboot the device.
 
-After the Raspberry Pi is up and running, Chromium should automatically open and display the login system.
+After rebooting, the Raspberry Pi will automatically start Chromium in kiosk mode and display the login system.
 
