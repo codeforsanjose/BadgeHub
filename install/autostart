@@ -5,6 +5,6 @@
 @xset -dpms
 @xset s noblank
 @point-rpi
-@python /home/pi/GitHub/CFSJ-Login-System/nametag_Server.py
-@chromium-browser --incognito --kiosk http://localhost/5000/
+@python /home/pi/GitHub/CFSJ-Login-System/nametag_server.py
+@chromium-browser --incognito --kiosk http://localhost:5000/
 
