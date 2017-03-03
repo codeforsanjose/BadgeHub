@@ -27,17 +27,17 @@ sudo apt-get install -y --force-yes \
 # install the printer driver for the Dymo LabelWriter 450
 # for information about this, see the documentation on the
 # dymo website for the Linux SDK and CUPS Drivers
+cd /tmp
 wget http://download.dymo.com/Download%20Drivers/Linux/Download/dymo-cups-drivers-1.4.0.tar.gz
 tar xvf dymo-cups-drivers-1.4.0.tar.gz
 cd dymo-cups-drivers-1.4.0.5
 sudo ./configure
 sudo make
 sudo make install
-cd $PROJECT_DIR
-rm -rf cd dymo-cups-drivers-1.4.0.5
-rm dymo-cups-drivers-1.4.0.tar.gz
+cd /tmp
+sudo rm -rf dymo-cups-drivers-1.4.0*
 sudo usermod -a -G lpadmin pi
-
+cd $PROJECT_DIR
 
 # install Flask and other Python dependencies
 sudo pip install -r requirements.txt

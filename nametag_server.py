@@ -1,14 +1,20 @@
-import os, base64, csv, datetime
+import os, sys, base64, csv, datetime
 from flask import Flask, request, redirect, url_for, send_from_directory
 from werkzeug.utils import secure_filename
 
 PAGE_SIZE = "Custom.54x100mm"
 IMAGE_FILE = "temp.png"
-UPLOAD_FOLDER = 'user_uploads'
+CSV_FILE = "userInformation.csv"
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+
+def get_script_path():
+    """
+    http://stackoverflow.com/a/4943474
+    """
+    return os.path.dirname(os.path.realpath(sys.argv[0]))
 
 
 def allowed_file(filename):
@@ -17,10 +23,12 @@ def allowed_file(filename):
 
 def save_user_info(name, email):
     needs_header = False
-    if not os.path.exists("userInformation.csv"):
+    csv_file = os.path.join(os.sep, get_script_path(), CSV_FILE)
+    print("using CSV file at {}".format(csv_file))
+    if not os.path.exists(csv_file):
         needs_header = True
 
-    with open("userInformation.csv", 'a') as csvfile:
+    with open(csv_file, 'a') as csvfile:
         fieldnames = ["Name", "Email", "Timestamp"]
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         if needs_header:
@@ -28,6 +36,7 @@ def save_user_info(name, email):
         writer.writerow({"Name":name, "Email":email, "Timestamp":datetime.datetime.now()})
 
 def send_to_printer():
+    print("sending image to printer")
     os.system("lpr -o landscape -o PageSize={} -o fit-to-page  {}".format(PAGE_SIZE, IMAGE_FILE))
 
 @app.route('/')
@@ -42,7 +51,9 @@ def printing():
 def upload_file():
     if request.method == 'POST':
         print ("'name = '{}' email = '{}' nametag_img = '{}'".format( str(request.form['name']), str(request.form['email']), str(request.form['nametag_img']) ) )
-        with open(IMAGE_FILE, "wb") as f:
+        img_file = os.path.join(os.sep, get_script_path(), IMAGE_FILE)
+        print("saving temp image at {}".format(img_file))
+        with open(img_file, "wb") as f:
             # Removing the prefix 'data:image/png;base64,'
             data = request.form['nametag_img'].split(",")[1]
             f.write(base64.b64decode(data))
