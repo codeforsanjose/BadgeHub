@@ -37,7 +37,8 @@ def save_user_info(name, email):
 
 def send_to_printer():
     print("sending image to printer")
-    os.system("lpr -o landscape -o PageSize={} -o fit-to-page  {}".format(PAGE_SIZE, IMAGE_FILE))
+    img_file = os.path.join(os.sep, get_script_path(), IMAGE_FILE)
+    os.system("lpr -o landscape -o PageSize={} -o fit-to-page  {}".format(PAGE_SIZE, img_file))
 
 @app.route('/')
 def root():
