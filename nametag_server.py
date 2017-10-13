@@ -48,6 +48,10 @@ def root():
 def printing():
     return app.send_static_file('printing.html')
 
+@app.route('/not_printing')
+def not_printing():
+    return app.send_static_file('not_printing.html')
+
 @app.route('/print', methods=['POST'])
 def upload_file():
     if request.method == 'POST':
@@ -59,8 +63,17 @@ def upload_file():
             data = request.form['nametag_img'].split(",")[1]
             f.write(base64.b64decode(data))
         save_user_info(request.form['name'], request.form['email'])
-        send_to_printer()
-        return redirect(url_for("printing"))
+
+        # print only if the submit button value is "print"
+        if request.form['button'] == "print":
+            print("Printing nametag for \"%s\""%request.form['name'])
+            send_to_printer()
+            return redirect(url_for("printing"))
+
+        # otherwise submit and return to the root route (which is the sign in form)
+        elif request.form['button'] == "noprint":
+            print("Not printing for \"%s\""%request.form['name'])
+            return redirect(url_for("not_printing"))
 
 
 app.run(host= '0.0.0.0')
