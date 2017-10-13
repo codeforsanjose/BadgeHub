@@ -52,8 +52,8 @@ def printing():
 def not_printing():
     return app.send_static_file('not_printing.html')
 
-@app.route('/print', methods=['POST'])
-def upload_file():
+@app.route('/submit', methods=['POST'])
+def submit():
     if request.method == 'POST':
         print ("'name = '{}' email = '{}' nametag_img = '{}'".format( str(request.form['name']), str(request.form['email']), str(request.form['nametag_img']) ) )
         img_file = os.path.join(os.sep, get_script_path(), IMAGE_FILE)
