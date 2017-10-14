@@ -15,7 +15,7 @@
       <h1><img src="static/images/c4sj_logo.jpg" alt="Code For San Jose" id="c4sj_logo"></h1>
       <p>Welcome! Please sign in.</p>
     </div>
-    <form id="login_form" action="/print" method="post" autocomplete="off">
+    <form id="login_form" action="/signin" method="post" autocomplete="off">
       <div style="display: none;">
         <input type="text" id="PreventChromeAutocomplete" 
           name="PreventChromeAutocomplete" autocomplete="address-level4" />
@@ -29,7 +29,8 @@
         <span>Email address</span>
         <input type="email" name="email" placeholder="your email address" required>
       </label>
-      <button type="submit" value="print">print name tag</button>
+      <button name="button" type="submit" value="print">print new nametag</button>
+			<button name="button" type="submit" value="noprint">already have one!</button>
     </form>
     <div class="nametag_preview hidden">
       <h2>Nametag preview:</h2>

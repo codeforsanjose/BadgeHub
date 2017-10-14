@@ -21,7 +21,7 @@ form label input {
     border: 1px solid #a9a9a9;
     height: 1.5rem;
     width: 11.5rem;}
-form button {display:inline-block;float: right; margin: 1rem 2rem;font-size: 1em;}
+form button {display:inline-block;float: right; margin: 1rem 1rem;font-size: 1em;width: 11em;}
 
 
 .nametag_preview {display:inline-block;width: 50%;float:right; padding: 2rem; box-sizing: border-box;}
