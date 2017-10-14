@@ -1,11 +1,12 @@
 import os, sys, base64, csv, datetime
-from flask import Flask, request, redirect, url_for, send_from_directory
+from flask import Flask, request, redirect, url_for, send_from_directory, render_template
 from werkzeug.utils import secure_filename
 
 PAGE_SIZE = "Custom.54x100mm"
 IMAGE_FILE = "temp.png"
 CSV_FILE = "userInformation.csv"
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+
 
 app = Flask(__name__)
 
@@ -44,14 +45,6 @@ def send_to_printer():
 def root():
     return app.send_static_file('index.html')
 
-@app.route('/printing')
-def printing():
-    return app.send_static_file('printing.html')
-
-@app.route('/not_printing')
-def not_printing():
-    return app.send_static_file('not_printing.html')
-
 @app.route('/signin', methods=['POST'])
 def signin():
     if request.method == 'POST':
@@ -68,12 +61,12 @@ def signin():
         if request.form['button'] == "print":
             print("Printing nametag for \"%s\""%request.form['name'])
             send_to_printer()
-            return redirect(url_for("printing"))
+            return render_template("thankyou.html", message="Your nametag will print soon.")
 
         # otherwise submit and return to the root route (which is the sign in form)
         elif request.form['button'] == "noprint":
             print("Not printing for \"%s\""%request.form['name'])
-            return redirect(url_for("not_printing"))
+            return render_template("thankyou.html", message="No nametag! Did you bring your own?")
 
 
 app.run(host= '0.0.0.0')
