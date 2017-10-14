@@ -61,12 +61,12 @@ def signin():
         if request.form['button'] == "print":
             print("Printing nametag for \"%s\""%request.form['name'])
             send_to_printer()
-            return render_template("thankyou.html", message="Your nametag will print soon.")
+            return render_template("thankyou", message="Your nametag will print soon.")
 
-        # otherwise submit and return to the root route (which is the sign in form)
+        # otherwise simply submit 
         elif request.form['button'] == "noprint":
             print("Not printing for \"%s\""%request.form['name'])
-            return render_template("thankyou.html", message="No nametag! Did you bring your own?")
+            return render_template("thankyou", message="No nametag! Did you bring your own?")
 
 
 app.run(host= '0.0.0.0')
