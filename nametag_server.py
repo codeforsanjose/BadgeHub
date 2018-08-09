@@ -1,15 +1,13 @@
 import os, sys, base64, csv, datetime
+from config import CSV_FILENAME
 from flask import Flask, request, redirect, url_for, send_from_directory, render_template
 from werkzeug.utils import secure_filename
 
 PAGE_SIZE = "Custom.54x100mm"
 IMAGE_FILE = "temp.png"
-CSV_FILE = "userInformation.csv"
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
-
 app = Flask(__name__)
-
 
 def get_script_path():
     """
@@ -17,14 +15,13 @@ def get_script_path():
     """
     return os.path.dirname(os.path.realpath(sys.argv[0]))
 
-
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def save_user_info(name, email):
     needs_header = False
-    csv_file = os.path.join(os.sep, get_script_path(), CSV_FILE)
+    csv_file = os.path.join(os.sep, get_script_path(), CSV_FILENAME)
     print("using CSV file at {}".format(csv_file))
     if not os.path.exists(csv_file):
         needs_header = True
@@ -61,12 +58,17 @@ def signin():
         if request.form['button'] == "print":
             print("Printing nametag for \"%s\""%request.form['name'])
             send_to_printer()
-            return render_template("thankyou", message="Your nametag will print soon.")
+            return render_template("thankyou.html", message="Your nametag will print soon.")
 
         # otherwise simply submit 
         elif request.form['button'] == "noprint":
             print("Not printing for \"%s\""%request.form['name'])
-            return render_template("thankyou", message="No nametag! Did you bring your own?")
+            return render_template("thankyou.html", message="Successfully signed in, enjoy your hack night!")
 
 
-app.run(host= '0.0.0.0')
+def start_webserver():
+    app.run(host= '0.0.0.0')
+
+if __name__ == "__main__":
+    start_webserver()
+

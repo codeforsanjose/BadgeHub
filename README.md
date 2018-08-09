@@ -1,6 +1,7 @@
 # Code For San Jose Login System
 
-The **Code For San Jose Login System** prints out name tags which contain the guest's name and email address as a QR code, name in plain text, and the Code For San Jose Brigade logo. The guest information is recorded in a `.csv` file.
+The **Code For San Jose Login System** prints out name tags which contain the guest's name and email address as a QR code, name in plain text, and the Code For San Jose Brigade logo. The guest information is recorded in a `.csv` file and automatically uploaded to Google sheets when the Sheets API is turned on. 
+
 
 ![creating a name tag](static/images/nametag_web.gif)
 
@@ -34,6 +35,11 @@ Setting up your Raspberry Pi as a name tag kiosk involves two steps:
 
 1. [Installing the login system](#installing_login)
 2. [Adding the DYMO LabelWriter 450 printer](#adding_printer)
+
+Optional step:
+-------------
+3. [Uploading to Google sheets](#uploading_data)
+
 
 ### <a name="installing_login">Installing the login system</a>
 
@@ -72,4 +78,13 @@ The installation process may take several minutes to complete. The script instal
 12. Finally, close the browser and reboot the device.
 
 After rebooting, the Raspberry Pi will automatically start Chromium in kiosk mode and display the login system.
+
+
+### <a name="uploading_data">Uploading to Google sheets</a>
+
+1. Open Chromium and browse to [https://developers.google.com/sheets/api/quickstart/python](https://developers.google.com/sheets/api/quickstart/python).
+2. Follow the instructions under "Step 1: Turn on the Google Sheets API" to create and download client_secret.json.
+3. Copy the file into the CFSJ-Login-System folder.
+
+The uploder.py copies the user name and email address of the guest from the `.csv` file into Google sheets. After a successful update, the `.csv` file is deleted. If the update fails, the user information is retained in the `.csv` file until a successful retry.
 
