@@ -1,5 +1,5 @@
-import os, sys, base64, csv, datetime
-from config import CSV_FILENAME
+import os, sys, base64, csv, datetime, logging
+from config import CSV_FILENAME, LOGGING_ID
 from flask import Flask, request, redirect, url_for, send_from_directory, render_template
 from werkzeug.utils import secure_filename
 
@@ -8,6 +8,7 @@ IMAGE_FILE = "temp.png"
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
+logger = logging.getLogger(LOGGING_ID)
 
 def get_script_path():
     """
@@ -22,7 +23,7 @@ def allowed_file(filename):
 def save_user_info(name, email):
     needs_header = False
     csv_file = os.path.join(os.sep, get_script_path(), CSV_FILENAME)
-    print("using CSV file at {}".format(csv_file))
+    logger.info("using CSV file at {}".format(csv_file))
     if not os.path.exists(csv_file):
         needs_header = True
 
@@ -34,7 +35,7 @@ def save_user_info(name, email):
         writer.writerow({"Name":name, "Email":email, "Timestamp":datetime.datetime.now()})
 
 def send_to_printer():
-    print("sending image to printer")
+    logger.info("sending image to printer")
     img_file = os.path.join(os.sep, get_script_path(), IMAGE_FILE)
     os.system("lpr -o landscape -o PageSize={} -o fit-to-page  {}".format(PAGE_SIZE, img_file))
 
@@ -45,9 +46,9 @@ def root():
 @app.route('/signin', methods=['POST'])
 def signin():
     if request.method == 'POST':
-        print ("'name = '{}' email = '{}' nametag_img = '{}'".format( str(request.form['name']), str(request.form['email']), str(request.form['nametag_img']) ) )
+        logger.info("'name = '{}' email = '{}' nametag_img = '{}'".format( str(request.form['name']), str(request.form['email']), str(request.form['nametag_img']) ) )
         img_file = os.path.join(os.sep, get_script_path(), IMAGE_FILE)
-        print("saving temp image at {}".format(img_file))
+        logger.info("saving temp image at {}".format(img_file))
         with open(img_file, "wb") as f:
             # Removing the prefix 'data:image/png;base64,'
             data = request.form['nametag_img'].split(",")[1]
@@ -56,13 +57,13 @@ def signin():
 
         # print only if the submit button value is "print"
         if request.form['button'] == "print":
-            print("Printing nametag for \"%s\""%request.form['name'])
+            logger.info("Printing nametag for \"%s\""%request.form['name'])
             send_to_printer()
             return render_template("thankyou.html", message="Your nametag will print soon.")
 
         # otherwise simply submit 
         elif request.form['button'] == "noprint":
-            print("Not printing for \"%s\""%request.form['name'])
+            logger.info("Not printing for \"{}\"".format(request.form['name']))
             return render_template("thankyou.html", message="Successfully signed in, enjoy your hack night!")
 
 
