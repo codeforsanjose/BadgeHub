@@ -21,6 +21,7 @@ sudo apt-get install -y --force-yes \
 	libcupsimage2-dev  \
 	g++ \
 	cups \
+	cups-bsd \
 	cups-client
 
 
