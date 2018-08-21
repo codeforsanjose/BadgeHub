@@ -46,7 +46,7 @@ def root():
 @app.route('/signin', methods=['POST'])
 def signin():
     if request.method == 'POST':
-        logger.info("'name = '{}' prononun = '{}' email = '{}' nametag_img = '{}'".format( str(request.form['name']), str(request.form['pronoun']), str(request.form['email']), str(request.form['nametag_img']) ) )
+        logger.info("'name = '{}' pronoun = '{}' email = '{}' nametag_img = '{}'".format( str(request.form['name']), str(request.form['pronoun']), str(request.form['email']), str(request.form['nametag_img']) ) )
         img_file = os.path.join(os.sep, get_script_path(), IMAGE_FILE)
         logger.info("saving temp image at {}".format(img_file))
         with open(img_file, "wb") as f:
