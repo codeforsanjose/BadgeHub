@@ -16,6 +16,7 @@ var nametag = {
         this.form = document.getElementById(form_id);
         this.img_preview = document.getElementById(img_preview_id);
         this.name_elem = this.form.elements["name"];
+        this.pronoun_elem = this.form.elements["pronoun"];
         this.email_elem = this.form.elements["email"];
         this.nametag_img_elem = this.form.elements["nametag_img"];
 
@@ -23,6 +24,7 @@ var nametag = {
             var self = this;
             function createNametag(){
                 if (self.name_elem.value === '' &&
+                    self.pronoun_elem.value === '' &&
                     self.email_elem.value === ''){
                     self.canvas.parentElement.classList.add('hidden')
                     return;
@@ -31,6 +33,7 @@ var nametag = {
                 self.draw();
             }
             this.name_elem.onkeyup = createNametag;
+            this.pronoun_elem.onkeyup = createNametag;
             this.email_elem.onkeyup = createNametag;
             this.form.addEventListener('change', createNametag);
         } else {
@@ -84,7 +87,7 @@ var nametag = {
         var c_height = this.canvas.height;
         var c_width = this.canvas.width;
         
-        var text = this.name_elem.value;
+        var text = this.name_elem.value + '(' + this.pronoun_elem.value + ')';
         var fontface = 'sans-serif';
 
         // fit text on canvas
@@ -108,11 +111,12 @@ var nametag = {
         var c_width = this.canvas.width;
 
          if (this.name_elem.value === '' &&
+             this.pronoun_elem.value === '' &&
              this.email_elem.value === ''){
                 return;
          }
                                  
-        var qr_text = this.name_elem.value + ';' + this.email_elem.value;
+        var qr_text = this.name_elem.value + ';' + this.pronoun_elem.value + ';' + this.email_elem.value;
   
         // cell size
         var cs=Math.floor(c_height/70);
