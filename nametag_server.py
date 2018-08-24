@@ -32,7 +32,7 @@ def save_user_info(name, pronoun, email):
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         if needs_header:
             writer.writeheader()
-        writer.writerow({"Name":name, "Preferred Pronoun":pronoun, "Email":email, "Timestamp":datetime.datetime.now()})
+        writer.writerow({"Name":name, "Pronoun":pronoun, "Email":email, "Timestamp":datetime.datetime.now()})
 
 def send_to_printer():
     logger.info("sending image to printer")
