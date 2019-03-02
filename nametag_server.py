@@ -20,7 +20,7 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-def save_user_info(name, email):
+def save_user_info(name, pronoun, email):
     needs_header = False
     csv_file = os.path.join(os.sep, get_script_path(), CSV_FILENAME)
     logger.info("using CSV file at {}".format(csv_file))
@@ -28,11 +28,11 @@ def save_user_info(name, email):
         needs_header = True
 
     with open(csv_file, 'a') as csvfile:
-        fieldnames = ["Name", "Email", "Timestamp"]
+        fieldnames = ["Name", "Pronoun", "Email", "Timestamp"]
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         if needs_header:
             writer.writeheader()
-        writer.writerow({"Name":name, "Email":email, "Timestamp":datetime.datetime.now()})
+        writer.writerow({"Name":name, "Pronoun":pronoun, "Email":email, "Timestamp":datetime.datetime.now()})
 
 def send_to_printer():
     logger.info("sending image to printer")
@@ -46,14 +46,14 @@ def root():
 @app.route('/signin', methods=['POST'])
 def signin():
     if request.method == 'POST':
-        logger.info("'name = '{}' email = '{}' nametag_img = '{}'".format( str(request.form['name']), str(request.form['email']), str(request.form['nametag_img']) ) )
+        logger.info("'name = '{}' pronoun = '{}' email = '{}' nametag_img = '{}'".format( str(request.form['name']), str(request.form['pronoun']), str(request.form['email']), str(request.form['nametag_img']) ) )
         img_file = os.path.join(os.sep, get_script_path(), IMAGE_FILE)
         logger.info("saving temp image at {}".format(img_file))
         with open(img_file, "wb") as f:
             # Removing the prefix 'data:image/png;base64,'
             data = request.form['nametag_img'].split(",")[1]
             f.write(base64.b64decode(data))
-        save_user_info(request.form['name'], request.form['email'])
+        save_user_info(request.form['name'], request.form['pronoun'], request.form['email'])
 
         # print only if the submit button value is "print"
         if request.form['button'] == "print":
