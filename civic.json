@@ -1,5 +1,4 @@
 {
- "status": "Alpja",
- "tags": ["login", "data", "registration", "automation"] 
+ "status": "Alpha",
+ "tags": ["login", "data", "registration", "automation", "python", "flask", "redis"]
 }
-

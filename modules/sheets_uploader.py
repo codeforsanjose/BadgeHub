@@ -1,6 +1,4 @@
-from __future__ import print_function
-from config import CSV_FILENAME, SPREADSHEET_ID, LOGGING_ID
-from pathlib import Path
+from config import CSV_FILENAME, SPREADSHEET_ID
 import httplib2
 import os, sys, csv, time, logging
 
@@ -11,11 +9,12 @@ from oauth2client.file import Storage
 
 try:
     import argparse
+
     flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
 except ImportError:
     flags = None
 
-logger = logging.getLogger(LOGGING_ID)
+logger = logging.getLogger(__name__)
 
 # If modifying these scopes, delete your previously saved credentials
 # at ~/.credentials/sheets.googleapis.com-python-quickstart.json
@@ -23,22 +22,24 @@ SCOPES = 'https://www.googleapis.com/auth/spreadsheets'
 CLIENT_SECRET_FILE = 'client_secret.json'
 APPLICATION_NAME = 'Google Sheets API Python Quickstart'
 
+
 def get_script_path():
     """
     http://stackoverflow.com/a/4943474
     """
     return os.path.dirname(os.path.realpath(sys.argv[0]))
 
+
 def read_csv(csv_filename):
     contents = []
     with open(csv_filename) as csvfile:
         csvReader = csv.reader(csvfile)
-        next(csvReader) # skip the header row
+        next(csvReader)  # skip the header row
         for row in csvReader:
-          if len(row) > 0:
-              contents.append(row)
+            if len(row) > 0:
+                contents.append(row)
     return contents
-    
+
 
 def get_credentials():
     """Gets valid user credentials from storage.
@@ -63,25 +64,26 @@ def get_credentials():
         flow.user_agent = APPLICATION_NAME
         if flags:
             credentials = tools.run_flow(flow, store, flags)
-        else: # Needed only for compatibility with Python 2.6
+        else:  # Needed only for compatibility with Python 2.6
             credentials = tools.run(flow, store)
         logger.info('Storing credentials to ' + credential_path)
-    return credentials 
+    return credentials
+
 
 def write_spreadsheet(values):
     needs_header = False
-    csv_file = os.path.join(os.sep, get_script_path(), CSV_FILENAME)
-    logger.info("using CSV file at {}".format(csv_file))
-    if not os.path.exists(csv_file):
+    logger.info("using CSV file at {}".format(CSV_FILENAME))
+    if not os.path.exists(CSV_FILENAME):
         needs_header = True
 
-    with open(csv_file, 'a') as csvfile:
+    with open(CSV_FILENAME, 'a') as csvfile:
         fieldnames = ["Name", "Email", "Timestamp"]
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         if needs_header:
             writer.writeheader()
         for row in values:
-            writer.writerow({"Name":row[0], "Email":row[1], "Timestamp":row[2]})
+            writer.writerow({"Name": row[0], "Email": row[1], "Timestamp": row[2]})
+
 
 def update_spreadsheet(spreadsheet_id, data):
     credentials = get_credentials()
@@ -104,15 +106,17 @@ def update_spreadsheet(spreadsheet_id, data):
     }
     try:
         service = discovery.build('sheets', 'v4', http=http,
-            discoveryServiceUrl=discoveryUrl)
-        response = service.spreadsheets().values().append(spreadsheetId = spreadsheet_id,
-                                                   range = spreadsheet_range, valueInputOption = valueInputOption, body=body).execute()
+                                  discoveryServiceUrl=discoveryUrl, cache_discovery=False)
+        response = service.spreadsheets().values().append(spreadsheetId=spreadsheet_id,
+                                                          range=spreadsheet_range, valueInputOption=valueInputOption,
+                                                          body=body).execute()
         n_updates = response.get("updates")["updatedRows"]
         if n_updates == len(values):
-            logger.info("Successfully updated Google sheets. Deleting "+CSV_FILENAME)
+            logger.info("Successfully updated Google sheets. Deleting " + CSV_FILENAME)
     except (httplib2.ServerNotFoundError, TimeoutError) as e:
-        logger.info("Failed to update Google sheets. Look at " +CSV_FILENAME +" for updates.")
+        logger.info("Failed to update Google sheets. Look at " + CSV_FILENAME + " for updates.")
         write_spreadsheet(values)
+
 
 def main():
     """Shows basic usage of the Sheets API.
@@ -123,17 +127,16 @@ def main():
     """
 
     while (True):
-        csv_file = Path(CSV_FILENAME)
-        if csv_file.is_file(): 
+        if os.path.exists(CSV_FILENAME):
             logger.info("File found. Updating Google spreadsheet.")
             user_data = read_csv(CSV_FILENAME)
             os.remove(CSV_FILENAME)
-            update_spreadsheet(SPREADSHEET_ID, user_data) 
-        else:
-            logger.info("Nothing to upload.")
+            update_spreadsheet(SPREADSHEET_ID, user_data)
+            # else:
+        #     logger.info("Nothing to upload.")
 
-        time.sleep(30) #Time delay in seconds
+        time.sleep(30)  # Time delay in seconds
+
 
 if __name__ == '__main__':
     main()
-    

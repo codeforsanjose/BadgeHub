@@ -8,3 +8,6 @@ userInformation.csv
 temp.png
 client_secret.json
 *.log
+
+.idea/
+*.iml

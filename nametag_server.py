@@ -1,75 +1,256 @@
 import os, sys, base64, csv, datetime, logging
-from config import CSV_FILENAME, LOGGING_ID
-from flask import Flask, request, redirect, url_for, send_from_directory, render_template
-from werkzeug.utils import secure_filename
+import json
+from config import CSV_FILENAME, DEBUG, PORT_NUMBER, DEFAULT_PREFERENCES, REDIS_HOST, REDIS_PORT
+from flask import Flask, request, render_template, send_file, jsonify
+from flask_wtf import FlaskForm
+from wtforms import BooleanField, StringField, TextAreaField
+from wtforms.fields.html5 import DecimalRangeField
+from wtforms.validators import NumberRange
+from flask_wtf.file import FileField
+# from werkzeug.utils import secure_filename
+# from nfc import getBoardInfo
+import redis
+from utils import get_script_path
+import configparser
+from modules.image_creator import Nametag
 
 PAGE_SIZE = "Custom.54x100mm"
 IMAGE_FILE = "temp.png"
-ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
+r = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, charset="utf-8", db=0, decode_responses=True)
+config = configparser.ConfigParser()
 
 app = Flask(__name__)
-logger = logging.getLogger(LOGGING_ID)
+logger = logging.getLogger(__name__)
+app.config['SECRET_KEY'] = 'secret!'
 
-def get_script_path():
-    """
-    http://stackoverflow.com/a/4943474
-    """
-    return os.path.dirname(os.path.realpath(sys.argv[0]))
+last_server_status = {}
+open_connections = 0
+
+if DEBUG:
+    logger.info("DEBUG mode enabled; enabling CORS for all requests")
+    from flask_cors import CORS
+
+    CORS(app)
+else:
+    logger.info("CORS is disabled")
+
 
 def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 def save_user_info(name, email):
     needs_header = False
-    csv_file = os.path.join(os.sep, get_script_path(), CSV_FILENAME)
-    logger.info("using CSV file at {}".format(csv_file))
-    if not os.path.exists(csv_file):
+    logger.info("using CSV file at {}".format(CSV_FILENAME))
+    if not os.path.exists(CSV_FILENAME):
         needs_header = True
-
-    with open(csv_file, 'a') as csvfile:
+    with open(CSV_FILENAME, 'a') as csvfile:
         fieldnames = ["Name", "Email", "Timestamp"]
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         if needs_header:
             writer.writeheader()
-        writer.writerow({"Name":name, "Email":email, "Timestamp":datetime.datetime.now()})
+        writer.writerow({"Name": name, "Email": email, "Timestamp": datetime.datetime.now()})
+
 
 def send_to_printer():
     logger.info("sending image to printer")
     img_file = os.path.join(os.sep, get_script_path(), IMAGE_FILE)
     os.system("lpr -o landscape -o PageSize={} -o fit-to-page  {}".format(PAGE_SIZE, img_file))
 
+
 @app.route('/')
 def root():
-    return app.send_static_file('index.html')
+    current_preferences = getPreferences()
+
+    if current_preferences is None or all(value is None for value in current_preferences.values()):
+        logger.info("Unexpected blank value for preferences")
+
+    return render_template('index.html', preferences=current_preferences)
+
+
+def getPreferences():
+    prefs_dict = {}
+    stored_preferences = r.get('preferences')
+    print('redis returned {}'.format(str(stored_preferences)), file=sys.stderr)
+    if stored_preferences is not None:
+        prefs_dict = json.loads(stored_preferences)
+        print('Read preferences as:', file=sys.stderr)
+        for p in prefs_dict:
+            print('{}:{}'.format(p, prefs_dict[p]), file=sys.stderr)
+    else:
+        logger.info("Preferences are currently empty; returning defaults")
+        prefs_dict = DEFAULT_PREFERENCES
+
+    for pref in DEFAULT_PREFERENCES:
+        if prefs_dict.get(pref) is None:
+            logger.info('preference for "{}" is empty, resetting it to "{}"'
+                        .format(pref, DEFAULT_PREFERENCES[pref]))
+            prefs_dict[pref] = DEFAULT_PREFERENCES[pref]
+    return prefs_dict
+
+
+def setPreferences(prefs_dict):
+    json_prefs = json.dumps(prefs_dict)
+    print("setting preferences: {}".format(json_prefs), file=sys.stderr)
+    r.set('preferences', json_prefs)
+
+
+class AdminForm(FlaskForm):
+    organization_logo = FileField(label='Change logo')
+    google_sheets_upload = BooleanField(label='Enable upload to Google Sheets')
+    enable_nfc = BooleanField(label='Enable NFC')
+    enable_printing = BooleanField(label='Enable printing')
+    print_logo = BooleanField(label='Include logo with each print')
+    print_qr_code = BooleanField(label='Include QR code with each print')
+    spreadsheet_id = StringField(label='Google Sheets Spreadsheet ID')
+    text_x_offset_pct = DecimalRangeField(label='Text x position (%)', default=0,
+                                          validators=[NumberRange(min=0, max=100)])
+    text_y_offset_pct = DecimalRangeField(label='Text y position (%)', default=0,
+                                          validators=[NumberRange(min=0, max=100)])
+    qr_x_offset_pct = DecimalRangeField(label='QR code x position (%)', default=0,
+                                        validators=[NumberRange(min=0, max=100)])
+    qr_y_offset_pct = DecimalRangeField(label='QR code y position (%)', default=0,
+                                        validators=[NumberRange(min=0, max=100)])
+    qr_max_width_pct = DecimalRangeField(label='QR code max width (%)', default=0,
+                                         validators=[NumberRange(min=0, max=100)])
+    logo_x_offset_pct = DecimalRangeField(label='Logo x position (%)', default=0,
+                                          validators=[NumberRange(min=0, max=100)])
+    logo_y_offset_pct = DecimalRangeField(label='Logo y position (%)', default=0,
+                                          validators=[NumberRange(min=0, max=100)])
+    logo_scale = DecimalRangeField(label='Logo scale', default=0)
+    thank_you_message = TextAreaField(label='Thank you message', render_kw={"rows": 10, "cols": 30})
+
+
+@app.route('/render', methods=['POST'])
+def render_nametag():
+    request_json = request.get_json()
+    logger.info('render_nametag request: {}'.format(str(request_json)))
+    prefs = getPreferences()
+    if prefs is None:
+        logger.info('No preferences found in Redis')
+        return
+    nametag = Nametag(text_line1="Swathi Lal",
+                      logo_scale=prefs['logo_scale'],
+                      logo_x_offset_pct=prefs['logo_x_offset_pct'], logo_y_offset_pct=prefs['logo_y_offset_pct'],
+                      qr_max_width_pct=prefs['qr_max_width_pct'],
+                      qr_x_offset_pct=prefs['qr_x_offset_pct'], qr_y_offset_pct=prefs['qr_y_offset_pct'],
+                      text_x_offset_pct=prefs['text_x_offset_pct'], text_y_offset_pct=prefs['text_y_offset_pct'],
+                      # ttf_file="/Library/Fonts/Tahoma.ttf",
+                      ttf_file="/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf",
+                      show_diag=False)
+
+    # return send_file('test.png', mimetype='image/png')
+    return jsonify({'nametag': 'data:image/png;charset=utf-8;base64,' + str(nametag.output_as_base64(), "utf-8")})
+
+
+@app.route('/admin', methods=['GET', 'POST'])
+def admin():
+    if request.method == 'POST':
+        logger.info('form response on submit:')
+        for field in request.form:
+            logger.info('response< {}:{} ({})'.format(field, str(request.form.get(field, None)), type(field)))
+        fields = {
+            'google_sheets_upload': bool(request.form.get('google_sheets_upload', None)),
+            'enable_printing': bool(request.form.get('enable_printing', None)),
+            'print_logo': bool(request.form.get('print_logo', None)),
+            'print_qr_code': bool(request.form.get('print_qr_code', None)),
+            'enable_nfc': bool(request.form.get('enable_nfc', None)),
+            'thank_you_message': request.form.get('thank_you_message', None),
+            'spreadsheet_id': request.form.get('spreadsheet_id', None),
+            'text_x_offset_pct': round(float(request.form.get('text_x_offset_pct', None)), 2),
+            'text_y_offset_pct': round(float(request.form.get('text_y_offset_pct', None)), 2),
+            'qr_x_offset_pct': round(float(request.form.get('qr_x_offset_pct', None)), 2),
+            'qr_y_offset_pct': round(float(request.form.get('qr_y_offset_pct', None)), 2),
+            'qr_max_width_pct': round(float(request.form.get('qr_max_width_pct', None)), 2),
+            'logo_x_offset_pct': round(float(request.form.get('logo_x_offset_pct', None)), 2),
+            'logo_y_offset_pct': round(float(request.form.get('logo_y_offset_pct', None)), 2),
+            'logo_scale': round(float(request.form.get('logo_scale', None)), 2)
+        }
+        setPreferences(fields)
+
+    form = AdminForm()
+    logger.info('rendering the admin template')
+    current_preferences = getPreferences()
+
+    if current_preferences is None or all(value == None for value in current_preferences.values()):
+        logger.info("Unexpected blank value for preferences")
+        # logger.info("Preferences are currently empty; pre-loading with defaults")
+        # setPreferences(DEFAULT_PREFERENCES)
+        # current_preferences = DEFAULT_PREFERENCES
+
+    for p in current_preferences:
+        print("current> {}:{} ({})".format(p, current_preferences[p], type(current_preferences[p])))
+    # form.data = current_preferences
+    form.google_sheets_upload.data = bool(current_preferences.get('google_sheets_upload'))
+    form.enable_nfc.data = bool(current_preferences.get('enable_nfc'))
+    form.enable_printing.data = bool(current_preferences.get('enable_printing'))
+    form.print_logo.data = bool(current_preferences.get('print_logo'))
+    form.print_qr_code.data = bool(current_preferences.get('print_qr_code'))
+    form.thank_you_message.data = current_preferences.get('thank_you_message')
+    form.spreadsheet_id.data = current_preferences.get('spreadsheet_id')
+    form.text_x_offset_pct.data = float(current_preferences.get('text_x_offset_pct'))
+    form.text_y_offset_pct.data = float(current_preferences.get('text_y_offset_pct'))
+    form.qr_x_offset_pct.data = float(current_preferences.get('qr_x_offset_pct'))
+    form.qr_y_offset_pct.data = float(current_preferences.get('qr_y_offset_pct'))
+    form.qr_max_width_pct.data = float(current_preferences.get('qr_max_width_pct'))
+    form.logo_x_offset_pct.data = float(current_preferences.get('logo_x_offset_pct'))
+    form.logo_y_offset_pct.data = float(current_preferences.get('logo_y_offset_pct'))
+    form.logo_scale.data = float(current_preferences.get('logo_scale'))
+    for d in form.data:
+        print(">>{}:{} ({})".format(d, form.data[d], str(type(form.data[d]))))
+    return render_template('admin.html', form=form, preferences=current_preferences)
+
 
 @app.route('/signin', methods=['POST'])
 def signin():
     if request.method == 'POST':
-        logger.info("'name = '{}' email = '{}' nametag_img = '{}'".format( str(request.form['name']), str(request.form['email']), str(request.form['nametag_img']) ) )
+        logger.info("'name = '{}' email = '{}' use_server_img = '{}' nametag_img = '{}'".format(
+            str(request.form.get('name', None)),
+            str(request.form.get('email', None)),
+            str(request.form.get('use_server_img', None)),
+            str(request.form.get('nametag_img', None))))
         img_file = os.path.join(os.sep, get_script_path(), IMAGE_FILE)
         logger.info("saving temp image at {}".format(img_file))
+
+        use_server_img = bool(request.form.get('use_server_img', False))
+        prefs = getPreferences()
+
         with open(img_file, "wb") as f:
-            # Removing the prefix 'data:image/png;base64,'
-            data = request.form['nametag_img'].split(",")[1]
+            if use_server_img:
+                line1 = str(request.form.get('name', None))
+                data = Nametag.nametag_from_prefs(line1, '', prefs)
+            else:
+                # Removing the prefix 'data:image/png;base64,'
+                print('image data: {}'.format(request.form['nametag_img']))
+                data = request.form['nametag_img'].split(",")[1]
+
             f.write(base64.b64decode(data))
-        save_user_info(request.form['name'], request.form['email'])
+
+        if prefs['google_sheets_upload']:
+            save_user_info(request.form['name'], request.form['email'])
 
         # print only if the submit button value is "print"
-        if request.form['button'] == "print":
-            logger.info("Printing nametag for \"%s\""%request.form['name'])
+        if prefs['enable_printing'] and request.form['button'] == "print":
+            logger.info("Printing nametag for \"%s\"" % request.form['name'])
             send_to_printer()
             return render_template("thankyou.html", message="Your nametag will print soon.")
 
-        # otherwise simply submit 
+        # otherwise simply submit
         elif request.form['button'] == "noprint":
             logger.info("Not printing for \"{}\"".format(request.form['name']))
             return render_template("thankyou.html", message="Successfully signed in, enjoy your hack night!")
 
 
 def start_webserver():
-    app.run(host= '0.0.0.0')
+    # server_ip = utils.get_server_ip_address()
+    # logger.info("IP: %s"%server_ip)
+    app.run(host='0.0.0.0', port=PORT_NUMBER, debug=DEBUG)
+
 
 if __name__ == "__main__":
-    start_webserver()
+    from main import setup_logging
 
+    setup_logging()
+    start_webserver()
