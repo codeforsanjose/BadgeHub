@@ -1,5 +1,4 @@
 
-
 function Nametag(config){
     this.canvas = config['canvas_elem'];
     this.canvas_height = this.canvas.height;
@@ -25,6 +24,7 @@ function Nametag(config){
     this.form = config['form_elem'];
     this.img_preview = config['img_preview_elem'];
     this.name_elem = config['line_1_input']
+    this.pronoun_elem = this.form.elements["pronoun"]
     this.email_elem = config['line_2_input']
     this.img_form_elem = config['img_form_elem']
 
@@ -37,6 +37,7 @@ function Nametag(config){
         var self = this;
         function createNametag(){
             if (self.name_elem.value === '' &&
+                self.email_elem.value === '' &&
                 self.email_elem.value === ''){
                 self.canvas.parentElement.classList.add('hidden')
                 return;
@@ -45,6 +46,7 @@ function Nametag(config){
             self.draw();
         }
         this.name_elem.onkeyup = createNametag;
+        this.pronoun_elem.onkeyup = createNametag;
         this.email_elem.onkeyup = createNametag;
         if (this.form) {
             this.form.addEventListener('change', createNametag);
@@ -164,8 +166,8 @@ Nametag.prototype = {
         var ctx = this.canvas.getContext('2d');
         var c_height = this.canvas.height;
         var c_width = this.canvas.width;
-        
-        var text_line1 = this.name_elem.value;
+
+        var text_line1 =  this.name_elem.value + '(' + this.pronoun_elem.value + ')';
         var text_line2 = this.email_elem.value;
         // var fontface = 'sans-serif';
         var fontface = 'Roboto';
@@ -212,13 +214,14 @@ Nametag.prototype = {
         var c_height = this.canvas.height;
         var c_width = this.canvas.width;
 
-        if (this.name_elem.value === '' &&
-            this.email_elem.value === ''){
-            return;
-        }
+         if (this.name_elem.value === '' &&
+             this.pronoun_elem.value === '' &&
+             this.email_elem.value === ''){
+                return;
+         }
+                                 
+        var qr_text = this.name_elem.value + ';' + this.pronoun_elem.value + ';' + this.email_elem.value;
 
-        var qr_text = this.name_elem.value + ' ' + this.email_elem.value;
-  
         // cell size
         var cs = 1;
         

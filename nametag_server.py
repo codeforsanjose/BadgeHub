@@ -41,17 +41,17 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-def save_user_info(name, email):
+def save_user_info(name, pronoun, email):
     needs_header = False
     logger.info("using CSV file at {}".format(CSV_FILENAME))
     if not os.path.exists(CSV_FILENAME):
         needs_header = True
     with open(CSV_FILENAME, 'a') as csvfile:
-        fieldnames = ["Name", "Email", "Timestamp"]
+        fieldnames = ["Name", "Pronoun", "Email", "Timestamp"]
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         if needs_header:
             writer.writeheader()
-        writer.writerow({"Name": name, "Email": email, "Timestamp": datetime.datetime.now()})
+        writer.writerow({"Name":name, "Pronoun":pronoun, "Email":email, "Timestamp":datetime.datetime.now()})
 
 
 def send_to_printer():
@@ -206,11 +206,13 @@ def admin():
 @app.route('/signin', methods=['POST'])
 def signin():
     if request.method == 'POST':
-        logger.info("'name = '{}' email = '{}' use_server_img = '{}' nametag_img = '{}'".format(
+        logger.info("'name = '{}' pronoun = '{}' email = '{}' use_server_img = '{}' nametag_img = '{}'".format(
             str(request.form.get('name', None)),
+            str(request.form['pronoun']),
             str(request.form.get('email', None)),
             str(request.form.get('use_server_img', None)),
             str(request.form.get('nametag_img', None))))
+
         img_file = os.path.join(os.sep, get_script_path(), IMAGE_FILE)
         logger.info("saving temp image at {}".format(img_file))
 
@@ -229,7 +231,7 @@ def signin():
             f.write(base64.b64decode(data))
 
         if prefs['google_sheets_upload']:
-            save_user_info(request.form['name'], request.form['email'])
+            save_user_info(request.form['name'], request.form['pronoun'], request.form['email'])
 
         # print only if the submit button value is "print"
         if prefs['enable_printing'] and request.form['button'] == "print":
