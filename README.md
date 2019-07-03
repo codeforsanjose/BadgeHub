@@ -183,14 +183,15 @@ virtualenv venv
 source venv/bin/activate
 pip install -r requirements.txt
 
+# to run the whole program:
+python run.py
+
 # to run just the front end
 python run.py -w
 
 # to run just the NFC portion:
 python -m BadgeHub.nfc_manager
 
-# or to run the whole program:
-python main.py
 ```
 
 TODO: look into using [cffi](https://cffi.readthedocs.io/en/latest/) for communicating status with CUPS.
