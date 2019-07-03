@@ -1,18 +1,26 @@
-import os, sys, base64, csv, datetime, logging
+import base64
+import configparser
+import csv
+import datetime
 import json
-from config import CSV_FILENAME, DEBUG, PORT_NUMBER, DEFAULT_PREFERENCES, REDIS_HOST, REDIS_PORT
-from flask import Flask, request, render_template, send_file, jsonify
-from flask_wtf import FlaskForm
-from wtforms import BooleanField, StringField, TextAreaField
-from wtforms.fields.html5 import DecimalRangeField
-from wtforms.validators import NumberRange
-from flask_wtf.file import FileField
+import logging
+import os
+
 # from werkzeug.utils import secure_filename
 # from nfc import getBoardInfo
 import redis
-from utils import get_script_path
-import configparser
-from modules.image_creator import Nametag
+from flask import Flask, request, render_template, jsonify
+from flask_wtf import FlaskForm
+from flask_wtf.file import FileField
+from wtforms import BooleanField, StringField, TextAreaField
+from wtforms.fields.html5 import DecimalRangeField
+from wtforms.validators import NumberRange
+
+from BadgeHub.config import CSV_FILENAME, DEBUG, PORT_NUMBER, REDIS_HOST, REDIS_PORT
+from BadgeHub.image_creator import Nametag
+from BadgeHub.redis_helper import get_preferences
+from BadgeHub.utils import get_script_path
+from BadgeHub.printer_manager import send_to_printer
 
 PAGE_SIZE = "Custom.54x100mm"
 IMAGE_FILE = "temp.png"
@@ -51,18 +59,12 @@ def save_user_info(name, pronoun, email):
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         if needs_header:
             writer.writeheader()
-        writer.writerow({"Name":name, "Pronoun":pronoun, "Email":email, "Timestamp":datetime.datetime.now()})
-
-
-def send_to_printer():
-    logger.info("sending image to printer")
-    img_file = os.path.join(os.sep, get_script_path(), IMAGE_FILE)
-    os.system("lpr -o landscape -o PageSize={} -o fit-to-page  {}".format(PAGE_SIZE, img_file))
+        writer.writerow({"Name": name, "Pronoun": pronoun, "Email": email, "Timestamp": datetime.datetime.now()})
 
 
 @app.route('/')
 def root():
-    current_preferences = getPreferences()
+    current_preferences = get_preferences(r)
 
     if current_preferences is None or all(value is None for value in current_preferences.values()):
         logger.info("Unexpected blank value for preferences")
@@ -70,30 +72,10 @@ def root():
     return render_template('index.html', preferences=current_preferences)
 
 
-def getPreferences():
-    prefs_dict = {}
-    stored_preferences = r.get('preferences')
-    print('redis returned {}'.format(str(stored_preferences)), file=sys.stderr)
-    if stored_preferences is not None:
-        prefs_dict = json.loads(stored_preferences)
-        print('Read preferences as:', file=sys.stderr)
-        for p in prefs_dict:
-            print('{}:{}'.format(p, prefs_dict[p]), file=sys.stderr)
-    else:
-        logger.info("Preferences are currently empty; returning defaults")
-        prefs_dict = DEFAULT_PREFERENCES
-
-    for pref in DEFAULT_PREFERENCES:
-        if prefs_dict.get(pref) is None:
-            logger.info('preference for "{}" is empty, resetting it to "{}"'
-                        .format(pref, DEFAULT_PREFERENCES[pref]))
-            prefs_dict[pref] = DEFAULT_PREFERENCES[pref]
-    return prefs_dict
-
 
 def setPreferences(prefs_dict):
     json_prefs = json.dumps(prefs_dict)
-    print("setting preferences: {}".format(json_prefs), file=sys.stderr)
+    logger.debug("setting preferences: {}".format(json_prefs))
     r.set('preferences', json_prefs)
 
 
@@ -104,6 +86,7 @@ class AdminForm(FlaskForm):
     enable_printing = BooleanField(label='Enable printing')
     print_logo = BooleanField(label='Include logo with each print')
     print_qr_code = BooleanField(label='Include QR code with each print')
+    enable_pronouns = BooleanField(label='Enable pronoun selection')
     spreadsheet_id = StringField(label='Google Sheets Spreadsheet ID')
     text_x_offset_pct = DecimalRangeField(label='Text x position (%)', default=0,
                                           validators=[NumberRange(min=0, max=100)])
@@ -127,7 +110,7 @@ class AdminForm(FlaskForm):
 def render_nametag():
     request_json = request.get_json()
     logger.info('render_nametag request: {}'.format(str(request_json)))
-    prefs = getPreferences()
+    prefs = get_preferences(r)
     if prefs is None:
         logger.info('No preferences found in Redis')
         return
@@ -157,6 +140,7 @@ def admin():
             'print_logo': bool(request.form.get('print_logo', None)),
             'print_qr_code': bool(request.form.get('print_qr_code', None)),
             'enable_nfc': bool(request.form.get('enable_nfc', None)),
+            'enable_pronouns': bool(request.form.get('enable_pronouns', None)),
             'thank_you_message': request.form.get('thank_you_message', None),
             'spreadsheet_id': request.form.get('spreadsheet_id', None),
             'text_x_offset_pct': round(float(request.form.get('text_x_offset_pct', None)), 2),
@@ -172,22 +156,23 @@ def admin():
 
     form = AdminForm()
     logger.info('rendering the admin template')
-    current_preferences = getPreferences()
+    current_preferences = get_preferences(r)
 
-    if current_preferences is None or all(value == None for value in current_preferences.values()):
+    if current_preferences is None or all(value is None for value in current_preferences.values()):
         logger.info("Unexpected blank value for preferences")
         # logger.info("Preferences are currently empty; pre-loading with defaults")
         # setPreferences(DEFAULT_PREFERENCES)
         # current_preferences = DEFAULT_PREFERENCES
 
     for p in current_preferences:
-        print("current> {}:{} ({})".format(p, current_preferences[p], type(current_preferences[p])))
+        logger.info("current> {}:{} ({})".format(p, current_preferences[p], type(current_preferences[p])))
     # form.data = current_preferences
     form.google_sheets_upload.data = bool(current_preferences.get('google_sheets_upload'))
     form.enable_nfc.data = bool(current_preferences.get('enable_nfc'))
     form.enable_printing.data = bool(current_preferences.get('enable_printing'))
     form.print_logo.data = bool(current_preferences.get('print_logo'))
     form.print_qr_code.data = bool(current_preferences.get('print_qr_code'))
+    form.enable_pronouns.data = bool(current_preferences.get('enable_pronouns'))
     form.thank_you_message.data = current_preferences.get('thank_you_message')
     form.spreadsheet_id.data = current_preferences.get('spreadsheet_id')
     form.text_x_offset_pct.data = float(current_preferences.get('text_x_offset_pct'))
@@ -199,7 +184,7 @@ def admin():
     form.logo_y_offset_pct.data = float(current_preferences.get('logo_y_offset_pct'))
     form.logo_scale.data = float(current_preferences.get('logo_scale'))
     for d in form.data:
-        print(">>{}:{} ({})".format(d, form.data[d], str(type(form.data[d]))))
+        logger.info(">>{}:{} ({})".format(d, form.data[d], str(type(form.data[d]))))
     return render_template('admin.html', form=form, preferences=current_preferences)
 
 
@@ -217,7 +202,7 @@ def signin():
         logger.info("saving temp image at {}".format(img_file))
 
         use_server_img = bool(request.form.get('use_server_img', False))
-        prefs = getPreferences()
+        prefs = get_preferences(r)
 
         with open(img_file, "wb") as f:
             if use_server_img:
@@ -225,7 +210,7 @@ def signin():
                 data = Nametag.nametag_from_prefs(line1, '', prefs)
             else:
                 # Removing the prefix 'data:image/png;base64,'
-                print('image data: {}'.format(request.form['nametag_img']))
+                logger.info('image data: {}'.format(request.form['nametag_img']))
                 data = request.form['nametag_img'].split(",")[1]
 
             f.write(base64.b64decode(data))
@@ -236,7 +221,7 @@ def signin():
         # print only if the submit button value is "print"
         if prefs['enable_printing'] and request.form['button'] == "print":
             logger.info("Printing nametag for \"%s\"" % request.form['name'])
-            send_to_printer()
+            send_to_printer(img_file)
             return render_template("thankyou.html", message="Your nametag will print soon.")
 
         # otherwise simply submit
@@ -252,7 +237,6 @@ def start_webserver():
 
 
 if __name__ == "__main__":
-    from main import setup_logging
-
+    from BadgeHub.log_helper import setup_logging
     setup_logging()
     start_webserver()

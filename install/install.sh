@@ -19,6 +19,7 @@ sudo apt-get install -y \
     libtool \
     libpcsclite-dev \
     libusb-dev \
+    lpr \
     cups \
     libcups2-dev \
     libcupsimage2-dev \

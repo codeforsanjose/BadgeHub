@@ -60,6 +60,10 @@
           {{ form.print_qr_code.label }}
           {{ form.print_qr_code }}
         </div>
+        <div class="label_input_pair">
+          {{ form.enable_pronouns.label }}
+          {{ form.enable_pronouns }}
+        </div>
   
         <div class="label_input_pair">
           {{ form.thank_you_message.label }}
@@ -78,6 +82,29 @@
           Line 2
           <input type='text' id="line2_test_input"/>
         </label>
+        <p>Preferred Pronoun:</p>
+        <fieldset class="gender_picker">
+          <div class="label_input_pair">
+            <input type="radio" name="pronoun" id="pronoun_he" value="he/him/his"/>
+            <label for="pronoun_he">He/Him/His</label>
+          </div>
+          <div class="label_input_pair">
+            <input type="radio" name="pronoun" id="pronoun_she" value="she/her/hers"/>
+            <label for="pronoun_she">She/Her/Hers</label>
+          </div>
+          <div class="label_input_pair">
+            <input type="radio" name="pronoun" id="pronound_they" value="they/them/their"/>
+            <label for="pronound_they">They/Them/Their</label>
+          </div>
+          <div class="label_input_pair">
+            <input type="radio" name="pronoun" id="pronoun_ze" value="ze/hir/hirs"/>
+            <label for="pronoun_ze">Ze/Hir/Hirs</label>
+          </div>
+          <div class="label_input_pair">
+            <input type="radio" name="pronoun" id="pronoun_decline" value="ze/hir/hirs"/>
+            <label for="pronoun_decline">(decline to state)</label>
+          </div>
+        </fieldset>
         <canvas id="nametag_canvas" width="600" height="337"></canvas>
          <div class="label_input_pair">
           {{ form.text_x_offset_pct.label }}
@@ -120,6 +147,16 @@
           <output for="logo_scale">{{ form.logo_scale.data }}</output>
         </div>
         <script>
+         function toggleRadioGroup(groupName, disabled) {
+          // https://stackoverflow.com/a/15637650/940217
+          var inputs = document.getElementsByName(groupName);
+          for (var i = 0, len = inputs.length; i<len; i++){
+            inputs[i].disabled = disabled;
+          }
+        }
+
+        toggleRadioGroup('pronoun', !{{ preferences.enable_pronouns | tojson | safe }})
+
         document.nametag = new Nametag({
             'canvas_elem': document.getElementById('nametag_canvas'),
             'form_elem': document.getElementById('login_form'),
@@ -128,13 +165,16 @@
             'text_x_offset_pct': document.getElementById('text_x_offset_pct').value,
             'text_y_offset_pct': document.getElementById('text_y_offset_pct').value,
             'logo_elem': document.getElementById('organization_logo_src'),
-            'logo_scale' : {{ preferences.logo_scale }},
-            'qr_max_width_pct' : {{ preferences.qr_max_width_pct }},
+            'logo_scale' : {{ preferences.logo_scale | tojson | safe }},
+            'pronoun_elems' : document.getElementsByName('pronoun'),
+            'enable_pronouns' : {{ preferences.enable_pronouns | tojson | safe }},
+            'qr_max_width_pct' : {{ preferences.qr_max_width_pct | tojson | safe }},
             'show_diag':true
         })
-        document.nametag.set_logo_pos({{ preferences.logo_x_offset_pct }}, {{ preferences.logo_y_offset_pct }})
-        document.nametag.set_qr_x_pos({{ preferences.qr_x_offset_pct }})
-        document.nametag.set_qr_y_pos({{ preferences.qr_y_offset_pct }})
+        document.nametag.set_logo_pos({{ preferences.logo_x_offset_pct | tojson | safe }}, {{ preferences.logo_y_offset_pct | tojson | safe }})
+        document.nametag.set_qr_x_pos({{ preferences.qr_x_offset_pct | tojson | safe }})
+        document.nametag.set_qr_y_pos({{ preferences.qr_y_offset_pct | tojson | safe }})
+
 
         function onRangeChange(rangeInputElmt, listener) {
           // https://stackoverflow.com/a/37623959/940217
@@ -154,6 +194,7 @@
             }
           });
         }
+
 
         // TODO: clean this repetition up
         onRangeChange(document.getElementById('text_x_offset_pct'), function(e){
@@ -204,6 +245,12 @@
           document.nametag.set_logo_scale(value)
           document.querySelector('output[for="logo_scale"').innerHTML = value
         })
+
+        document.getElementById('enable_pronouns').addEventListener('change', function() {
+          toggleRadioGroup('pronoun', !this.checked)
+
+          document.nametag.set_pronouns_enabled(this.checked);
+        });
         </script>
         <button name="button" type="submit">Save Settings</button>
       </section>

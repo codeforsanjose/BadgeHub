@@ -1,13 +1,14 @@
-import os, sys, base64, logging
-import cups
-from config import DEBUG, REDIS_HOST, REDIS_PORT, PRINT_CHECK_DELAY_SECONDS
-import redis
-import json
+import os
+import sys
 import time
-from utils import get_script_path
+
+import redis
+
+from BadgeHub.config import REDIS_HOST, REDIS_PORT, PRINT_CHECK_DELAY_SECONDS
+from BadgeHub.utils import get_script_path
 
 PAGE_SIZE = "Custom.54x100mm"
-IMAGE_FILE = "temp.png"
+IMAGE_FILE = os.path.join(os.sep, get_script_path(), "temp.png")
 
 PRINT_MANAGER_REDIS_KEY = 'print_jobs'
 
@@ -15,10 +16,8 @@ r = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, charset="utf-8", db=0, decode_
 
 
 def send_to_printer(filepath=IMAGE_FILE, page_size=PAGE_SIZE):
-    # Removing the prefix 'data:image/png;base64,'
     print('image data: {}'.format(filepath))
-    img_file = os.path.join(os.sep, get_script_path(), IMAGE_FILE)
-    os.system("lpr -o landscape -o PageSize={} -o fit-to-page  {}".format(page_size, img_file))
+    os.system("lpr -o landscape -o PageSize={} -o fit-to-page  {}".format(page_size, filepath))
 
 
 def add_file_to_print_queue(filename):
@@ -41,7 +40,7 @@ def listen_for_print_requests():
 
 
 if __name__ == "__main__":
-    from main import setup_logging
+    from BadgeHub.log_helper import setup_logging
 
     setup_logging()
     listen_for_print_requests()

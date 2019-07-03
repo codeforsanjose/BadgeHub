@@ -24,7 +24,8 @@ function Nametag(config){
     this.form = config['form_elem'];
     this.img_preview = config['img_preview_elem'];
     this.name_elem = config['line_1_input']
-    this.pronoun_elem = this.form.elements["pronoun"]
+    this.pronoun_elems = config['pronoun_elems']
+    this.enable_pronouns = config['enable_pronouns']
     this.email_elem = config['line_2_input']
     this.img_form_elem = config['img_form_elem']
 
@@ -46,7 +47,12 @@ function Nametag(config){
             self.draw();
         }
         this.name_elem.onkeyup = createNametag;
-        this.pronoun_elem.onkeyup = createNametag;
+        this.pronoun_elems.onkeyup = createNametag;
+
+        for (var i = 0; i < this.pronoun_elems.length; i++) {
+            this.pronoun_elems[i].addEventListener('change', createNametag);
+        }
+
         this.email_elem.onkeyup = createNametag;
         if (this.form) {
             this.form.addEventListener('change', createNametag);
@@ -103,6 +109,12 @@ Nametag.prototype = {
         this.draw()
     },
 
+    set_pronouns_enabled : function(enabled){
+        console.log('setting pronouns to be '+(enabled? 'enabled' : 'disabled'))
+        this.enable_pronouns = enabled;
+        this.draw();
+    },
+
     show_safe_zone : function(show_diag){
         this.show_diag=show_diag
         this.draw()
@@ -116,15 +128,12 @@ Nametag.prototype = {
     draw : function(){
         this.clear_canvas();
 
-        // top-center
         this.draw_text();
         this.reset_context();
 
-        // lower-left corner
         this.draw_qr();
         this.reset_context();
 
-        // lower-right
         this.draw_logo();
         this.reset_context();
 
@@ -167,7 +176,15 @@ Nametag.prototype = {
         var c_height = this.canvas.height;
         var c_width = this.canvas.width;
 
-        var text_line1 =  this.name_elem.value + '(' + this.pronoun_elem.value + ')';
+        var text_line1 =  this.name_elem.value;
+
+        if (this.enable_pronouns) {
+            for (var i=0; i < this.pronoun_elems.length; i++) {
+                if (this.pronoun_elems[i].checked) {
+                    text_line1 += ' (' + this.pronoun_elems[i].value + ')';
+                }
+            }
+        }
         var text_line2 = this.email_elem.value;
         // var fontface = 'sans-serif';
         var fontface = 'Roboto';
@@ -215,12 +232,20 @@ Nametag.prototype = {
         var c_width = this.canvas.width;
 
          if (this.name_elem.value === '' &&
-             this.pronoun_elem.value === '' &&
+             this.pronoun_elems.value === '' &&
              this.email_elem.value === ''){
                 return;
          }
                                  
-        var qr_text = this.name_elem.value + ';' + this.pronoun_elem.value + ';' + this.email_elem.value;
+        var qr_text = this.name_elem.value + ';' + this.email_elem.value;
+
+        if (this.enable_pronouns && this.pronoun_elems.value !== '') {
+            for (var i=0; i < this.pronoun_elems.length; i++) {
+                if (this.pronoun_elems[i].checked) {
+                    qr_text += ';' + this.pronoun_elems[i].value;
+                }
+            }
+        }
 
         // cell size
         var cs = 1;

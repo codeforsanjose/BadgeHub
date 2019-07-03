@@ -32,29 +32,31 @@
         <span>Email address</span>
         <input type="email" name="email" placeholder="your email address" required>
       </label>
+      {% if preferences.enable_pronouns %}
       <p>Preferred Pronoun:</p>
-      <div>
-        <input type="checkbox" id="he/him/his" value="he/him/his"/>
-        <label for="he/him/his">He/Him/His</label>
-      </div>
-      <div>
-        <input type="checkbox" id="she/her/hers" value="she/her/hers"/>
-        <label for="she/her/hers">She/Her/Hers</label>
-      </div>
-      <div>
-        <input type="checkbox" id="they/them/their" value="they/them/their"/>
-        <label for="they/them/their">They/Them/Their</label>
-      </div>
-      <div>
-        <input type="checkbox" id="ze/hir/hirs" value="ze/hir/hirs"/>
-        <label for="ze/hir/hirs">Ze/Hir/Hirs</label>
-      </div>
-      <div>
-        <input type="checkbox" id="other" value="other"/>
-        <label for="other">Other</label>
-        <input type="text" required autofocus>
-      </div>
-      <br/>
+      <fieldset class="gender_picker">
+        <div class="label_input_pair">
+          <input type="radio" name="pronoun" id="pronoun_he" value="he/him/his"/>
+          <label for="pronoun_he">He/Him/His</label>
+        </div>
+        <div class="label_input_pair">
+          <input type="radio" name="pronoun" id="pronoun_she" value="she/her/hers"/>
+          <label for="pronoun_she">She/Her/Hers</label>
+        </div>
+        <div class="label_input_pair">
+          <input type="radio" name="pronoun" id="pronound_they" value="they/them/their"/>
+          <label for="pronound_they">They/Them/Their</label>
+        </div>
+        <div class="label_input_pair">
+          <input type="radio" name="pronoun" id="pronoun_ze" value="ze/hir/hirs"/>
+          <label for="pronoun_ze">Ze/Hir/Hirs</label>
+        </div>
+        <div class="label_input_pair">
+          <input type="radio" name="pronoun" id="pronoun_decline" value="ze/hir/hirs"/>
+          <label for="pronoun_decline">(decline to state)</label>
+        </div>
+      </fieldset>
+      {% endif %}
       <button name="button" type="submit" value="print">Sign in and print nametag</button>
 			<button name="button" type="submit" value="noprint">Sign in only</button>
     </form>
@@ -71,13 +73,15 @@
       'logo_elem': document.getElementById('organization_logo'),
       'line_1_input': document.querySelector('[name="name"]'),
       'line_2_input': document.querySelector('[name="email"]'),
-      'text_x_offset_pct': {{ preferences.text_x_offset_pct }},
-      'text_y_offset_pct': {{ preferences.text_y_offset_pct }},
+      'text_x_offset_pct': {{ preferences.text_x_offset_pct | tojson | safe }},
+      'text_y_offset_pct': {{ preferences.text_y_offset_pct | tojson | safe }},
+      'pronoun_elems': document.getElementsByName('pronoun'),
+      'enable_pronouns' : {{ preferences.enable_pronouns | tojson | safe }},
       'img_preview_elem' : document.getElementById('nametag_preview_surrogate'),
       'logo_elem': document.getElementById('organization_logo_src'),
       'img_form_elem': document.querySelector('[name="nametag_img"]'),
-      'logo_scale' : {{ preferences.logo_scale }},
-      'qr_max_width_pct' : {{ preferences.qr_max_width_pct }}
+      'logo_scale' : {{ preferences.logo_scale | tojson | safe}},
+      'qr_max_width_pct' : {{ preferences.qr_max_width_pct | tojson | safe }}
     })
     nametag.set_logo_pos({{ preferences.logo_x_offset_pct }}, {{ preferences.logo_y_offset_pct }})
     nametag.set_qr_x_pos({{ preferences.qr_x_offset_pct }})

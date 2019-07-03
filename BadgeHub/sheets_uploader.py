@@ -1,18 +1,18 @@
-from config import CSV_FILENAME, SPREADSHEET_ID
-import httplib2
-import os, sys, csv, time, logging
+import csv
+import logging
+import os
+import sys
+import time
 
+import httplib2
 from apiclient import discovery
 from oauth2client import client
 from oauth2client import tools
 from oauth2client.file import Storage
 
-try:
-    import argparse
+from .config import CSV_FILENAME, SPREADSHEET_ID
 
-    flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
-except ImportError:
-    flags = None
+
 
 logger = logging.getLogger(__name__)
 
@@ -82,7 +82,8 @@ def write_spreadsheet(values):
         if needs_header:
             writer.writeheader()
         for row in values:
-            writer.writerow({"Name":row[0], "Pronoun":row[1], "Email":row[2], "Timestamp":row[3]})
+            writer.writerow({"Name": row[0], "Pronoun": row[1], "Email": row[2], "Timestamp": row[3]})
+
 
 def update_spreadsheet(spreadsheet_id, data):
     credentials = get_credentials()
@@ -113,7 +114,7 @@ def update_spreadsheet(spreadsheet_id, data):
         if n_updates == len(values):
             logger.info("Successfully updated Google sheets. Deleting " + CSV_FILENAME)
     except (httplib2.ServerNotFoundError, TimeoutError) as e:
-        logger.info("Failed to update Google sheets. Look at " + CSV_FILENAME + " for updates.")
+        logger.error("Failed to update Google sheets. Look at " + CSV_FILENAME + " for updates.")
         write_spreadsheet(values)
 
 
@@ -138,4 +139,9 @@ def main():
 
 
 if __name__ == '__main__':
+    from BadgeHub.log_helper import setup_logging
+    import argparse
+    flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
+
+    setup_logging()
     main()

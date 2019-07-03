@@ -130,8 +130,8 @@ https://pinout.xyz/pinout/spi
 | 5V        | 5V (Pins 2 or 4)                         | VDD5V       |
 | GND       | GND (pins 6, 9, 14, 20, 25, 30, 34, 39)  |             |
 | SCK       | 23/BCM11                                 | SCLK        |
-| MOSI      | 21/BCM10                                 |             |
-| MISO      | 19/BCM9                                  |             |
+| MOSI      | 19/BCM10                                 | MO          |
+| MISO      | 21/BCM9                                  | MI          |
 | NSS       | 29/BCM5                                  | SSEL        |
 
 
@@ -184,7 +184,10 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 # to run just the front end
-python nametag_server.py
+python run.py -w
+
+# to run just the NFC portion:
+python -m BadgeHub.nfc_manager
 
 # or to run the whole program:
 python main.py
@@ -192,7 +195,7 @@ python main.py
 
 TODO: look into using [cffi](https://cffi.readthedocs.io/en/latest/) for communicating status with CUPS.
 
-[1]: static/images/nametag_web.gif
+[1]: app/static/images/nametag_web.gif
 [2]: https://www.amazon.com/ELEMENT-Element14-Raspberry-Pi-Motherboard/dp/B07BDR5PDW
 [3]: https://www.amazon.com/Raspberry-Pi-7-Touchscreen-Display/dp/B0153R2A9I/
 [4]: https://www.amazon.com/SmartiPi-Official-Raspberry-Touchscreen-Display/dp/B01HV97F64/

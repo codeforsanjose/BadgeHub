@@ -1,15 +1,18 @@
-from PIL import Image, ImageDraw, ImageFont
-import math
-import qrcode
-from config import DEBUG
 import base64
+import logging
+import math
 from io import BytesIO
+
+import qrcode
+from PIL import Image, ImageDraw, ImageFont
 
 PRINT_DPI = 300
 PAGE_WIDTH_IN = 4.0
 PAGE_HEIGHT_IN = 2.25
 PAGE_WIDTH_PX = math.floor(PAGE_WIDTH_IN * PRINT_DPI)
 PAGE_HEIGHT_PX = math.floor(PAGE_HEIGHT_IN * PRINT_DPI)
+
+logger = logging.getLogger(__name__)
 
 
 class Nametag:
@@ -21,7 +24,7 @@ class Nametag:
                  qr_x_offset_pct: float = 0, qr_y_offset_pct: float = 0, qr_max_width_pct: float = 1,
                  text_x_offset_pct: float = 0, text_y_offset_pct: float = 0,
                  ttf_file: str = None, show_diag: bool = False) -> None:
-        print("using width={}, height={}".format(width, height))
+        logger.info("using width={}, height={}".format(width, height))
         self.im = Image.new('RGBA', (width, height), color=None)
         self.height = height
         self.width = width
@@ -32,32 +35,32 @@ class Nametag:
         self.logo_scale = logo_scale
         self.logo_x_offset_pct = logo_x_offset_pct
         if 0 > self.logo_x_offset_pct > 1.0:
-            print('logo_x_offset_pct should be in the range [0,1]')
+            logger.info('logo_x_offset_pct should be in the range [0,1]')
             self.logo_x_offset_pct = self.margin_pct
         self.logo_y_offset_pct = logo_y_offset_pct
         if 0 > self.logo_y_offset_pct > 1.0:
-            print('logo_y_offset_pct should be in the range [0,1]')
+            logger.info('logo_y_offset_pct should be in the range [0,1]')
             self.logo_y_offset_pct = self.margin_pct
 
         self.qr_x_offset_pct = qr_x_offset_pct
         self.qr_y_offset_pct = qr_y_offset_pct
         self.qr_max_width_pct = qr_max_width_pct
         if 0 > self.qr_x_offset_pct > 1.0:
-            print('qr_x_offset_pct should be in the range [0,1]')
+            logger.info('qr_x_offset_pct should be in the range [0,1]')
             self.qr_x_offset_pct = self.margin_pct
         if 0 > self.qr_y_offset_pct > 1.0:
-            print('qr_y_offset_pct should be in the range [0,1]')
+            logger.info('qr_y_offset_pct should be in the range [0,1]')
             self.qr_y_offset_pct = self.margin_pct
 
         self.text_line1 = text_line1
         self.text_line2 = text_line2
         self.text_x_offset_pct = text_x_offset_pct
         if 0 > self.text_x_offset_pct > 1.0:
-            print('text_x_offset_pct should be in the range [0,1]')
+            logger.info('text_x_offset_pct should be in the range [0,1]')
             self.text_x_offset_pct = self.margin_pct
         self.text_y_offset_pct = text_y_offset_pct
         if 0 > self.text_y_offset_pct > 1.0:
-            print('text_y_offset_pct should be in the range [0,1]')
+            logger.info('text_y_offset_pct should be in the range [0,1]')
             self.text_y_offset_pct = self.margin_pct
         self.ttf_file = ttf_file
         self.show_diag = show_diag
@@ -73,10 +76,9 @@ class Nametag:
         self.draw_qr()
         self.draw_diag_lines()
 
-    def save(self):
-        if DEBUG:
-            print('saving image with dimensions: [{}, {}]'.format(self.width, self.height))
-        self.im.save('test.png', 'PNG')
+    def save(self, filepath='test.png', format='PNG'):
+        logger.info('saving image with dimensions: [{}, {}]'.format(self.width, self.height))
+        self.im.save(filepath, format)
 
     def output_as_base64(self):
         buffered = BytesIO()
@@ -96,8 +98,8 @@ class Nametag:
                                                        obj_size=(size_x, size_y), canvas_size=(self.width, self.height),
                                                        margin_px=self.margin_px)
         draw.text((pos_x, pos_y), self.text_line1, font=font, fill='Black')
-        if DEBUG:
-            print('font size={}, text size=({}, {}), text pos=({}, {})'.format(font_size, size_x, size_y, pos_x, pos_y))
+        logger.info(
+            'font size={}, text size=({}, {}), text pos=({}, {})'.format(font_size, size_x, size_y, pos_x, pos_y))
 
     def draw_logo(self):
         logo_im = Image.open("static/images/organization_logo.jpg").convert('LA')
@@ -126,9 +128,8 @@ class Nametag:
                                                              obj_size=qr_img.size,
                                                              canvas_size=(self.width, self.height),
                                                              margin_px=self.margin_px)
-        if DEBUG:
-            print("QR code width={}, height={}, pos=({}, {})"
-                  .format(qr_img.size[0], qr_img.size[1], qr_pos_x, qr_pos_y))
+        logger.info("QR code width={}, height={}, pos=({}, {})"
+                     .format(qr_img.size[0], qr_img.size[1], qr_pos_x, qr_pos_y))
         self.im.paste(qr_img, (qr_pos_x, qr_pos_y))
 
     def draw_diag_lines(self):
@@ -179,7 +180,10 @@ class Nametag:
 #     print(font.family, font.style, font.file)
 # font = ImageFont.truetype("/Library/Fonts/Tahoma.ttf", math.floor(PAGE_HEIGHT_PX / 6))
 if __name__ == '__main__':
-    from config import DEFAULT_PREFERENCES
+    from .log_helper import setup_logging
+
+    setup_logging()
+    from .config import DEFAULT_PREFERENCES
 
     nametag = Nametag(text_line1="Test User",
                       text_line2="someone@example.com",

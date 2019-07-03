@@ -1,8 +1,8 @@
 html, body {position:absolute;top:0;left:0;display:block;width:800px;height:480px;margin:0;padding:0;overflow:hidden;}
 
 
-h1, h1 img {display: inline-block;height:8rem;}
-form {display: inline-block; float: left; padding: 1.5rem; box-sizing: border-box; top: 27px; width: 50%; font-size: 1.1em; line-height: 1.5em; position: relative;}
+h1, h1 img {display: inline-block;height:7rem;}
+form {display: inline-block; float: left; padding: 1rem; box-sizing: border-box; width: 28rem; font-size: 1em; line-height: 1.2em; position: relative;}
 form label {display:flex; justify-content: space-between; margin:1rem;font-size:1em;line-height: 1.5rem;}
 form label span {width:auto; text-align:left;}
 form label input {
@@ -11,5 +11,5 @@ form label input {
     padding: 3px;
     border: 1px solid #a9a9a9;
     height: 1.5rem;
-    width: 11.5rem;}
+    width: 12.5rem;}
 form button {display:inline-block;float: right; margin: 1rem 1rem;font-size: 1em;width: 11em;}
