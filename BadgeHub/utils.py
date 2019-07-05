@@ -19,3 +19,17 @@ def get_script_path():
     http://stackoverflow.com/a/4943474/940217
     """
     return os.path.dirname(os.path.realpath(sys.argv[0]))
+
+
+def convert_to_dict(obj):
+    """
+    A function takes in a custom object and returns a dictionary representation of the object.
+    This dict representation includes meta data such as the object's module and class names.
+
+    see https://medium.com/python-pandemonium/json-the-python-way-91aac95d4041
+    """
+
+    #  Populate the dictionary with object properties
+    obj_dict = {}
+    obj_dict.update(obj.__dict__)
+    return obj_dict

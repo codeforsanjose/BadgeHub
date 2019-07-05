@@ -1,0 +1,282 @@
+{
+  "w102h252": {
+    "cups_id": "w102h252",
+    "dimens": {
+      "height_inches": 3.2,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.31
+    },
+    "label": "30321 Large Address"
+  },
+  "w102h252.1": {
+    "cups_id": "w102h252.1",
+    "dimens": {
+      "height_inches": 3.2,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.31
+    },
+    "label": "99012 Large Address"
+  },
+  "w102h792": {
+    "cups_id": "w102h792",
+    "dimens": {
+      "height_inches": 10.67,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.31
+    },
+    "label": "Continuous, Narrow"
+  },
+  "w108h539": {
+    "cups_id": "w108h539",
+    "dimens": {
+      "height_inches": 7.2,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.4
+    },
+    "label": "99018 Small Lever Arch"
+  },
+  "w118h252.1": {
+    "cups_id": "w118h252.1",
+    "dimens": {
+      "height_inches": 3.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.53
+    },
+    "label": "30337 Audio Cassette"
+  },
+  "w36h136": {
+    "cups_id": "w36h136",
+    "dimens": {
+      "height_inches": 1.59,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.4
+    },
+    "label": "30346 1/2 in x 1-7/8 in"
+  },
+  "w36h144": {
+    "cups_id": "w36h144",
+    "dimens": {
+      "height_inches": 1.72,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.42
+    },
+    "label": "99017 Suspension File"
+  },
+  "w54h144": {
+    "cups_id": "w54h144",
+    "dimens": {
+      "height_inches": 1.71,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.65
+    },
+    "label": "11355 Multi-Purpose"
+  },
+  "w54h144.1": {
+    "cups_id": "w54h144.1",
+    "dimens": {
+      "height_inches": 1.71,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.65
+    },
+    "label": "30330 Return Address"
+  },
+  "w54h180": {
+    "cups_id": "w54h180",
+    "dimens": {
+      "height_inches": 2.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.65
+    },
+    "label": "30345 3/4 in x 2-1/2 in"
+  },
+  "w54h203": {
+    "cups_id": "w54h203",
+    "dimens": {
+      "height_inches": 2.53,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.65
+    },
+    "label": "30339 8mm Video (2 up)"
+  },
+  "w54h424": {
+    "cups_id": "w54h424",
+    "dimens": {
+      "height_inches": 5.6,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.67
+    },
+    "label": "30325 Video Spine"
+  },
+  "w57h248": {
+    "cups_id": "w57h248",
+    "dimens": {
+      "height_inches": 3.16,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.74
+    },
+    "label": "30327 File Folder"
+  },
+  "w63h419": {
+    "cups_id": "w63h419",
+    "dimens": {
+      "height_inches": 5.53,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.83
+    },
+    "label": "99016 Video Spine"
+  },
+  "w65h90": {
+    "cups_id": "w65h90",
+    "dimens": {
+      "height_inches": 0.96,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.79
+    },
+    "label": "30348 9/10 in x 1-1/4 in"
+  },
+  "w71h144": {
+    "cups_id": "w71h144",
+    "dimens": {
+      "height_inches": 0.75,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.94
+    },
+    "label": "30373 Price Tag Label"
+  },
+  "w72h108": {
+    "cups_id": "w72h108",
+    "dimens": {
+      "height_inches": 1.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.9
+    },
+    "label": "30347 1 in x 1-1/2 in"
+  },
+  "w72h154": {
+    "cups_id": "w72h154",
+    "dimens": {
+      "height_inches": 1.98,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.9
+    },
+    "label": "11352 Return Address Int"
+  },
+  "w72h154.1": {
+    "cups_id": "w72h154.1",
+    "dimens": {
+      "height_inches": 1.98,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.9
+    },
+    "label": "30336 1 in x 2-1/8 in"
+  },
+  "w72h72": {
+    "cups_id": "w72h72",
+    "dimens": {
+      "height_inches": 0.85,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.9
+    },
+    "label": "11353 Multi-Purpose"
+  },
+  "w72h72.1": {
+    "cups_id": "w72h72.1",
+    "dimens": {
+      "height_inches": 0.84,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.9
+    },
+    "label": "30332 1 in x 1 in"
+  },
+  "w72h72.2": {
+    "cups_id": "w72h72.2",
+    "dimens": {
+      "height_inches": 0.85,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.9
+    },
+    "label": "30333 1/2 in x 1 in (2 up)"
+  },
+  "w73h86": {
+    "cups_id": "w73h86",
+    "dimens": {
+      "height_inches": 1.07,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.97
+    },
+    "label": "30335 1/2 in x 1/2 in (4 up)"
+  },
+  "w79h252": {
+    "cups_id": "w79h252",
+    "dimens": {
+      "height_inches": 3.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.0
+    },
+    "label": "30252 Address"
+  },
+  "w79h252.1": {
+    "cups_id": "w79h252.1",
+    "dimens": {
+      "height_inches": 3.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.0
+    },
+    "label": "30320 Address"
+  },
+  "w79h252.2": {
+    "cups_id": "w79h252.2",
+    "dimens": {
+      "height_inches": 3.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.0
+    },
+    "label": "99010 Standard Address"
+  },
+  "w80h144": {
+    "cups_id": "w80h144",
+    "dimens": {
+      "height_inches": 1.63,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.94
+    },
+    "label": "30376 Hanging File Insert"
+  },
+  "w82h248": {
+    "cups_id": "w82h248",
+    "dimens": {
+      "height_inches": 3.18,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.03
+    },
+    "label": "30277 File Folder (2 up)"
+  }
+}

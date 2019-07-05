@@ -1,0 +1,127 @@
+{
+  "lm400": {
+    "manufacturer": "DYMO",
+    "model_name": "DYMO LabelMANAGER 400",
+    "short_name": "lm400"
+  },
+  "lm450": {
+    "manufacturer": "DYMO",
+    "model_name": "DYMO LabelMANAGER 450",
+    "short_name": "lm450"
+  },
+  "lmpc": {
+    "manufacturer": "DYMO",
+    "model_name": "DYMO LabelMANAGER PC",
+    "short_name": "lmpc"
+  },
+  "lmpc2": {
+    "manufacturer": "DYMO",
+    "model_name": "DYMO LabelMANAGER PC II",
+    "short_name": "lmpc2"
+  },
+  "lmpnp": {
+    "manufacturer": "DYMO",
+    "model_name": "DYMO LabelManager PnP",
+    "short_name": "lmpnp"
+  },
+  "lp350": {
+    "manufacturer": "DYMO",
+    "model_name": "DYMO LabelPOINT 350",
+    "short_name": "lp350"
+  },
+  "lw300": {
+    "manufacturer": "DYMO",
+    "model_name": "DYMO LabelWriter 300",
+    "short_name": "lw300"
+  },
+  "lw310": {
+    "manufacturer": "DYMO",
+    "model_name": "DYMO LabelWriter 310",
+    "short_name": "lw310"
+  },
+  "lw315": {
+    "manufacturer": "DYMO",
+    "model_name": "DYMO LabelWriter 315",
+    "short_name": "lw315"
+  },
+  "lw320": {
+    "manufacturer": "DYMO",
+    "model_name": "DYMO LabelWriter 320",
+    "short_name": "lw320"
+  },
+  "lw330": {
+    "manufacturer": "DYMO",
+    "model_name": "DYMO LabelWriter 330",
+    "short_name": "lw330"
+  },
+  "lw330t": {
+    "manufacturer": "DYMO",
+    "model_name": "DYMO LabelWriter 330 Turbo",
+    "short_name": "lw330t"
+  },
+  "lw400": {
+    "manufacturer": "DYMO",
+    "model_name": "DYMO LabelWriter 400",
+    "short_name": "lw400"
+  },
+  "lw400t": {
+    "manufacturer": "DYMO",
+    "model_name": "DYMO LabelWriter 400 Turbo",
+    "short_name": "lw400t"
+  },
+  "lw450": {
+    "manufacturer": "DYMO",
+    "model_name": "DYMO LabelWriter 450",
+    "short_name": "lw450"
+  },
+  "lw450dl": {
+    "manufacturer": "DYMO",
+    "model_name": "DYMO LabelWriter 450 DUO Label",
+    "short_name": "lw450dl"
+  },
+  "lw450dt": {
+    "manufacturer": "DYMO",
+    "model_name": "DYMO LabelWriter 450 DUO Tape",
+    "short_name": "lw450dt"
+  },
+  "lw450t": {
+    "manufacturer": "DYMO",
+    "model_name": "DYMO LabelWriter 450 Turbo",
+    "short_name": "lw450t"
+  },
+  "lw450tt": {
+    "manufacturer": "DYMO",
+    "model_name": "DYMO LabelWriter 450 Twin Turbo",
+    "short_name": "lw450tt"
+  },
+  "lw4xl": {
+    "manufacturer": "DYMO",
+    "model_name": "DYMO LabelWriter 4XL",
+    "short_name": "lw4xl"
+  },
+  "lwduol": {
+    "manufacturer": "DYMO",
+    "model_name": "DYMO LabelWriter DUO Label",
+    "short_name": "lwduol"
+  },
+  "lwduot": {
+    "manufacturer": "DYMO",
+    "model_name": "DYMO LabelWriter DUO Tape",
+    "short_name": "lwduot"
+  },
+  "lwduot2": {
+    "manufacturer": "DYMO",
+    "model_name": "DYMO LabelWriter DUO Tape 128",
+    "short_name": "lwduot2"
+  },
+  "lwtt": {
+    "manufacturer": "DYMO",
+    "model_name": "DYMO LabelWriter Twin Turbo",
+    "short_name": "lwtt"
+  },
+  "se450": {
+    "manufacturer": "DYMO",
+    "model_name": "DYMO LabelWriter SE450",
+    "short_name": "se450"
+  }
+}

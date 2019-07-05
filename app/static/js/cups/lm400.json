@@ -1,0 +1,152 @@
+{
+  "w18h252": {
+    "cups_id": "w18h252",
+    "dimens": {
+      "height_inches": 2.67,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.18
+    },
+    "label": "06 mm (1/4\") Label"
+  },
+  "w18h4000": {
+    "cups_id": "w18h4000",
+    "dimens": {
+      "height_inches": 54.72,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.18
+    },
+    "label": "06 mm (1/4\") Continuous"
+  },
+  "w26h252": {
+    "cups_id": "w26h252",
+    "dimens": {
+      "height_inches": 2.67,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.22
+    },
+    "label": "09 mm (3/8\") Label"
+  },
+  "w26h4000": {
+    "cups_id": "w26h4000",
+    "dimens": {
+      "height_inches": 54.72,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.22
+    },
+    "label": "09 mm (3/8\") Continuous"
+  },
+  "w35h144": {
+    "cups_id": "w35h144",
+    "dimens": {
+      "height_inches": 1.17,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.22
+    },
+    "label": "1/5 File"
+  },
+  "w35h144.1": {
+    "cups_id": "w35h144.1",
+    "dimens": {
+      "height_inches": 1.17,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.22
+    },
+    "label": "Small Pendaflex"
+  },
+  "w35h252": {
+    "cups_id": "w35h252",
+    "dimens": {
+      "height_inches": 2.67,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.22
+    },
+    "label": "1/3 File"
+  },
+  "w35h252.1": {
+    "cups_id": "w35h252.1",
+    "dimens": {
+      "height_inches": 2.67,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.22
+    },
+    "label": "12 mm (1/2\") Label"
+  },
+  "w35h252.2": {
+    "cups_id": "w35h252.2",
+    "dimens": {
+      "height_inches": 2.67,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.22
+    },
+    "label": "Large Pendaflex"
+  },
+  "w35h4000": {
+    "cups_id": "w35h4000",
+    "dimens": {
+      "height_inches": 54.72,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.22
+    },
+    "label": "12 mm (1/2\") Continuous"
+  },
+  "w55h252": {
+    "cups_id": "w55h252",
+    "dimens": {
+      "height_inches": 2.67,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.53
+    },
+    "label": "19 mm (3/4\") Label"
+  },
+  "w55h4000": {
+    "cups_id": "w55h4000",
+    "dimens": {
+      "height_inches": 54.72,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.53
+    },
+    "label": "19 mm (3/4\") Continuous"
+  },
+  "w68h252": {
+    "cups_id": "w68h252",
+    "dimens": {
+      "height_inches": 2.67,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.53
+    },
+    "label": "24 mm (1\") Label"
+  },
+  "w68h252.2": {
+    "cups_id": "w68h252.2",
+    "dimens": {
+      "height_inches": 2.67,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.53
+    },
+    "label": "Address Label"
+  },
+  "w68h4000": {
+    "cups_id": "w68h4000",
+    "dimens": {
+      "height_inches": 54.72,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.53
+    },
+    "label": "24 mm (1\") Continuous"
+  }
+}

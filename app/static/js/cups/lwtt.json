@@ -1,0 +1,612 @@
+{
+  "30334_2-1_4_in_x_1-1_4_in": {
+    "cups_id": "30334_2-1_4_in_x_1-1_4_in",
+    "dimens": {
+      "height_inches": 1.13,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.17
+    },
+    "label": "30334 2-1/4 in x 1-1/4 in"
+  },
+  "30383_PC_Postage_3-Part": {
+    "cups_id": "30383_PC_Postage_3-Part",
+    "dimens": {
+      "height_inches": 6.72,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.15
+    },
+    "label": "30383 PC Postage 3-Part"
+  },
+  "30384_PC_Postage_2-Part": {
+    "cups_id": "30384_PC_Postage_2-Part",
+    "dimens": {
+      "height_inches": 7.22,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.22
+    },
+    "label": "30384 PC Postage 2-Part"
+  },
+  "30387_PC_Postage_EPS": {
+    "cups_id": "30387_PC_Postage_EPS",
+    "dimens": {
+      "height_inches": 10.22,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.22
+    },
+    "label": "30387 PC Postage EPS"
+  },
+  "w102h252": {
+    "cups_id": "w102h252",
+    "dimens": {
+      "height_inches": 3.2,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.31
+    },
+    "label": "30321 Large Address"
+  },
+  "w102h252.1": {
+    "cups_id": "w102h252.1",
+    "dimens": {
+      "height_inches": 3.2,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.31
+    },
+    "label": "99012 Large Address"
+  },
+  "w108h539": {
+    "cups_id": "w108h539",
+    "dimens": {
+      "height_inches": 7.2,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.4
+    },
+    "label": "99018 Small Lever Arch"
+  },
+  "w112h126": {
+    "cups_id": "w112h126",
+    "dimens": {
+      "height_inches": 1.28,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.36
+    },
+    "label": "30886 CD Label"
+  },
+  "w118h252": {
+    "cups_id": "w118h252",
+    "dimens": {
+      "height_inches": 3.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.53
+    },
+    "label": "11356 White Name badge"
+  },
+  "w118h252.1": {
+    "cups_id": "w118h252.1",
+    "dimens": {
+      "height_inches": 3.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.53
+    },
+    "label": "30337 Audio Cassette"
+  },
+  "w131h221": {
+    "cups_id": "w131h221",
+    "dimens": {
+      "height_inches": 2.78,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.72
+    },
+    "label": "30326 Video Top"
+  },
+  "w139h221": {
+    "cups_id": "w139h221",
+    "dimens": {
+      "height_inches": 2.78,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.89
+    },
+    "label": "99016 Video Top"
+  },
+  "w144h169": {
+    "cups_id": "w144h169",
+    "dimens": {
+      "height_inches": 2.06,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.9
+    },
+    "label": "30370 Zip Disk"
+  },
+  "w144h252": {
+    "cups_id": "w144h252",
+    "dimens": {
+      "height_inches": 3.07,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.84
+    },
+    "label": "30374 Appointment Card"
+  },
+  "w154h198": {
+    "cups_id": "w154h198",
+    "dimens": {
+      "height_inches": 2.47,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.03
+    },
+    "label": "30258 Diskette"
+  },
+  "w154h198.1": {
+    "cups_id": "w154h198.1",
+    "dimens": {
+      "height_inches": 2.47,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.05
+    },
+    "label": "30324 Diskette"
+  },
+  "w154h198.2": {
+    "cups_id": "w154h198.2",
+    "dimens": {
+      "height_inches": 2.47,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.05
+    },
+    "label": "99015 Diskette"
+  },
+  "w154h286": {
+    "cups_id": "w154h286",
+    "dimens": {
+      "height_inches": 3.7,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.03
+    },
+    "label": "30323 Shipping"
+  },
+  "w154h286.1": {
+    "cups_id": "w154h286.1",
+    "dimens": {
+      "height_inches": 3.7,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.03
+    },
+    "label": "99014 Name Badge Label"
+  },
+  "w154h286.2": {
+    "cups_id": "w154h286.2",
+    "dimens": {
+      "height_inches": 3.7,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.03
+    },
+    "label": "99014 Shipping"
+  },
+  "w154h64": {
+    "cups_id": "w154h64",
+    "dimens": {
+      "height_inches": 0.76,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.09
+    },
+    "label": "11351 Jewelry Label"
+  },
+  "w154h64.1": {
+    "cups_id": "w154h64.1",
+    "dimens": {
+      "height_inches": 0.76,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.09
+    },
+    "label": "30299 Jewelry Label (2 up)"
+  },
+  "w154h7680": {
+    "cups_id": "w154h7680",
+    "dimens": {
+      "height_inches": 106.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.0
+    },
+    "label": "Banner"
+  },
+  "w154h792": {
+    "cups_id": "w154h792",
+    "dimens": {
+      "height_inches": 10.71,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.03
+    },
+    "label": "Continuous, Wide"
+  },
+  "w162h504": {
+    "cups_id": "w162h504",
+    "dimens": {
+      "height_inches": 6.72,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.15
+    },
+    "label": "30383 PC Postage 3-Part"
+  },
+  "w162h90": {
+    "cups_id": "w162h90",
+    "dimens": {
+      "height_inches": 1.13,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.17
+    },
+    "label": "11354 Multi-Purpose"
+  },
+  "w162h90.1": {
+    "cups_id": "w162h90.1",
+    "dimens": {
+      "height_inches": 1.13,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.17
+    },
+    "label": "30334 2-1/4 in x 1-1/4 in"
+  },
+  "w167h188": {
+    "cups_id": "w167h188",
+    "dimens": {
+      "height_inches": 2.13,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.18
+    },
+    "label": "14681 CD/DVD Label"
+  },
+  "w167h188.1": {
+    "cups_id": "w167h188.1",
+    "dimens": {
+      "height_inches": 2.13,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.18
+    },
+    "label": "30854 CD Label"
+  },
+  "w167h252": {
+    "cups_id": "w167h252",
+    "dimens": {
+      "height_inches": 3.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.21
+    },
+    "label": "30253 Address (2 up)"
+  },
+  "w167h288": {
+    "cups_id": "w167h288",
+    "dimens": {
+      "height_inches": 3.71,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.22
+    },
+    "label": "30256 Shipping"
+  },
+  "w167h288.1": {
+    "cups_id": "w167h288.1",
+    "dimens": {
+      "height_inches": 3.71,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.22
+    },
+    "label": "30364 Name Badge Label"
+  },
+  "w167h288.2": {
+    "cups_id": "w167h288.2",
+    "dimens": {
+      "height_inches": 3.71,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.22
+    },
+    "label": "30857 Badge Label"
+  },
+  "w167h539": {
+    "cups_id": "w167h539",
+    "dimens": {
+      "height_inches": 7.2,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.22
+    },
+    "label": "99019 Large Lever Arch"
+  },
+  "w167h540": {
+    "cups_id": "w167h540",
+    "dimens": {
+      "height_inches": 7.22,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.22
+    },
+    "label": "30384 PC Postage 2-Part"
+  },
+  "w167h756": {
+    "cups_id": "w167h756",
+    "dimens": {
+      "height_inches": 10.22,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.22
+    },
+    "label": "30387 PC Postage EPS"
+  },
+  "w168h252": {
+    "cups_id": "w168h252",
+    "dimens": {
+      "height_inches": 3.07,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.24
+    },
+    "label": "30365 Name Badge Card"
+  },
+  "w176h292": {
+    "cups_id": "w176h292",
+    "dimens": {
+      "height_inches": 3.62,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.24
+    },
+    "label": "30856 Badge Card Label"
+  },
+  "w36h136": {
+    "cups_id": "w36h136",
+    "dimens": {
+      "height_inches": 1.59,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.4
+    },
+    "label": "30346 1/2 in x 1-7/8 in"
+  },
+  "w36h144": {
+    "cups_id": "w36h144",
+    "dimens": {
+      "height_inches": 1.72,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.42
+    },
+    "label": "99017 Suspension File"
+  },
+  "w54h144": {
+    "cups_id": "w54h144",
+    "dimens": {
+      "height_inches": 1.71,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.65
+    },
+    "label": "11355 Multi-Purpose"
+  },
+  "w54h144.1": {
+    "cups_id": "w54h144.1",
+    "dimens": {
+      "height_inches": 1.71,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.65
+    },
+    "label": "30330 Return Address"
+  },
+  "w54h180": {
+    "cups_id": "w54h180",
+    "dimens": {
+      "height_inches": 2.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.65
+    },
+    "label": "30345 3/4 in x 2-1/2 in"
+  },
+  "w54h203": {
+    "cups_id": "w54h203",
+    "dimens": {
+      "height_inches": 2.53,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.65
+    },
+    "label": "30339 8mm Video (2 up)"
+  },
+  "w54h424": {
+    "cups_id": "w54h424",
+    "dimens": {
+      "height_inches": 5.6,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.67
+    },
+    "label": "30325 Video Spine"
+  },
+  "w57h248": {
+    "cups_id": "w57h248",
+    "dimens": {
+      "height_inches": 3.16,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.74
+    },
+    "label": "30327 File Folder"
+  },
+  "w63h419": {
+    "cups_id": "w63h419",
+    "dimens": {
+      "height_inches": 5.53,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.83
+    },
+    "label": "99016 Video Spine"
+  },
+  "w65h90": {
+    "cups_id": "w65h90",
+    "dimens": {
+      "height_inches": 0.96,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.79
+    },
+    "label": "30348 9/10 in x 1-1/4 in"
+  },
+  "w71h144": {
+    "cups_id": "w71h144",
+    "dimens": {
+      "height_inches": 0.75,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.94
+    },
+    "label": "30373 Price Tag Label"
+  },
+  "w72h108": {
+    "cups_id": "w72h108",
+    "dimens": {
+      "height_inches": 1.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.9
+    },
+    "label": "30347 1 in x 1-1/2 in"
+  },
+  "w72h154": {
+    "cups_id": "w72h154",
+    "dimens": {
+      "height_inches": 1.98,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.9
+    },
+    "label": "11352 Return Address Int"
+  },
+  "w72h154.1": {
+    "cups_id": "w72h154.1",
+    "dimens": {
+      "height_inches": 1.98,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.9
+    },
+    "label": "30336 1 in x 2-1/8 in"
+  },
+  "w72h72": {
+    "cups_id": "w72h72",
+    "dimens": {
+      "height_inches": 0.85,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.9
+    },
+    "label": "11353 Multi-Purpose"
+  },
+  "w72h72.1": {
+    "cups_id": "w72h72.1",
+    "dimens": {
+      "height_inches": 0.84,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.9
+    },
+    "label": "30332 1 in x 1 in"
+  },
+  "w72h72.2": {
+    "cups_id": "w72h72.2",
+    "dimens": {
+      "height_inches": 0.85,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.9
+    },
+    "label": "30333 1/2 in x 1 in (2 up)"
+  },
+  "w73h86": {
+    "cups_id": "w73h86",
+    "dimens": {
+      "height_inches": 1.07,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.97
+    },
+    "label": "30335 1/2 in x 1/2 in (4 up)"
+  },
+  "w79h252": {
+    "cups_id": "w79h252",
+    "dimens": {
+      "height_inches": 3.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.0
+    },
+    "label": "30252 Address"
+  },
+  "w79h252.1": {
+    "cups_id": "w79h252.1",
+    "dimens": {
+      "height_inches": 3.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.0
+    },
+    "label": "30320 Address"
+  },
+  "w79h252.2": {
+    "cups_id": "w79h252.2",
+    "dimens": {
+      "height_inches": 3.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.0
+    },
+    "label": "99010 Standard Address"
+  },
+  "w80h144": {
+    "cups_id": "w80h144",
+    "dimens": {
+      "height_inches": 1.63,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.94
+    },
+    "label": "30376 Hanging File Insert"
+  },
+  "w82h248": {
+    "cups_id": "w82h248",
+    "dimens": {
+      "height_inches": 3.18,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.03
+    },
+    "label": "30277 File Folder (2 up)"
+  }
+}

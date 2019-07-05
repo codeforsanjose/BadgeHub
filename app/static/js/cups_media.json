@@ -1,0 +1,1807 @@
+{
+  "1744907_4_in_x_6_in": {
+    "cups_id": "1744907_4_in_x_6_in",
+    "dimens": {
+      "height_inches": 6.0,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 4.0
+    },
+    "label": "1744907 4 in x 6 in",
+    "manufacturer": "  DYMO\n"
+  },
+  "30334_2-1_4_in_x_1-1_4_in": {
+    "cups_id": "30334_2-1_4_in_x_1-1_4_in",
+    "dimens": {
+      "height_inches": 1.13,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.17
+    },
+    "label": "30334 2-1/4 in x 1-1/4 in",
+    "manufacturer": "  DYMO\n"
+  },
+  "30383_PC_Postage_3-Part": {
+    "cups_id": "30383_PC_Postage_3-Part",
+    "dimens": {
+      "height_inches": 6.72,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.15
+    },
+    "label": "30383 PC Postage 3-Part",
+    "manufacturer": "  DYMO\n"
+  },
+  "30384_PC_Postage_2-Part": {
+    "cups_id": "30384_PC_Postage_2-Part",
+    "dimens": {
+      "height_inches": 7.22,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.22
+    },
+    "label": "30384 PC Postage 2-Part",
+    "manufacturer": "  DYMO\n"
+  },
+  "30387_PC_Postage_EPS": {
+    "cups_id": "30387_PC_Postage_EPS",
+    "dimens": {
+      "height_inches": 10.22,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.22
+    },
+    "label": "30387 PC Postage EPS",
+    "manufacturer": "  DYMO\n"
+  },
+  "w102h252": {
+    "cups_id": "w102h252",
+    "dimens": {
+      "height_inches": 3.2,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.31
+    },
+    "label": "30321 Large Address",
+    "manufacturer": "  DYMO\n"
+  },
+  "w102h252.1": {
+    "cups_id": "w102h252.1",
+    "dimens": {
+      "height_inches": 3.2,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.31
+    },
+    "label": "99012 Large Address",
+    "manufacturer": "  DYMO\n"
+  },
+  "w102h792": {
+    "cups_id": "w102h792",
+    "dimens": {
+      "height_inches": 10.67,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.31
+    },
+    "label": "Continuous, Narrow",
+    "manufacturer": "  DYMO\n"
+  },
+  "w108h539": {
+    "cups_id": "w108h539",
+    "dimens": {
+      "height_inches": 7.2,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.4
+    },
+    "label": "99018 Small Lever Arch",
+    "manufacturer": "  DYMO\n"
+  },
+  "w112h126": {
+    "cups_id": "w112h126",
+    "dimens": {
+      "height_inches": 1.28,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.36
+    },
+    "label": "30886 CD Label",
+    "manufacturer": "  DYMO\n"
+  },
+  "w118h252": {
+    "cups_id": "w118h252",
+    "dimens": {
+      "height_inches": 3.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.53
+    },
+    "label": "11356 White Name badge",
+    "manufacturer": "  DYMO\n"
+  },
+  "w118h252.1": {
+    "cups_id": "w118h252.1",
+    "dimens": {
+      "height_inches": 3.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.53
+    },
+    "label": "30337 Audio Cassette",
+    "manufacturer": "  DYMO\n"
+  },
+  "w131h221": {
+    "cups_id": "w131h221",
+    "dimens": {
+      "height_inches": 2.78,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.72
+    },
+    "label": "30326 Video Top",
+    "manufacturer": "  DYMO\n"
+  },
+  "w139h221": {
+    "cups_id": "w139h221",
+    "dimens": {
+      "height_inches": 2.78,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.89
+    },
+    "label": "99016 Video Top",
+    "manufacturer": "  DYMO\n"
+  },
+  "w144h169": {
+    "cups_id": "w144h169",
+    "dimens": {
+      "height_inches": 2.06,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.9
+    },
+    "label": "30370 Zip Disk",
+    "manufacturer": "  DYMO\n"
+  },
+  "w144h252": {
+    "cups_id": "w144h252",
+    "dimens": {
+      "height_inches": 3.07,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.84
+    },
+    "label": "30374 Appointment Card",
+    "manufacturer": "  DYMO\n"
+  },
+  "w154h198": {
+    "cups_id": "w154h198",
+    "dimens": {
+      "height_inches": 2.47,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.03
+    },
+    "label": "30258 Diskette",
+    "manufacturer": "  DYMO\n"
+  },
+  "w154h198.1": {
+    "cups_id": "w154h198.1",
+    "dimens": {
+      "height_inches": 2.47,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.05
+    },
+    "label": "30324 Diskette",
+    "manufacturer": "  DYMO\n"
+  },
+  "w154h198.2": {
+    "cups_id": "w154h198.2",
+    "dimens": {
+      "height_inches": 2.47,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.05
+    },
+    "label": "99015 Diskette",
+    "manufacturer": "  DYMO\n"
+  },
+  "w154h286": {
+    "cups_id": "w154h286",
+    "dimens": {
+      "height_inches": 3.7,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.03
+    },
+    "label": "30323 Shipping",
+    "manufacturer": "  DYMO\n"
+  },
+  "w154h286.1": {
+    "cups_id": "w154h286.1",
+    "dimens": {
+      "height_inches": 3.7,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.03
+    },
+    "label": "99014 Name Badge Label",
+    "manufacturer": "  DYMO\n"
+  },
+  "w154h286.2": {
+    "cups_id": "w154h286.2",
+    "dimens": {
+      "height_inches": 3.7,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.03
+    },
+    "label": "99014 Shipping",
+    "manufacturer": "  DYMO\n"
+  },
+  "w154h64": {
+    "cups_id": "w154h64",
+    "dimens": {
+      "height_inches": 0.76,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.09
+    },
+    "label": "11351 Jewelry Label",
+    "manufacturer": "  DYMO\n"
+  },
+  "w154h64.1": {
+    "cups_id": "w154h64.1",
+    "dimens": {
+      "height_inches": 0.76,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.09
+    },
+    "label": "30299 Jewelry Label (2 up)",
+    "manufacturer": "  DYMO\n"
+  },
+  "w154h7680": {
+    "cups_id": "w154h7680",
+    "dimens": {
+      "height_inches": 106.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.0
+    },
+    "label": "Banner",
+    "manufacturer": "  DYMO\n"
+  },
+  "w154h792": {
+    "cups_id": "w154h792",
+    "dimens": {
+      "height_inches": 10.71,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.03
+    },
+    "label": "Continuous, Wide",
+    "manufacturer": "  DYMO\n"
+  },
+  "w162h504": {
+    "cups_id": "w162h504",
+    "dimens": {
+      "height_inches": 6.72,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.15
+    },
+    "label": "30383 PC Postage 3-Part",
+    "manufacturer": "  DYMO\n"
+  },
+  "w162h90": {
+    "cups_id": "w162h90",
+    "dimens": {
+      "height_inches": 1.13,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.17
+    },
+    "label": "11354 Multi-Purpose",
+    "manufacturer": "  DYMO\n"
+  },
+  "w162h90.1": {
+    "cups_id": "w162h90.1",
+    "dimens": {
+      "height_inches": 1.13,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.17
+    },
+    "label": "30334 2-1/4 in x 1-1/4 in",
+    "manufacturer": "  DYMO\n"
+  },
+  "w167h188": {
+    "cups_id": "w167h188",
+    "dimens": {
+      "height_inches": 2.13,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.18
+    },
+    "label": "14681 CD/DVD Label",
+    "manufacturer": "  DYMO\n"
+  },
+  "w167h188.1": {
+    "cups_id": "w167h188.1",
+    "dimens": {
+      "height_inches": 2.13,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.18
+    },
+    "label": "30854 CD Label",
+    "manufacturer": "  DYMO\n"
+  },
+  "w167h252": {
+    "cups_id": "w167h252",
+    "dimens": {
+      "height_inches": 3.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.21
+    },
+    "label": "30253 Address (2 up)",
+    "manufacturer": "  DYMO\n"
+  },
+  "w167h288": {
+    "cups_id": "w167h288",
+    "dimens": {
+      "height_inches": 3.71,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.22
+    },
+    "label": "30256 Shipping",
+    "manufacturer": "  DYMO\n"
+  },
+  "w167h288.1": {
+    "cups_id": "w167h288.1",
+    "dimens": {
+      "height_inches": 3.71,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.22
+    },
+    "label": "30364 Name Badge Label",
+    "manufacturer": "  DYMO\n"
+  },
+  "w167h288.2": {
+    "cups_id": "w167h288.2",
+    "dimens": {
+      "height_inches": 3.71,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.22
+    },
+    "label": "30857 Badge Label",
+    "manufacturer": "  DYMO\n"
+  },
+  "w167h539": {
+    "cups_id": "w167h539",
+    "dimens": {
+      "height_inches": 7.2,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.22
+    },
+    "label": "99019 Large Lever Arch",
+    "manufacturer": "  DYMO\n"
+  },
+  "w167h540": {
+    "cups_id": "w167h540",
+    "dimens": {
+      "height_inches": 7.22,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.22
+    },
+    "label": "30384 PC Postage 2-Part",
+    "manufacturer": "  DYMO\n"
+  },
+  "w167h756": {
+    "cups_id": "w167h756",
+    "dimens": {
+      "height_inches": 10.22,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.22
+    },
+    "label": "30387 PC Postage EPS",
+    "manufacturer": "  DYMO\n"
+  },
+  "w168h252": {
+    "cups_id": "w168h252",
+    "dimens": {
+      "height_inches": 3.07,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.24
+    },
+    "label": "30365 Name Badge Card",
+    "manufacturer": "  DYMO\n"
+  },
+  "w176h292": {
+    "cups_id": "w176h292",
+    "dimens": {
+      "height_inches": 3.62,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.24
+    },
+    "label": "30856 Badge Card Label",
+    "manufacturer": "  DYMO\n"
+  },
+  "w18h252": {
+    "cups_id": "w18h252",
+    "dimens": {
+      "height_inches": 2.67,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.18
+    },
+    "label": "06 mm (1/4\") Label",
+    "manufacturer": "  DYMO\n"
+  },
+  "w18h4000": {
+    "cups_id": "w18h4000",
+    "dimens": {
+      "height_inches": 54.72,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.18
+    },
+    "label": "06 mm (1/4\") Continuous",
+    "manufacturer": "  DYMO\n"
+  },
+  "w252h77": {
+    "cups_id": "w252h77",
+    "dimens": {
+      "height_inches": 0.94,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 3.24
+    },
+    "label": "Address Label (Horizontal)",
+    "manufacturer": "  DYMO\n"
+  },
+  "w26h252": {
+    "cups_id": "w26h252",
+    "dimens": {
+      "height_inches": 2.67,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.22
+    },
+    "label": "09 mm (3/8\") Label",
+    "manufacturer": "  DYMO\n"
+  },
+  "w26h4000": {
+    "cups_id": "w26h4000",
+    "dimens": {
+      "height_inches": 54.72,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.22
+    },
+    "label": "09 mm (3/8\") Continuous",
+    "manufacturer": "  DYMO\n"
+  },
+  "w288h167": {
+    "cups_id": "w288h167",
+    "dimens": {
+      "height_inches": 2.19,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 3.74
+    },
+    "label": "Shipping Label (Horizontal)",
+    "manufacturer": "  DYMO\n"
+  },
+  "w296h452": {
+    "cups_id": "w296h452",
+    "dimens": {
+      "height_inches": 6.0,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 4.0
+    },
+    "label": "1744907 4 in x 6 in",
+    "manufacturer": "  DYMO\n"
+  },
+  "w308h7680": {
+    "cups_id": "w308h7680",
+    "dimens": {
+      "height_inches": 106.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 4.16
+    },
+    "label": "Banner, 4 in",
+    "manufacturer": "  DYMO\n"
+  },
+  "w35h144": {
+    "cups_id": "w35h144",
+    "dimens": {
+      "height_inches": 1.17,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.22
+    },
+    "label": "1/5 File",
+    "manufacturer": "  DYMO\n"
+  },
+  "w35h144.1": {
+    "cups_id": "w35h144.1",
+    "dimens": {
+      "height_inches": 1.17,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.22
+    },
+    "label": "Small Pendaflex",
+    "manufacturer": "  DYMO\n"
+  },
+  "w35h252": {
+    "cups_id": "w35h252",
+    "dimens": {
+      "height_inches": 2.67,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.22
+    },
+    "label": "1/3 File",
+    "manufacturer": "  DYMO\n"
+  },
+  "w35h252.1": {
+    "cups_id": "w35h252.1",
+    "dimens": {
+      "height_inches": 2.67,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.22
+    },
+    "label": "12 mm (1/2\") Label",
+    "manufacturer": "  DYMO\n"
+  },
+  "w35h252.2": {
+    "cups_id": "w35h252.2",
+    "dimens": {
+      "height_inches": 2.67,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.22
+    },
+    "label": "Large Pendaflex",
+    "manufacturer": "  DYMO\n"
+  },
+  "w35h4000": {
+    "cups_id": "w35h4000",
+    "dimens": {
+      "height_inches": 54.72,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.22
+    },
+    "label": "12 mm (1/2\") Continuous",
+    "manufacturer": "  DYMO\n"
+  },
+  "w36h136": {
+    "cups_id": "w36h136",
+    "dimens": {
+      "height_inches": 1.59,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.4
+    },
+    "label": "30346 1/2 in x 1-7/8 in",
+    "manufacturer": "  DYMO\n"
+  },
+  "w36h144": {
+    "cups_id": "w36h144",
+    "dimens": {
+      "height_inches": 1.72,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.42
+    },
+    "label": "99017 Suspension File",
+    "manufacturer": "  DYMO\n"
+  },
+  "w54h144": {
+    "cups_id": "w54h144",
+    "dimens": {
+      "height_inches": 1.71,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.65
+    },
+    "label": "11355 Multi-Purpose",
+    "manufacturer": "  DYMO\n"
+  },
+  "w54h144.1": {
+    "cups_id": "w54h144.1",
+    "dimens": {
+      "height_inches": 1.71,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.65
+    },
+    "label": "30330 Return Address",
+    "manufacturer": "  DYMO\n"
+  },
+  "w54h180": {
+    "cups_id": "w54h180",
+    "dimens": {
+      "height_inches": 2.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.65
+    },
+    "label": "30345 3/4 in x 2-1/2 in",
+    "manufacturer": "  DYMO\n"
+  },
+  "w54h203": {
+    "cups_id": "w54h203",
+    "dimens": {
+      "height_inches": 2.53,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.65
+    },
+    "label": "30339 8mm Video (2 up)",
+    "manufacturer": "  DYMO\n"
+  },
+  "w54h424": {
+    "cups_id": "w54h424",
+    "dimens": {
+      "height_inches": 5.6,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.67
+    },
+    "label": "30325 Video Spine",
+    "manufacturer": "  DYMO\n"
+  },
+  "w55h252": {
+    "cups_id": "w55h252",
+    "dimens": {
+      "height_inches": 2.67,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.53
+    },
+    "label": "19 mm (3/4\") Label",
+    "manufacturer": "  DYMO\n"
+  },
+  "w55h4000": {
+    "cups_id": "w55h4000",
+    "dimens": {
+      "height_inches": 54.72,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.53
+    },
+    "label": "19 mm (3/4\") Continuous",
+    "manufacturer": "  DYMO\n"
+  },
+  "w57h248": {
+    "cups_id": "w57h248",
+    "dimens": {
+      "height_inches": 3.16,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.74
+    },
+    "label": "30327 File Folder",
+    "manufacturer": "  DYMO\n"
+  },
+  "w63h419": {
+    "cups_id": "w63h419",
+    "dimens": {
+      "height_inches": 5.53,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.83
+    },
+    "label": "99016 Video Spine",
+    "manufacturer": "  DYMO\n"
+  },
+  "w65h90": {
+    "cups_id": "w65h90",
+    "dimens": {
+      "height_inches": 0.96,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.79
+    },
+    "label": "30348 9/10 in x 1-1/4 in",
+    "manufacturer": "  DYMO\n"
+  },
+  "w68h252": {
+    "cups_id": "w68h252",
+    "dimens": {
+      "height_inches": 2.67,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.53
+    },
+    "label": "24 mm (1\") Label",
+    "manufacturer": "  DYMO\n"
+  },
+  "w68h252.2": {
+    "cups_id": "w68h252.2",
+    "dimens": {
+      "height_inches": 2.67,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.53
+    },
+    "label": "Address Label",
+    "manufacturer": "  DYMO\n"
+  },
+  "w68h4000": {
+    "cups_id": "w68h4000",
+    "dimens": {
+      "height_inches": 54.72,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.53
+    },
+    "label": "24 mm (1\") Continuous",
+    "manufacturer": "  DYMO\n"
+  },
+  "w71h144": {
+    "cups_id": "w71h144",
+    "dimens": {
+      "height_inches": 0.75,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.94
+    },
+    "label": "30373 Price Tag Label",
+    "manufacturer": "  DYMO\n"
+  },
+  "w72h108": {
+    "cups_id": "w72h108",
+    "dimens": {
+      "height_inches": 1.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.9
+    },
+    "label": "30347 1 in x 1-1/2 in",
+    "manufacturer": "  DYMO\n"
+  },
+  "w72h154": {
+    "cups_id": "w72h154",
+    "dimens": {
+      "height_inches": 1.98,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.9
+    },
+    "label": "11352 Return Address Int",
+    "manufacturer": "  DYMO\n"
+  },
+  "w72h154.1": {
+    "cups_id": "w72h154.1",
+    "dimens": {
+      "height_inches": 1.98,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.9
+    },
+    "label": "30336 1 in x 2-1/8 in",
+    "manufacturer": "  DYMO\n"
+  },
+  "w72h72": {
+    "cups_id": "w72h72",
+    "dimens": {
+      "height_inches": 0.85,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.9
+    },
+    "label": "11353 Multi-Purpose",
+    "manufacturer": "  DYMO\n"
+  },
+  "w72h72.1": {
+    "cups_id": "w72h72.1",
+    "dimens": {
+      "height_inches": 0.84,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.9
+    },
+    "label": "30332 1 in x 1 in",
+    "manufacturer": "  DYMO\n"
+  },
+  "w72h72.2": {
+    "cups_id": "w72h72.2",
+    "dimens": {
+      "height_inches": 0.85,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.9
+    },
+    "label": "30333 1/2 in x 1 in (2 up)",
+    "manufacturer": "  DYMO\n"
+  },
+  "w73h86": {
+    "cups_id": "w73h86",
+    "dimens": {
+      "height_inches": 1.07,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.97
+    },
+    "label": "30335 1/2 in x 1/2 in (4 up)",
+    "manufacturer": "  DYMO\n"
+  },
+  "w79h252": {
+    "cups_id": "w79h252",
+    "dimens": {
+      "height_inches": 3.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.0
+    },
+    "label": "30252 Address",
+    "manufacturer": "  DYMO\n"
+  },
+  "w79h252.1": {
+    "cups_id": "w79h252.1",
+    "dimens": {
+      "height_inches": 3.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.0
+    },
+    "label": "30320 Address",
+    "manufacturer": "  DYMO\n"
+  },
+  "w79h252.2": {
+    "cups_id": "w79h252.2",
+    "dimens": {
+      "height_inches": 3.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.0
+    },
+    "label": "99010 Standard Address",
+    "manufacturer": "  DYMO\n"
+  },
+  "w80h144": {
+    "cups_id": "w80h144",
+    "dimens": {
+      "height_inches": 1.63,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.94
+    },
+    "label": "30376 Hanging File Insert",
+    "manufacturer": "  DYMO\n"
+  },
+  "w82h248": {
+    "cups_id": "w82h248",
+    "dimens": {
+      "height_inches": 3.18,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.03
+    },
+    "label": "30277 File Folder (2 up)",
+    "manufacturer": "  DYMO\n"
+  }
+}{
+  "1744907_4_in_x_6_in": {
+    "cups_id": "1744907_4_in_x_6_in",
+    "dimens": {
+      "height_inches": 6.0,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 4.0
+    },
+    "label": "1744907 4 in x 6 in",
+    "manufacturer": "DYMO"
+  },
+  "30334_2-1_4_in_x_1-1_4_in": {
+    "cups_id": "30334_2-1_4_in_x_1-1_4_in",
+    "dimens": {
+      "height_inches": 1.13,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.17
+    },
+    "label": "30334 2-1/4 in x 1-1/4 in",
+    "manufacturer": "DYMO"
+  },
+  "30383_PC_Postage_3-Part": {
+    "cups_id": "30383_PC_Postage_3-Part",
+    "dimens": {
+      "height_inches": 6.72,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.15
+    },
+    "label": "30383 PC Postage 3-Part",
+    "manufacturer": "DYMO"
+  },
+  "30384_PC_Postage_2-Part": {
+    "cups_id": "30384_PC_Postage_2-Part",
+    "dimens": {
+      "height_inches": 7.22,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.22
+    },
+    "label": "30384 PC Postage 2-Part",
+    "manufacturer": "DYMO"
+  },
+  "30387_PC_Postage_EPS": {
+    "cups_id": "30387_PC_Postage_EPS",
+    "dimens": {
+      "height_inches": 10.22,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.22
+    },
+    "label": "30387 PC Postage EPS",
+    "manufacturer": "DYMO"
+  },
+  "w102h252": {
+    "cups_id": "w102h252",
+    "dimens": {
+      "height_inches": 3.2,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.31
+    },
+    "label": "30321 Large Address",
+    "manufacturer": "DYMO"
+  },
+  "w102h252.1": {
+    "cups_id": "w102h252.1",
+    "dimens": {
+      "height_inches": 3.2,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.31
+    },
+    "label": "99012 Large Address",
+    "manufacturer": "DYMO"
+  },
+  "w102h792": {
+    "cups_id": "w102h792",
+    "dimens": {
+      "height_inches": 10.67,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.31
+    },
+    "label": "Continuous, Narrow",
+    "manufacturer": "DYMO"
+  },
+  "w108h539": {
+    "cups_id": "w108h539",
+    "dimens": {
+      "height_inches": 7.2,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.4
+    },
+    "label": "99018 Small Lever Arch",
+    "manufacturer": "DYMO"
+  },
+  "w112h126": {
+    "cups_id": "w112h126",
+    "dimens": {
+      "height_inches": 1.28,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.36
+    },
+    "label": "30886 CD Label",
+    "manufacturer": "DYMO"
+  },
+  "w118h252": {
+    "cups_id": "w118h252",
+    "dimens": {
+      "height_inches": 3.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.53
+    },
+    "label": "11356 White Name badge",
+    "manufacturer": "DYMO"
+  },
+  "w118h252.1": {
+    "cups_id": "w118h252.1",
+    "dimens": {
+      "height_inches": 3.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.53
+    },
+    "label": "30337 Audio Cassette",
+    "manufacturer": "DYMO"
+  },
+  "w131h221": {
+    "cups_id": "w131h221",
+    "dimens": {
+      "height_inches": 2.78,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.72
+    },
+    "label": "30326 Video Top",
+    "manufacturer": "DYMO"
+  },
+  "w139h221": {
+    "cups_id": "w139h221",
+    "dimens": {
+      "height_inches": 2.78,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.89
+    },
+    "label": "99016 Video Top",
+    "manufacturer": "DYMO"
+  },
+  "w144h169": {
+    "cups_id": "w144h169",
+    "dimens": {
+      "height_inches": 2.06,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.9
+    },
+    "label": "30370 Zip Disk",
+    "manufacturer": "DYMO"
+  },
+  "w144h252": {
+    "cups_id": "w144h252",
+    "dimens": {
+      "height_inches": 3.07,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.84
+    },
+    "label": "30374 Appointment Card",
+    "manufacturer": "DYMO"
+  },
+  "w154h198": {
+    "cups_id": "w154h198",
+    "dimens": {
+      "height_inches": 2.47,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.03
+    },
+    "label": "30258 Diskette",
+    "manufacturer": "DYMO"
+  },
+  "w154h198.1": {
+    "cups_id": "w154h198.1",
+    "dimens": {
+      "height_inches": 2.47,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.05
+    },
+    "label": "30324 Diskette",
+    "manufacturer": "DYMO"
+  },
+  "w154h198.2": {
+    "cups_id": "w154h198.2",
+    "dimens": {
+      "height_inches": 2.47,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.05
+    },
+    "label": "99015 Diskette",
+    "manufacturer": "DYMO"
+  },
+  "w154h286": {
+    "cups_id": "w154h286",
+    "dimens": {
+      "height_inches": 3.7,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.03
+    },
+    "label": "30323 Shipping",
+    "manufacturer": "DYMO"
+  },
+  "w154h286.1": {
+    "cups_id": "w154h286.1",
+    "dimens": {
+      "height_inches": 3.7,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.03
+    },
+    "label": "99014 Name Badge Label",
+    "manufacturer": "DYMO"
+  },
+  "w154h286.2": {
+    "cups_id": "w154h286.2",
+    "dimens": {
+      "height_inches": 3.7,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.03
+    },
+    "label": "99014 Shipping",
+    "manufacturer": "DYMO"
+  },
+  "w154h64": {
+    "cups_id": "w154h64",
+    "dimens": {
+      "height_inches": 0.76,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.09
+    },
+    "label": "11351 Jewelry Label",
+    "manufacturer": "DYMO"
+  },
+  "w154h64.1": {
+    "cups_id": "w154h64.1",
+    "dimens": {
+      "height_inches": 0.76,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.09
+    },
+    "label": "30299 Jewelry Label (2 up)",
+    "manufacturer": "DYMO"
+  },
+  "w154h7680": {
+    "cups_id": "w154h7680",
+    "dimens": {
+      "height_inches": 106.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.0
+    },
+    "label": "Banner",
+    "manufacturer": "DYMO"
+  },
+  "w154h792": {
+    "cups_id": "w154h792",
+    "dimens": {
+      "height_inches": 10.71,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.03
+    },
+    "label": "Continuous, Wide",
+    "manufacturer": "DYMO"
+  },
+  "w162h504": {
+    "cups_id": "w162h504",
+    "dimens": {
+      "height_inches": 6.72,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.15
+    },
+    "label": "30383 PC Postage 3-Part",
+    "manufacturer": "DYMO"
+  },
+  "w162h90": {
+    "cups_id": "w162h90",
+    "dimens": {
+      "height_inches": 1.13,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.17
+    },
+    "label": "11354 Multi-Purpose",
+    "manufacturer": "DYMO"
+  },
+  "w162h90.1": {
+    "cups_id": "w162h90.1",
+    "dimens": {
+      "height_inches": 1.13,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.17
+    },
+    "label": "30334 2-1/4 in x 1-1/4 in",
+    "manufacturer": "DYMO"
+  },
+  "w167h188": {
+    "cups_id": "w167h188",
+    "dimens": {
+      "height_inches": 2.13,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.18
+    },
+    "label": "14681 CD/DVD Label",
+    "manufacturer": "DYMO"
+  },
+  "w167h188.1": {
+    "cups_id": "w167h188.1",
+    "dimens": {
+      "height_inches": 2.13,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.18
+    },
+    "label": "30854 CD Label",
+    "manufacturer": "DYMO"
+  },
+  "w167h252": {
+    "cups_id": "w167h252",
+    "dimens": {
+      "height_inches": 3.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.21
+    },
+    "label": "30253 Address (2 up)",
+    "manufacturer": "DYMO"
+  },
+  "w167h288": {
+    "cups_id": "w167h288",
+    "dimens": {
+      "height_inches": 3.71,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.22
+    },
+    "label": "30256 Shipping",
+    "manufacturer": "DYMO"
+  },
+  "w167h288.1": {
+    "cups_id": "w167h288.1",
+    "dimens": {
+      "height_inches": 3.71,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.22
+    },
+    "label": "30364 Name Badge Label",
+    "manufacturer": "DYMO"
+  },
+  "w167h288.2": {
+    "cups_id": "w167h288.2",
+    "dimens": {
+      "height_inches": 3.71,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.22
+    },
+    "label": "30857 Badge Label",
+    "manufacturer": "DYMO"
+  },
+  "w167h539": {
+    "cups_id": "w167h539",
+    "dimens": {
+      "height_inches": 7.2,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.22
+    },
+    "label": "99019 Large Lever Arch",
+    "manufacturer": "DYMO"
+  },
+  "w167h540": {
+    "cups_id": "w167h540",
+    "dimens": {
+      "height_inches": 7.22,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.22
+    },
+    "label": "30384 PC Postage 2-Part",
+    "manufacturer": "DYMO"
+  },
+  "w167h756": {
+    "cups_id": "w167h756",
+    "dimens": {
+      "height_inches": 10.22,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.22
+    },
+    "label": "30387 PC Postage EPS",
+    "manufacturer": "DYMO"
+  },
+  "w168h252": {
+    "cups_id": "w168h252",
+    "dimens": {
+      "height_inches": 3.07,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.24
+    },
+    "label": "30365 Name Badge Card",
+    "manufacturer": "DYMO"
+  },
+  "w176h292": {
+    "cups_id": "w176h292",
+    "dimens": {
+      "height_inches": 3.62,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 2.24
+    },
+    "label": "30856 Badge Card Label",
+    "manufacturer": "DYMO"
+  },
+  "w18h252": {
+    "cups_id": "w18h252",
+    "dimens": {
+      "height_inches": 2.67,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.18
+    },
+    "label": "06 mm (1/4\") Label",
+    "manufacturer": "DYMO"
+  },
+  "w18h4000": {
+    "cups_id": "w18h4000",
+    "dimens": {
+      "height_inches": 54.72,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.18
+    },
+    "label": "06 mm (1/4\") Continuous",
+    "manufacturer": "DYMO"
+  },
+  "w252h77": {
+    "cups_id": "w252h77",
+    "dimens": {
+      "height_inches": 0.94,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 3.24
+    },
+    "label": "Address Label (Horizontal)",
+    "manufacturer": "DYMO"
+  },
+  "w26h252": {
+    "cups_id": "w26h252",
+    "dimens": {
+      "height_inches": 2.67,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.22
+    },
+    "label": "09 mm (3/8\") Label",
+    "manufacturer": "DYMO"
+  },
+  "w26h4000": {
+    "cups_id": "w26h4000",
+    "dimens": {
+      "height_inches": 54.72,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.22
+    },
+    "label": "09 mm (3/8\") Continuous",
+    "manufacturer": "DYMO"
+  },
+  "w288h167": {
+    "cups_id": "w288h167",
+    "dimens": {
+      "height_inches": 2.19,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 3.74
+    },
+    "label": "Shipping Label (Horizontal)",
+    "manufacturer": "DYMO"
+  },
+  "w296h452": {
+    "cups_id": "w296h452",
+    "dimens": {
+      "height_inches": 6.0,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 4.0
+    },
+    "label": "1744907 4 in x 6 in",
+    "manufacturer": "DYMO"
+  },
+  "w308h7680": {
+    "cups_id": "w308h7680",
+    "dimens": {
+      "height_inches": 106.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 4.16
+    },
+    "label": "Banner, 4 in",
+    "manufacturer": "DYMO"
+  },
+  "w35h144": {
+    "cups_id": "w35h144",
+    "dimens": {
+      "height_inches": 1.17,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.22
+    },
+    "label": "1/5 File",
+    "manufacturer": "DYMO"
+  },
+  "w35h144.1": {
+    "cups_id": "w35h144.1",
+    "dimens": {
+      "height_inches": 1.17,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.22
+    },
+    "label": "Small Pendaflex",
+    "manufacturer": "DYMO"
+  },
+  "w35h252": {
+    "cups_id": "w35h252",
+    "dimens": {
+      "height_inches": 2.67,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.22
+    },
+    "label": "1/3 File",
+    "manufacturer": "DYMO"
+  },
+  "w35h252.1": {
+    "cups_id": "w35h252.1",
+    "dimens": {
+      "height_inches": 2.67,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.22
+    },
+    "label": "12 mm (1/2\") Label",
+    "manufacturer": "DYMO"
+  },
+  "w35h252.2": {
+    "cups_id": "w35h252.2",
+    "dimens": {
+      "height_inches": 2.67,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.22
+    },
+    "label": "Large Pendaflex",
+    "manufacturer": "DYMO"
+  },
+  "w35h4000": {
+    "cups_id": "w35h4000",
+    "dimens": {
+      "height_inches": 54.72,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.22
+    },
+    "label": "12 mm (1/2\") Continuous",
+    "manufacturer": "DYMO"
+  },
+  "w36h136": {
+    "cups_id": "w36h136",
+    "dimens": {
+      "height_inches": 1.59,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.4
+    },
+    "label": "30346 1/2 in x 1-7/8 in",
+    "manufacturer": "DYMO"
+  },
+  "w36h144": {
+    "cups_id": "w36h144",
+    "dimens": {
+      "height_inches": 1.72,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.42
+    },
+    "label": "99017 Suspension File",
+    "manufacturer": "DYMO"
+  },
+  "w54h144": {
+    "cups_id": "w54h144",
+    "dimens": {
+      "height_inches": 1.71,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.65
+    },
+    "label": "11355 Multi-Purpose",
+    "manufacturer": "DYMO"
+  },
+  "w54h144.1": {
+    "cups_id": "w54h144.1",
+    "dimens": {
+      "height_inches": 1.71,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.65
+    },
+    "label": "30330 Return Address",
+    "manufacturer": "DYMO"
+  },
+  "w54h180": {
+    "cups_id": "w54h180",
+    "dimens": {
+      "height_inches": 2.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.65
+    },
+    "label": "30345 3/4 in x 2-1/2 in",
+    "manufacturer": "DYMO"
+  },
+  "w54h203": {
+    "cups_id": "w54h203",
+    "dimens": {
+      "height_inches": 2.53,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.65
+    },
+    "label": "30339 8mm Video (2 up)",
+    "manufacturer": "DYMO"
+  },
+  "w54h424": {
+    "cups_id": "w54h424",
+    "dimens": {
+      "height_inches": 5.6,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.67
+    },
+    "label": "30325 Video Spine",
+    "manufacturer": "DYMO"
+  },
+  "w55h252": {
+    "cups_id": "w55h252",
+    "dimens": {
+      "height_inches": 2.67,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.53
+    },
+    "label": "19 mm (3/4\") Label",
+    "manufacturer": "DYMO"
+  },
+  "w55h4000": {
+    "cups_id": "w55h4000",
+    "dimens": {
+      "height_inches": 54.72,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.53
+    },
+    "label": "19 mm (3/4\") Continuous",
+    "manufacturer": "DYMO"
+  },
+  "w57h248": {
+    "cups_id": "w57h248",
+    "dimens": {
+      "height_inches": 3.16,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.74
+    },
+    "label": "30327 File Folder",
+    "manufacturer": "DYMO"
+  },
+  "w63h419": {
+    "cups_id": "w63h419",
+    "dimens": {
+      "height_inches": 5.53,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.83
+    },
+    "label": "99016 Video Spine",
+    "manufacturer": "DYMO"
+  },
+  "w65h90": {
+    "cups_id": "w65h90",
+    "dimens": {
+      "height_inches": 0.96,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.79
+    },
+    "label": "30348 9/10 in x 1-1/4 in",
+    "manufacturer": "DYMO"
+  },
+  "w68h252": {
+    "cups_id": "w68h252",
+    "dimens": {
+      "height_inches": 2.67,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.53
+    },
+    "label": "24 mm (1\") Label",
+    "manufacturer": "DYMO"
+  },
+  "w68h252.2": {
+    "cups_id": "w68h252.2",
+    "dimens": {
+      "height_inches": 2.67,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.53
+    },
+    "label": "Address Label",
+    "manufacturer": "DYMO"
+  },
+  "w68h4000": {
+    "cups_id": "w68h4000",
+    "dimens": {
+      "height_inches": 54.72,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.53
+    },
+    "label": "24 mm (1\") Continuous",
+    "manufacturer": "DYMO"
+  },
+  "w71h144": {
+    "cups_id": "w71h144",
+    "dimens": {
+      "height_inches": 0.75,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.94
+    },
+    "label": "30373 Price Tag Label",
+    "manufacturer": "DYMO"
+  },
+  "w72h108": {
+    "cups_id": "w72h108",
+    "dimens": {
+      "height_inches": 1.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.9
+    },
+    "label": "30347 1 in x 1-1/2 in",
+    "manufacturer": "DYMO"
+  },
+  "w72h154": {
+    "cups_id": "w72h154",
+    "dimens": {
+      "height_inches": 1.98,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.9
+    },
+    "label": "11352 Return Address Int",
+    "manufacturer": "DYMO"
+  },
+  "w72h154.1": {
+    "cups_id": "w72h154.1",
+    "dimens": {
+      "height_inches": 1.98,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.9
+    },
+    "label": "30336 1 in x 2-1/8 in",
+    "manufacturer": "DYMO"
+  },
+  "w72h72": {
+    "cups_id": "w72h72",
+    "dimens": {
+      "height_inches": 0.85,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.9
+    },
+    "label": "11353 Multi-Purpose",
+    "manufacturer": "DYMO"
+  },
+  "w72h72.1": {
+    "cups_id": "w72h72.1",
+    "dimens": {
+      "height_inches": 0.84,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.9
+    },
+    "label": "30332 1 in x 1 in",
+    "manufacturer": "DYMO"
+  },
+  "w72h72.2": {
+    "cups_id": "w72h72.2",
+    "dimens": {
+      "height_inches": 0.85,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.9
+    },
+    "label": "30333 1/2 in x 1 in (2 up)",
+    "manufacturer": "DYMO"
+  },
+  "w73h86": {
+    "cups_id": "w73h86",
+    "dimens": {
+      "height_inches": 1.07,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.97
+    },
+    "label": "30335 1/2 in x 1/2 in (4 up)",
+    "manufacturer": "DYMO"
+  },
+  "w79h252": {
+    "cups_id": "w79h252",
+    "dimens": {
+      "height_inches": 3.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.0
+    },
+    "label": "30252 Address",
+    "manufacturer": "DYMO"
+  },
+  "w79h252.1": {
+    "cups_id": "w79h252.1",
+    "dimens": {
+      "height_inches": 3.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.0
+    },
+    "label": "30320 Address",
+    "manufacturer": "DYMO"
+  },
+  "w79h252.2": {
+    "cups_id": "w79h252.2",
+    "dimens": {
+      "height_inches": 3.21,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.0
+    },
+    "label": "99010 Standard Address",
+    "manufacturer": "DYMO"
+  },
+  "w80h144": {
+    "cups_id": "w80h144",
+    "dimens": {
+      "height_inches": 1.63,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 0.94
+    },
+    "label": "30376 Hanging File Insert",
+    "manufacturer": "DYMO"
+  },
+  "w82h248": {
+    "cups_id": "w82h248",
+    "dimens": {
+      "height_inches": 3.18,
+      "is_ellipse": false,
+      "is_rectangle": true,
+      "width_inches": 1.03
+    },
+    "label": "30277 File Folder (2 up)",
+    "manufacturer": "DYMO"
+  }
+}
