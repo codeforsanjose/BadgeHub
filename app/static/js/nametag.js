@@ -1,6 +1,7 @@
 
 function Nametag(config){
     this.canvas = config['canvas_elem'];
+    this.print_dpi = 300;
     this.canvas_height = this.canvas.height;
     this.canvas_width = this.canvas.width;
     this.margin_pct = 0.05;

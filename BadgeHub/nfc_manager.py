@@ -8,6 +8,7 @@ import os
 import redis
 from adafruit_pn532.spi import PN532_SPI
 
+from BadgeHub.redis_helper import set_nfc_status
 from BadgeHub.config import REDIS_HOST, REDIS_PORT
 from BadgeHub.image_creator import Nametag
 from BadgeHub.printer_manager import send_to_printer
@@ -69,19 +70,25 @@ def listen_for_cards():
     # SPI connection:
     spi = busio.SPI(board.SCK, board.MOSI, board.MISO)
     cs_pin = DigitalInOut(board.D5)
+    nfc_status = {}
     try:
         pn532 = PN532_SPI(spi, cs_pin, debug=False)
+        ic, ver, rev, support = pn532.get_firmware_version()
+        nfc_status = {'ic': ic, 'ver': ver, 'rev': rev, "support": support}
+        set_nfc_status(r, nfc_status)
         # Configure PN532 to communicate with MiFare cards
         pn532.SAM_configuration()
     except RuntimeError as re:
         print(re)
-        logger.error('Failed to initialize the NFC reader. Check the connection to the reader.')
+        nfc_status['message'] = 'Failed to initialize the NFC reader. Check the connection to the reader.'
+        set_nfc_status(r, nfc_status)
+        logger.error(nfc_status['message'])
         return
 
     logger.debug('Waiting for RFID/NFC card...')
     while True:
         # Check if a card is available to read
-        uid = pn532.read_passive_target(timeout=0.5)
+        uid = pn532.read_passive_target(timeout=2.0)
 
         # Try again if no card is available.
         if uid is None:
@@ -105,9 +112,8 @@ def listen_for_cards():
 def init_nfc():
     if not imports_ok:
         logger.error("Cannot start NFC.")
+        set_nfc_status(r, {'message': "Cannot start NFC."})
         return
-    board_info = get_board_info()
-    logger.info("Connected NFC board info:\n{}".format(str(board_info)))
     listen_for_cards()
 
 

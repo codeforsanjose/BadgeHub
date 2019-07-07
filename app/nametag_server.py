@@ -2,7 +2,6 @@ import base64
 import configparser
 import csv
 import datetime
-import json
 import logging
 import os
 
@@ -18,11 +17,10 @@ from wtforms.validators import NumberRange
 
 from BadgeHub.config import CSV_FILENAME, DEBUG, PORT_NUMBER, REDIS_HOST, REDIS_PORT
 from BadgeHub.image_creator import Nametag
-from BadgeHub.redis_helper import get_preferences
+from BadgeHub.redis_helper import get_preferences, set_preferences, get_printer_status, get_nfc_status
 from BadgeHub.utils import get_script_path
 from BadgeHub.printer_manager import send_to_printer
 
-PAGE_SIZE = "Custom.54x100mm"
 IMAGE_FILE = "temp.png"
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
@@ -70,13 +68,6 @@ def root():
         logger.info("Unexpected blank value for preferences")
 
     return render_template('index.html', preferences=current_preferences)
-
-
-
-def setPreferences(prefs_dict):
-    json_prefs = json.dumps(prefs_dict)
-    logger.debug("setting preferences: {}".format(json_prefs))
-    r.set('preferences', json_prefs)
 
 
 class AdminForm(FlaskForm):
@@ -128,6 +119,12 @@ def render_nametag():
     return jsonify({'nametag': 'data:image/png;charset=utf-8;base64,' + str(nametag.output_as_base64(), "utf-8")})
 
 
+@app.route('/admin/status', methods=['GET'])
+def get_info():
+    info = {'printers': get_printer_status(r), 'nfc': get_nfc_status(r)}
+    return jsonify(info)
+
+
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
     if request.method == 'POST':
@@ -152,7 +149,7 @@ def admin():
             'logo_y_offset_pct': round(float(request.form.get('logo_y_offset_pct', None)), 2),
             'logo_scale': round(float(request.form.get('logo_scale', None)), 2)
         }
-        setPreferences(fields)
+        set_preferences(r, fields)
 
     form = AdminForm()
     logger.info('rendering the admin template')
@@ -238,5 +235,6 @@ def start_webserver():
 
 if __name__ == "__main__":
     from BadgeHub.log_helper import setup_logging
+
     setup_logging()
     start_webserver()

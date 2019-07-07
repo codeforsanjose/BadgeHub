@@ -1,8 +1,6 @@
 import os
-import re
 import json
 from BadgeHub.utils import convert_to_dict
-from typing import Dict
 
 
 class MediaDimensions:
@@ -62,9 +60,10 @@ def ppd_to_media_sizes(path_to_ppd_file: str, printer_short_name : str):
     The file will contain lines of text which should contain the media descriptors.
 
     Example of what we're looking for:
-    *PageSize w102h252/30321 Large Address: "<</PageSize[102 252]/ImagingBBox null/cupsInteger0 0>>setpagedevice"
-              ^        ^------------------^-----media name
-              ^------^--------------------------media identifier
+    *ImageableArea w79h252.1/30320 Address: "4.32 4.32 76.08 235.44"
+                   ^         ^               ^---------------------^---dimensions, in 1/72nd of an inch
+                   ^         ^------------^----------------------------media name
+                   ^--------^------------------------------------------media identifier
 
     :param path_to_ppd_file: the path to the ppd file to be parsed, eg: "lw450t.ppd"
     :return: Dict:
@@ -116,7 +115,7 @@ if __name__ == '__main__':
 
             media_as_json = json.dumps(ppd_output['media'], sort_keys=True, default=convert_to_dict, indent=2)
             outfile = os.path.join(output_directory, short_printer_name+'.json')
-            with open(outfile, 'a') as f:
+            with open(outfile, 'w') as f:
                 f.write(media_as_json)
 
             printers_info[short_printer_name] = ppd_output['printer']
@@ -126,5 +125,5 @@ if __name__ == '__main__':
     printers_output_file = os.path.join(output_directory, 'printers.json')
     media_as_json = json.dumps(printers_info, sort_keys=True, default=convert_to_dict, indent=2)
     print('saving printer info at {}'.format(printers_output_file))
-    with open(printers_output_file, 'a') as file:
+    with open(printers_output_file, 'w') as file:
         file.write(media_as_json)

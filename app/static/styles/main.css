@@ -1,6 +1,6 @@
 body, h1, h2, h3, h4, p {font-family: sans-serif;}
 h1 {font-size:3em;}
-h2{font-size: 1.2em; margin-top: .4rem; margin-bottom: .6rem;}
+h2{font-size: 1.5em; margin-top: .4rem; margin-bottom: .6rem;border-bottom: 1px solid #dedede;}
 
 .header {display: flex;align-items: center;justify-content: flex-start;height: 8rem;padding: 1rem;}
 .header h1 {margin: 1rem;}
@@ -25,6 +25,10 @@ box-shadow: 0px 2px 10px 0px rgba(143,143,143,1);}
 
 .thankyou_text {display: block; text-align:center;font-size: 2.3em; line-height: 2.5em;}
 
+/*#printer_list [data-printer-online="true"]::before {content: '\25CF'; color: #00ff00; margin-right:0.5em;}
+#printer_list [data-printer-online="false"]::before {content: '\25CF'; color: #ff0000; margin-right:0.5em;}*/
+#printer_list [data-printer-online="true"]::after {content: '(online)'; color: #00ff00; margin-left:0.5em;}
+#printer_list [data-printer-online="false"]::after {content: '(offline)'; color: #ff0000; margin-left:0.5em;}
 #printer_list [data-status="idle"]{background-color:#0f0;}
 #printer_list [data-status="printing"]{background-color:#0ff;}
 #printer_list [data-status="stopped"]{background-color:#f00;}

@@ -26,10 +26,16 @@
         <div class="printers_status">
           <h2>Printer Status</h2>
           <ul id="printer_list"></ul>
+          <select id="media_select">
+            <option selected>loading...</option>
+          </select>
         </div>
         <div class="nfc_status">
           <h2>NFC Reader Status</h2>
-          <div id="nfc_info"></div>
+          <div id="nfc_info">
+            <span class="nfc_device_info"></span>
+            <span class="nfc_message"></span>
+          </div>
         </div>
       </section>
 
@@ -256,13 +262,15 @@
       </section>
     </form>
     <script type="text/javascript">
-    // $(document).ready(function(){
-    //   poll_status({
-    //     'printer_elem' : document.querySelector('#printer_list'),
-    //     'nfc_elem' : document.querySelector('#nfc_info'),
-    //     'update_interval' : 2000
-    //   })
-    // })
+    $(document).ready(function(){
+      poll_status({
+        'printer_elem' : document.querySelector('#printer_list'),
+        'printer_media_select_elem' : document.querySelector('#media_select'),
+        'nfc_device_info_elem' : document.querySelector('#nfc_info .nfc_device_info'),
+        'nfc_message_elem' : document.querySelector('#nfc_info .nfc_message'),
+        'update_interval' : 2000
+      })
+    })
 
     function outputUpdate(id, age) {
         document.getElementById(id).value = age;
