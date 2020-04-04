@@ -2,7 +2,7 @@ import os
 import sys
 import time
 from subprocess import PIPE, run
-
+import cups
 import redis
 
 from BadgeHub.redis_helper import set_printer_status
@@ -28,60 +28,44 @@ def add_file_to_print_queue(filename):
 
 
 def get_printer_info():
-    # Use the lpstat command to list the printers connected to the system, including the
-    # printer which is currently the default.
-    result = run(["lpstat", "-t"], stdout=PIPE, stderr=PIPE, universal_newlines=True)
-    if result.returncode is not 0:
-        print('Error getting printer status:\n{}'.format(result.stderr))
-        # TODO: update Redis with the printer error
-        return
+    printer_device_info = []
+    conn = cups.Connection()
+    printers = conn.getPrinters()
+    cups_default = conn.getDefault()
+    for printer in printers:
+        classes = conn.getClasses()
+        printer_attrs = conn.getPrinterAttributes(name=printer,
+                                                 requested_attributes=['job-sheets-supported', 'job-sheets-default'])
+        print(printer, printers[printer]["printer-info"], printers[printer]['printer-make-and-model'])
 
-    printer_name = None
-    for line in result.stdout.splitlines():
-        if line.lower().startswith('system default destination:'):
-            default_printer = line.split(':')[1]
-            printer_name = default_printer.strip()
+        # FIXME: this should return a list of every printer connected, not just the default.
+        #   Look into doing this as a C function so that we can tie directly into the CUPS API.
 
-    # The printer name we got may have some information other than the model number, which we don't need.
-    # A second command is needed to look up the printer model by printer name.
-    result = run(["lpstat", "-l", "-p", printer_name], stdout=PIPE, stderr=PIPE, universal_newlines=True)
-    if result.returncode is not 0:
-        print('Error getting printer model number:\n{}'.format(result.stderr))
-        # TODO: update Redis with the printer error
-        return
+        # Now get which PageSize/Media Size is set as default
+        result = run(["lpoptions", "-l", "-p", printer], stdout=PIPE, stderr=PIPE, universal_newlines=True)
+        if result.returncode is not 0:
+            print('Error getting PageSize/Media Size default values:\n{}'.format(result.stderr))
+            # TODO: update Redis with the printer error
+            return
 
-    printer_model = None
-    status_online = False
-    for line in result.stdout.splitlines():
-        if line.strip().startswith('Description:'):
-            default_printer = line.split(':')[1]
-            printer_model = default_printer.strip()
-        if line.strip().startswith('Alerts:'):
-            status_online = 'none' == line.split(':')[1].lower().strip()
+        default_page_size = False
+        for line in result.stdout.splitlines():
+            if line.strip().startswith('PageSize/Media Size:'):
+                media_type_list = line.split(':')[1]
+                media_type_list = media_type_list.strip().split(' ')
+                for media_type in media_type_list:
+                    if media_type.strip().startswith('*'):
+                        default_page_size = media_type.replace('*', '')
+        current_time_ms = int(round(time.time() * 1000))
+        printer_device_info.append({
+            'printer_model': printers[printer]['printer-make-and-model'],
+            'default_printer': True,
+            'online': False,
+            'default_media_size': default_page_size,
+            'last_seen_utc_ms': current_time_ms
+        })
 
-    # Now get which PageSize/Media Size is set as default
-    result = run(["lpoptions", "-l", "-p", printer_name], stdout=PIPE, stderr=PIPE, universal_newlines=True)
-    if result.returncode is not 0:
-        print('Error getting PageSize/Media Size default values:\n{}'.format(result.stderr))
-        # TODO: update Redis with the printer error
-        return
-
-    default_page_size = False
-    for line in result.stdout.splitlines():
-        if line.strip().startswith('PageSize/Media Size:'):
-            media_type_list = line.split(':')[1]
-            media_type_list = media_type_list.strip().split(' ')
-            for media_type in media_type_list:
-                if media_type.strip().startswith('*'):
-                    default_page_size = media_type.replace('*', '')
-
-    # FIXME: this should return a list of every printer connected, not just the default.
-    #   Look into doing this as a C function so that we can tie directly into the CUPS API.
-    return [{
-        'printer_model': printer_model,
-        'default_printer': True,
-        'online': status_online,
-        'default_media_size': default_page_size}]
+    return printer_device_info
 
 
 def listen_for_print_requests():

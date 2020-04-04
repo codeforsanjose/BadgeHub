@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Admin</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/vnd.microsoft.icon">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/vnd.microsoft.icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/reset.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}" type="text/css">
+
+    <script src="{{ url_for('static', filename='js/socket.io-2.2.0.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='js/admin.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='js/qrcode.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='js/nametag.js') }}" type="text/javascript"></script>
+  </head>
+  <body>
+    <div class="header">
+      <img src="{{ url_for('static', filename='images/organization_logo.jpg') }}" alt="Code For San Jose" id="organization_logo">
+      <img src="{{ url_for('static', filename='images/organization_logo.jpg') }}" alt="" id="organization_logo_src" style="display:none">
+      <h1>Profile #{{ preferences.profile_id }} Settings</h1>
+
+    </div>
+    <nav class="breadcrumb">
+      <ul>
+        <li><a href="{{ url_for('admin') }}">admin home</a></li>
+        <li>profile edit</li>
+      </ul>
+    </nav>
+    <form id="settings_form" action="{{ url_for('edit_profile', profile_id=preferences.profile_id) }}" method="post" enctype="multipart/form-data">
+       <section class="server_status_block">
+        <div class="printers_status">
+          <h2>Printer Status</h2>
+          <ul id="printer_list"></ul>
+          <select id="media_select">
+            <option selected>loading...</option>
+          </select>
+        </div>
+        <div class="nfc_status">
+          <h2>NFC Reader Status</h2>
+          <div id="nfc_info">
+            <span class="nfc_device_info"></span>
+            <span class="nfc_message"></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="server_settings_block">
+        {{ form.hidden_tag() }}
+        <div class="label_input_pair">
+          {{ form.profile_name.label }}
+          {{ form.profile_name }}
+        </div>
+        <div class="label_input_pair">
+          {{ form.is_current_profile.label }}
+          {{ form.is_current_profile }}
+        </div>
+        <div class="label_input_pair">
+          {{ form.google_sheets_upload.label }}
+          {{ form.google_sheets_upload }}
+        </div>
+        <div class="label_input_pair">
+          {{ form.spreadsheet_id.label }}
+          {{ form.spreadsheet_id }}
+        </div>
+        <div class="label_input_pair">
+          {{ form.enable_nfc.label }}
+          {{ form.enable_nfc }}
+        </div>
+        <div class="label_input_pair">
+          {{ form.enable_printing.label }}
+          {{ form.enable_printing }}
+        </div>
+        <div class="label_input_pair">
+          {{ form.print_logo.label }}
+          {{ form.print_logo }}
+        </div>
+        <div class="label_input_pair">
+          {{ form.print_qr_code.label }}
+          {{ form.print_qr_code }}
+        </div>
+        <div class="label_input_pair">
+          {{ form.enable_pronouns.label }}
+          {{ form.enable_pronouns }}
+        </div>
+  
+        <div class="label_input_pair">
+          {{ form.thank_you_message.label }}
+          {{ form.thank_you_message }}
+        </div>
+        <button name="button" type="submit">Save Settings</button>
+      </section>
+
+      <section class="print_settings_block">
+        <h2>Print preview:</h2>
+        <label>
+          Line 1
+          <input type='text' id="line1_test_input"/>
+        </label>
+        <label>
+          Line 2
+          <input type='text' id="line2_test_input"/>
+        </label>
+        <p>Preferred Pronoun:</p>
+        <fieldset class="gender_picker">
+          <div class="label_input_pair">
+            <input type="radio" name="pronoun" id="pronoun_he" value="he/him/his"/>
+            <label for="pronoun_he">He/Him/His</label>
+          </div>
+          <div class="label_input_pair">
+            <input type="radio" name="pronoun" id="pronoun_she" value="she/her/hers"/>
+            <label for="pronoun_she">She/Her/Hers</label>
+          </div>
+          <div class="label_input_pair">
+            <input type="radio" name="pronoun" id="pronound_they" value="they/them/their"/>
+            <label for="pronound_they">They/Them/Their</label>
+          </div>
+          <div class="label_input_pair">
+            <input type="radio" name="pronoun" id="pronoun_ze" value="ze/hir/hirs"/>
+            <label for="pronoun_ze">Ze/Hir/Hirs</label>
+          </div>
+          <div class="label_input_pair">
+            <input type="radio" name="pronoun" id="pronoun_decline" value="ze/hir/hirs"/>
+            <label for="pronoun_decline">(decline to state)</label>
+          </div>
+        </fieldset>
+        <canvas id="nametag_canvas" width="600" height="337"></canvas>
+         <div class="label_input_pair">
+          {{ form.text_x_offset_pct.label }}
+          {{ form.text_x_offset_pct( min=0, max=1 ) }}
+          <output for="text_x_offset_pct">{{ form.text_x_offset_pct.data }}</output>
+        </div>
+        <div class="label_input_pair">
+          {{ form.text_y_offset_pct.label }}
+          {{ form.text_y_offset_pct( min=0, max=1 ) }}
+          <output for="text_y_offset_pct">{{ form.text_y_offset_pct.data }}</output>
+        </div>
+        <div class="label_input_pair">
+          {{ form.qr_x_offset_pct.label }}
+          {{ form.qr_x_offset_pct( min=0, max=1 ) }}
+          <output for="qr_x_offset_pct">{{ form.qr_x_offset_pct.data }}</output>
+        </div>
+        <div class="label_input_pair">
+          {{ form.qr_y_offset_pct.label }}
+          {{ form.qr_y_offset_pct( min=0, max=1 ) }}
+          <output for="qr_y_offset_pct">{{ form.qr_y_offset_pct.data }}</output>
+        </div>
+        <div class="label_input_pair">
+          {{ form.qr_max_width_pct.label }}
+          {{ form.qr_max_width_pct( min=0, max=1 ) }}
+          <output for="qr_max_width_pct">{{ form.qr_max_width_pct.data }}</output>
+        </div>
+        <div class="label_input_pair">
+          {{ form.logo_x_offset_pct.label }}
+          {{ form.logo_x_offset_pct( min=0, max=1 ) }}
+          <output for="logo_x_offset_pct">{{ form.logo_x_offset_pct.data }}</output>
+        </div>
+        <div class="label_input_pair">
+          {{ form.logo_y_offset_pct.label }}
+          {{ form.logo_y_offset_pct( min=0, max=1 ) }}
+          <output for="logo_y_offset_pct">{{ form.logo_y_offset_pct.data }}</output>
+        </div>
+        <div class="label_input_pair">
+          {{ form.logo_scale.label }}
+          {{ form.logo_scale( min=0, max=3 ) }}
+          <output for="logo_scale">{{ form.logo_scale.data }}</output>
+        </div>
+        <script>
+         function toggleRadioGroup(groupName, disabled) {
+          // https://stackoverflow.com/a/15637650/940217
+          var inputs = document.getElementsByName(groupName);
+          for (var i = 0, len = inputs.length; i<len; i++){
+            inputs[i].disabled = disabled;
+          }
+        }
+
+        toggleRadioGroup('pronoun', !{{ preferences.enable_pronouns | tojson | safe }})
+
+        document.nametag = new Nametag({
+            'canvas_elem': document.getElementById('nametag_canvas'),
+            'form_elem': document.getElementById('login_form'),
+            'line_1_input': document.getElementById('line1_test_input'),
+            'line_2_input': document.getElementById('line2_test_input'),
+            'text_x_offset_pct': document.getElementById('text_x_offset_pct').value,
+            'text_y_offset_pct': document.getElementById('text_y_offset_pct').value,
+            'logo_elem': document.getElementById('organization_logo_src'),
+            'logo_scale' : {{ preferences.logo_scale | tojson | safe }},
+            'pronoun_elems' : document.getElementsByName('pronoun'),
+            'enable_pronouns' : {{ preferences.enable_pronouns | tojson | safe }},
+            'qr_max_width_pct' : {{ preferences.qr_max_width_pct | tojson | safe }},
+            'show_diag':true
+        })
+        document.nametag.set_logo_pos({{ preferences.logo_x_offset_pct | tojson | safe }}, {{ preferences.logo_y_offset_pct | tojson | safe }})
+        document.nametag.set_qr_x_pos({{ preferences.qr_x_offset_pct | tojson | safe }})
+        document.nametag.set_qr_y_pos({{ preferences.qr_y_offset_pct | tojson | safe }})
+
+
+        function onRangeChange(rangeInputElmt, listener) {
+          // https://stackoverflow.com/a/37623959/940217
+          var inputEvtHasNeverFired = true;
+          var rangeValue = {current: undefined, mostRecent: undefined};
+          rangeInputElmt.addEventListener("input", function(evt) {
+            inputEvtHasNeverFired = false;
+            rangeValue.current = evt.target.value;
+            if (rangeValue.current !== rangeValue.mostRecent) {
+              listener(evt);
+            }
+            rangeValue.mostRecent = rangeValue.current;
+          });
+          rangeInputElmt.addEventListener("change", function(evt) {
+            if (inputEvtHasNeverFired) {
+              listener(evt);
+            }
+          });
+        }
+
+
+        // TODO: clean this repetition up
+        onRangeChange(document.getElementById('text_x_offset_pct'), function(e){
+          var value = Math.round(e.target.value*100)/100
+          console.log('text_x_offset_pct range change', value)
+          document.nametag.set_text_x_offset_pct(value)
+          document.querySelector('output[for="text_x_offset_pct"').innerHTML = value
+        })
+        onRangeChange(document.getElementById('text_y_offset_pct'), function(e){
+          var value = Math.round(e.target.value*100)/100
+          console.log('text_y_offset_pct range change', value)
+          document.nametag.set_text_y_offset_pct(value)
+          document.querySelector('output[for="text_y_offset_pct"').innerHTML = value
+        })
+        onRangeChange(document.getElementById('qr_x_offset_pct'), function(e){
+          var value = Math.round(e.target.value*100)/100
+          console.log('qr_x_offset_pct range change', value)
+          document.nametag.set_qr_x_pos(value)
+          document.querySelector('output[for="qr_x_offset_pct"').innerHTML = value
+        })
+        onRangeChange(document.getElementById('qr_y_offset_pct'), function(e){
+          var value = Math.round(e.target.value*100)/100
+          console.log('qr_y_offset_pct range change', value)
+          document.nametag.set_qr_y_pos(value)
+          document.querySelector('output[for="qr_y_offset_pct"').innerHTML = value
+        })
+        onRangeChange(document.getElementById('qr_max_width_pct'), function(e){
+          var value = Math.round(e.target.value*100)/100
+          console.log('qr_max_width_pct range change', value)
+          document.nametag.set_qr_max_width_pct(value)
+          document.querySelector('output[for="qr_max_width_pct"').innerHTML = value
+        })
+        onRangeChange(document.getElementById('logo_x_offset_pct'), function(e){
+          var value = Math.round(e.target.value*100)/100
+          console.log('logo_x_offset_pct range change', value)
+          document.nametag.set_logo_x_pos(value)
+          document.querySelector('output[for="logo_x_offset_pct"').innerHTML = value
+        })
+        onRangeChange(document.getElementById('logo_y_offset_pct'), function(e){
+          var value = Math.round(e.target.value*100)/100
+          console.log('logo_y_offset_pct range change', value)
+          document.nametag.set_logo_y_pos(value)
+          document.querySelector('output[for="logo_y_offset_pct"').innerHTML = value
+        })
+        onRangeChange(document.getElementById('logo_scale'), function(e){
+          var value = Math.round(e.target.value*100)/100
+          console.log('logo_scale range change', value)
+          document.nametag.set_logo_scale(value)
+          document.querySelector('output[for="logo_scale"').innerHTML = value
+        })
+
+        document.getElementById('enable_pronouns').addEventListener('change', function() {
+          toggleRadioGroup('pronoun', !this.checked)
+
+          document.nametag.set_pronouns_enabled(this.checked);
+        });
+        </script>
+        <button name="button" type="submit">Save Settings</button>
+      </section>
+    </form>
+    <script type="text/javascript">
+    $(document).ready(function(){
+      poll_status({
+        'printer_elem' : document.querySelector('#printer_list'),
+        'printer_media_select_elem' : document.querySelector('#media_select'),
+        'nfc_device_info_elem' : document.querySelector('#nfc_info .nfc_device_info'),
+        'nfc_message_elem' : document.querySelector('#nfc_info .nfc_message'),
+        'update_interval' : 2000
+      })
+    })
+
+    function outputUpdate(id, age) {
+        document.getElementById(id).value = age;
+    }
+
+    function createImage(renderText){
+      var request = new XMLHttpRequest();
+      request.open('POST', "{{ url_for('render_nametag') }}", true);
+      request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+
+      request.onload = function() {
+        if (request.status >= 200 && request.status < 400) {
+          // Success!
+          var resp = request.responseText;
+          console.log('response: ',resp);
+        } else {
+          // We reached our target server, but it returned an error
+          console.error('response error, status='+request.status)
+        }
+      };
+
+      request.onerror = function() {
+        console.error('request error')
+      };
+
+      request.send(JSON.stringify({"text": renderText}));
+    }
+    </script>
+  </body>
+</html>

@@ -25,7 +25,7 @@ function get_media_types_for_printer(printer_long_name, printer_short_name) {
 function update_printer_list(printer_list_elem, media_select_elem, printer_data){
   // see https://www.cups.org/doc/cupspm.html#basic-destination-information
   if (Object.keys(printer_data).length === 0) {
-    console.error('Did not receive any printer data from the server; cannot update the printer info.')
+    console.warn('Did not receive any printer data from the server; cannot update the printer info.')
     return
   }
   printer_list_elem = $(printer_list_elem)
@@ -63,6 +63,7 @@ function update_media_list_for_printer(media_select_elem, printer_long_name, sel
         // no need to update
         return
     }
+    media_select_elem.innerHTML = ''
     media_select_elem.dataset.printer = printer_long_name
 
     var media_types = cached_printer_info[printer_long_name]['media_types']
@@ -78,45 +79,25 @@ function update_media_list_for_printer(media_select_elem, printer_long_name, sel
 
 
 function update_nfc_info(device_info_elem, message_elem, nfc_data){
-  // see https://www.nxp.com/docs/en/user-guide/141520.pdf
-  // 
-  // IC       - Version of the IC. For PN532, the contain of this byte is 0x32.
-  // Ver      - Version of the firmware,
-  // Rev      - Revision of the firmware,
-  // Support  - indicates which are the functionalities supported by the firmware.
-  //            When the bits are set to 1, the functionality is supported,
-  //            otherwise (bit set to 0) it is not.
-  //            Bit 2 is ISO18092
-  //            Bit 1 is ISO/IEC 14443 TypeB
-  //            Bit 0 is ISO/IEC 14443 TypeA
-  if (nfc_data === null) {
+
+  if (nfc_data === null ) {
     console.warn('null NFC status')
-    elem.innerHTML = 'disconnected'
+    message_elem.innerHTML = 'disconnected'
     return
   }
 
-  var firmware_version = nfc_data['ver']+'.'+nfc_data['rev']
-  var device_type = 'unknown'
-  if (nfc_data['ic'] === 0x32) {
-    device_type = 'PN532'
-  }
+  var chipset = nfc_data['chipset'] || ''
+  var vendor = nfc_data['vendor'] || ''
+  var product = nfc_data['product'] || ''
+  var path = nfc_data['path'] || ''
+  var last_seen_utc = nfc_data['last_seen_utc_ms'] || ''
 
-  var supported = []
-  if (nfc_data['support'] & 1) {
-    supported.push('ISO/IEC 14443 TypeA')
+  if (path.length == 0) {
+    message_elem.innerHTML = 'disconnected'
+  } else {
+    device_info_elem.innerHTML = 'Reader connected:<br/>'+chipset + '<br/>'+vendor+'<br/>'+product+'<br/>'+path
+    message_elem = nfc_data['message'] || ''
   }
-  if (nfc_data['support'] & 2) {
-    supported.push('ISO/IEC 14443 TypeB')
-  }
-  if (nfc_data['support'] & 4) {
-    supported.push('ISO18092')
-  }
-//  console.log('Found '+device_type+' NFC device with firmware version '
-//    +firmware_version+' and support for '+JSON.stringify(supported))
-
-
-  device_info_elem.innerHTML = 'Reader connected: '+device_type + ' version '+firmware_version
-  message_elem = nfc_data['message'] || ''
 }
 
 

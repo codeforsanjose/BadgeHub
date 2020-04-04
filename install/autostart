@@ -5,6 +5,6 @@
 @xset -dpms
 @xset s noblank
 @point-rpi
-@python /usr/local/cfsj-login-system/src/main.py
+@python3 /usr/local/cfsj-login-system/src/main.py
 @chromium-browser --incognito --kiosk http://localhost:5000/
 

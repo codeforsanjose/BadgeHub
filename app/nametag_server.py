@@ -1,30 +1,28 @@
 import base64
 import configparser
 import csv
+import json
 import datetime
 import logging
 import os
 
 # from werkzeug.utils import secure_filename
 # from nfc import getBoardInfo
-import redis
-from flask import Flask, request, render_template, jsonify
-from flask_wtf import FlaskForm
-from flask_wtf.file import FileField
-from wtforms import BooleanField, StringField, TextAreaField
-from wtforms.fields.html5 import DecimalRangeField
-from wtforms.validators import NumberRange
+from flask import Flask, request, render_template, jsonify, redirect, url_for
 
-from BadgeHub.config import CSV_FILENAME, DEBUG, PORT_NUMBER, REDIS_HOST, REDIS_PORT
+
+from BadgeHub.config import CSV_FILENAME, DEBUG, PORT_NUMBER
 from BadgeHub.image_creator import Nametag
-from BadgeHub.redis_helper import get_preferences, set_preferences, get_printer_status, get_nfc_status
+from BadgeHub.models.admin_form import AdminForm
+from BadgeHub.models.badge_profile import BadgeProfile
+from BadgeHub.redis_helper import redis_instance, get_preferences, get_next_profile_id, get_default_profile, get_preferences_for_id, set_profile, get_printer_status, get_nfc_status, peek_nfc_queue
 from BadgeHub.utils import get_script_path
 from BadgeHub.printer_manager import send_to_printer
 
 IMAGE_FILE = "temp.png"
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
-r = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, charset="utf-8", db=0, decode_responses=True)
+
 config = configparser.ConfigParser()
 
 app = Flask(__name__)
@@ -62,55 +60,29 @@ def save_user_info(name, pronoun, email):
 
 @app.route('/')
 def root():
-    current_preferences = get_preferences(r)
+    current_preferences = get_default_profile(redis_instance())
 
-    if current_preferences is None or all(value is None for value in current_preferences.values()):
-        logger.info("Unexpected blank value for preferences")
+    if current_preferences is None or all(value is None for value in current_preferences):
+        logger.warning("Unexpected blank value for preferences")
 
     return render_template('index.html', preferences=current_preferences)
-
-
-class AdminForm(FlaskForm):
-    organization_logo = FileField(label='Change logo')
-    google_sheets_upload = BooleanField(label='Enable upload to Google Sheets')
-    enable_nfc = BooleanField(label='Enable NFC')
-    enable_printing = BooleanField(label='Enable printing')
-    print_logo = BooleanField(label='Include logo with each print')
-    print_qr_code = BooleanField(label='Include QR code with each print')
-    enable_pronouns = BooleanField(label='Enable pronoun selection')
-    spreadsheet_id = StringField(label='Google Sheets Spreadsheet ID')
-    text_x_offset_pct = DecimalRangeField(label='Text x position (%)', default=0,
-                                          validators=[NumberRange(min=0, max=100)])
-    text_y_offset_pct = DecimalRangeField(label='Text y position (%)', default=0,
-                                          validators=[NumberRange(min=0, max=100)])
-    qr_x_offset_pct = DecimalRangeField(label='QR code x position (%)', default=0,
-                                        validators=[NumberRange(min=0, max=100)])
-    qr_y_offset_pct = DecimalRangeField(label='QR code y position (%)', default=0,
-                                        validators=[NumberRange(min=0, max=100)])
-    qr_max_width_pct = DecimalRangeField(label='QR code max width (%)', default=0,
-                                         validators=[NumberRange(min=0, max=100)])
-    logo_x_offset_pct = DecimalRangeField(label='Logo x position (%)', default=0,
-                                          validators=[NumberRange(min=0, max=100)])
-    logo_y_offset_pct = DecimalRangeField(label='Logo y position (%)', default=0,
-                                          validators=[NumberRange(min=0, max=100)])
-    logo_scale = DecimalRangeField(label='Logo scale', default=0)
-    thank_you_message = TextAreaField(label='Thank you message', render_kw={"rows": 10, "cols": 30})
 
 
 @app.route('/render', methods=['POST'])
 def render_nametag():
     request_json = request.get_json()
     logger.info('render_nametag request: {}'.format(str(request_json)))
-    prefs = get_preferences(r)
-    if prefs is None:
-        logger.info('No preferences found in Redis')
+    default_profile = get_default_profile(redis_instance())
+
+    if default_profile is None:
+        logger.error('No dfault profile found in Redis')
         return
     nametag = Nametag(text_line1="Swathi Lal",
-                      logo_scale=prefs['logo_scale'],
-                      logo_x_offset_pct=prefs['logo_x_offset_pct'], logo_y_offset_pct=prefs['logo_y_offset_pct'],
-                      qr_max_width_pct=prefs['qr_max_width_pct'],
-                      qr_x_offset_pct=prefs['qr_x_offset_pct'], qr_y_offset_pct=prefs['qr_y_offset_pct'],
-                      text_x_offset_pct=prefs['text_x_offset_pct'], text_y_offset_pct=prefs['text_y_offset_pct'],
+                      logo_scale=default_profile.logo_scale,
+                      logo_x_offset_pct=default_profile.logo_x_offset_pct, logo_y_offset_pct=default_profile.logo_y_offset_pct,
+                      qr_max_width_pct=default_profile.qr_max_width_pct,
+                      qr_x_offset_pct=default_profile.qr_x_offset_pct, qr_y_offset_pct=default_profile.qr_y_offset_pct,
+                      text_x_offset_pct=default_profile.text_x_offset_pct, text_y_offset_pct=default_profile.text_y_offset_pct,
                       # ttf_file="/Library/Fonts/Tahoma.ttf",
                       ttf_file="/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf",
                       show_diag=False)
@@ -119,70 +91,78 @@ def render_nametag():
     return jsonify({'nametag': 'data:image/png;charset=utf-8;base64,' + str(nametag.output_as_base64(), "utf-8")})
 
 
+@app.route('/admin', methods=['GET', 'POST'])
+def admin():
+    current_preferences = get_preferences(redis_instance())
+    # prefs = json.dumps(current_preferences, sort_keys=True, default=convert_to_dict)
+
+    # if there are no profiles, then create a default one.
+    if current_preferences is None or len(current_preferences) == 0:
+        default_profile = BadgeProfile()
+        profile_id = get_next_profile_id(redis_instance())
+        default_profile.profile_id = profile_id
+        default_profile.is_current_profile = True
+        current_preferences[profile_id] = default_profile
+        set_profile(redis_instance(), default_profile)
+
+    return render_template('admin.html', preferences=current_preferences)
+
+
 @app.route('/admin/status', methods=['GET'])
 def get_info():
-    info = {'printers': get_printer_status(r), 'nfc': get_nfc_status(r)}
+    info = {
+        'printers': get_printer_status(redis_instance()),
+        'nfc': get_nfc_status(redis_instance()),
+        'cards_pending' : peek_nfc_queue(redis_instance())
+        }
     return jsonify(info)
 
 
-@app.route('/admin', methods=['GET', 'POST'])
-def admin():
+@app.route('/admin/profile/new', methods=['GET'])
+def new_profile():
+    new_profile = BadgeProfile()
+    profile_id = get_next_profile_id(redis_instance())
+    new_profile.profile_id = profile_id
+    set_profile(redis_instance(), new_profile)
+    print(f'creating new profile with ID {profile_id}')
+    return redirect(url_for('edit_profile', profile_id=profile_id))
+
+
+@app.route('/admin/edit/<int:profile_id>', methods=['GET', 'POST'])
+def edit_profile(profile_id:int):
+    print(f'loading profile ID {profile_id}')
     if request.method == 'POST':
         logger.info('form response on submit:')
         for field in request.form:
             logger.info('response< {}:{} ({})'.format(field, str(request.form.get(field, None)), type(field)))
-        fields = {
-            'google_sheets_upload': bool(request.form.get('google_sheets_upload', None)),
-            'enable_printing': bool(request.form.get('enable_printing', None)),
-            'print_logo': bool(request.form.get('print_logo', None)),
-            'print_qr_code': bool(request.form.get('print_qr_code', None)),
-            'enable_nfc': bool(request.form.get('enable_nfc', None)),
-            'enable_pronouns': bool(request.form.get('enable_pronouns', None)),
-            'thank_you_message': request.form.get('thank_you_message', None),
-            'spreadsheet_id': request.form.get('spreadsheet_id', None),
-            'text_x_offset_pct': round(float(request.form.get('text_x_offset_pct', None)), 2),
-            'text_y_offset_pct': round(float(request.form.get('text_y_offset_pct', None)), 2),
-            'qr_x_offset_pct': round(float(request.form.get('qr_x_offset_pct', None)), 2),
-            'qr_y_offset_pct': round(float(request.form.get('qr_y_offset_pct', None)), 2),
-            'qr_max_width_pct': round(float(request.form.get('qr_max_width_pct', None)), 2),
-            'logo_x_offset_pct': round(float(request.form.get('logo_x_offset_pct', None)), 2),
-            'logo_y_offset_pct': round(float(request.form.get('logo_y_offset_pct', None)), 2),
-            'logo_scale': round(float(request.form.get('logo_scale', None)), 2)
-        }
-        set_preferences(r, fields)
+        profile_from_form_data = BadgeProfile.from_form(request.form)
+
+        # ensures that the profile we're editing corresponds to the URL.
+        profile_from_form_data.profile_id = profile_id
+        set_profile(redis_instance(), profile_from_form_data)
 
     form = AdminForm()
     logger.info('rendering the admin template')
-    current_preferences = get_preferences(r)
+    profile = get_preferences_for_id(redis_instance(), profile_id)
+    if profile is None:
+        return render_template('404.html', title='404'), 404
 
-    if current_preferences is None or all(value is None for value in current_preferences.values()):
-        logger.info("Unexpected blank value for preferences")
-        # logger.info("Preferences are currently empty; pre-loading with defaults")
-        # setPreferences(DEFAULT_PREFERENCES)
-        # current_preferences = DEFAULT_PREFERENCES
+    # if profile is None or all(value is None for value in profile):
+    #     logger.info("Unexpected blank value for preferences")
+    #     # logger.info("Preferences are currently empty; pre-loading with defaults")
+    #     # setPreferences(DEFAULT_PREFERENCES)
+    #     # profile = DEFAULT_PREFERENCES
+    
+    # for p in profile:
+    #     logger.info("current> {}:{} ({})".format(p, profile[p], type(profile[p])))
+    # # form.data = profile
 
-    for p in current_preferences:
-        logger.info("current> {}:{} ({})".format(p, current_preferences[p], type(current_preferences[p])))
-    # form.data = current_preferences
-    form.google_sheets_upload.data = bool(current_preferences.get('google_sheets_upload'))
-    form.enable_nfc.data = bool(current_preferences.get('enable_nfc'))
-    form.enable_printing.data = bool(current_preferences.get('enable_printing'))
-    form.print_logo.data = bool(current_preferences.get('print_logo'))
-    form.print_qr_code.data = bool(current_preferences.get('print_qr_code'))
-    form.enable_pronouns.data = bool(current_preferences.get('enable_pronouns'))
-    form.thank_you_message.data = current_preferences.get('thank_you_message')
-    form.spreadsheet_id.data = current_preferences.get('spreadsheet_id')
-    form.text_x_offset_pct.data = float(current_preferences.get('text_x_offset_pct'))
-    form.text_y_offset_pct.data = float(current_preferences.get('text_y_offset_pct'))
-    form.qr_x_offset_pct.data = float(current_preferences.get('qr_x_offset_pct'))
-    form.qr_y_offset_pct.data = float(current_preferences.get('qr_y_offset_pct'))
-    form.qr_max_width_pct.data = float(current_preferences.get('qr_max_width_pct'))
-    form.logo_x_offset_pct.data = float(current_preferences.get('logo_x_offset_pct'))
-    form.logo_y_offset_pct.data = float(current_preferences.get('logo_y_offset_pct'))
-    form.logo_scale.data = float(current_preferences.get('logo_scale'))
+    logger.info(f"current> {profile.to_json()}")
+  
+    form.populate_fields(profile)
     for d in form.data:
         logger.info(">>{}:{} ({})".format(d, form.data[d], str(type(form.data[d]))))
-    return render_template('admin.html', form=form, preferences=current_preferences)
+    return render_template('profile_edit.html', form=form, preferences=profile)
 
 
 @app.route('/signin', methods=['POST'])
@@ -199,12 +179,13 @@ def signin():
         logger.info("saving temp image at {}".format(img_file))
 
         use_server_img = bool(request.form.get('use_server_img', False))
-        prefs = get_preferences(r)
+
+        default_profile = get_default_profile(redis_instance())
 
         with open(img_file, "wb") as f:
             if use_server_img:
                 line1 = str(request.form.get('name', None))
-                data = Nametag.nametag_from_prefs(line1, '', prefs)
+                data = Nametag.nametag_from_profile(line1, '', default_profile)
             else:
                 # Removing the prefix 'data:image/png;base64,'
                 logger.info('image data: {}'.format(request.form['nametag_img']))
@@ -212,11 +193,11 @@ def signin():
 
             f.write(base64.b64decode(data))
 
-        if prefs['google_sheets_upload']:
+        if default_profile.google_sheets_upload:
             save_user_info(request.form['name'], request.form['pronoun'], request.form['email'])
 
         # print only if the submit button value is "print"
-        if prefs['enable_printing'] and request.form['button'] == "print":
+        if default_profile.enable_printing and request.form['button'] == "print":
             logger.info("Printing nametag for \"%s\"" % request.form['name'])
             send_to_printer(img_file)
             return render_template("thankyou.html", message="Your nametag will print soon.")

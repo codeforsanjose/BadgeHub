@@ -3,14 +3,26 @@ h1 {font-size:3em;}
 h2{font-size: 1.5em; margin-top: .4rem; margin-bottom: .6rem;border-bottom: 1px solid #dedede;}
 
 .header {display: flex;align-items: center;justify-content: flex-start;height: 8rem;padding: 1rem;}
-.header h1 {margin: 1rem;}
+.header h1 {margin: 1rem;display: block;}
 .header p {display: inline-block; font-size: 2em; line-height: 2em;}
 .header img {display: inline-block; height:8rem; }
+
+nav.breadcrumb {display: block; padding: 1rem;}
+.breadcrumb li {display:inline-block; float:left;}
+.breadcrumb li + li:before {
+    content: "/";
+    margin: 0 0.7em 0 0.7em;
+    display: inline-block;
+    font-size: 1em;
+}
+
+.settings_list { padding: 1rem;}
+.settings_list table, .settings_list td, .settings_list th {border: 2px solid #3c3c3c;padding:.2em;}
 
 form .label_input_pair {display: flex; width:20em; justify-content: space-between; align-items: center}
 form#settings_form label, form#settings_form input, form#settings_form button {margin:1em;}
 form#settings_form {display: flex;justify-content:center;align-items: stretch;align-content: space-around;}
-form#settings_form>section{display:inline-block;margin: 5em;}
+form#settings_form>section{display:inline-block;margin: 3em;}
 form#settings_form button { margin-left: auto; margin-right: auto; position: relative; display: block; }
 form#settings_form output { display: inline-block; width: 3rem;}
 .label_input_pair + .label_input_pair {border-top:1px solid #e6e6e6;}

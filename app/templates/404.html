@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>Admin</title>
+    <link href="favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="{{ url_for('static', filename='styles/reset.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='styles/main.css') }}" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+<div class="header">
+    <img alt="Code For San Jose" id="organization_logo" src="{{ url_for('static', filename='images/organization_logo.jpg') }}">
+    <img alt="" id="organization_logo_src" src="{{ url_for('static', filename='images/organization_logo.jpg') }}" style="display:none">
+    <h1>404 - Not Found 😅</h1>
+</div>
+
+<!-- TODO: generate a link and .zip file with all the needed information for debugging -->
+<p>If you feel like this is an error, please create an issue for it on <a
+        href="https://github.com/codeforsanjose/badgehub/issues">GitHub</a>, including the URL you were trying to visit
+    and a copy of your configuration file.</p>
+
+</body>
+</html>

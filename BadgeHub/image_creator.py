@@ -6,6 +6,8 @@ from io import BytesIO
 import qrcode
 from PIL import Image, ImageDraw, ImageFont
 
+from BadgeHub.models.badge_profile import BadgeProfile
+
 PRINT_DPI = 300
 PAGE_WIDTH_IN = 4.0
 PAGE_HEIGHT_IN = 2.25
@@ -157,18 +159,18 @@ class Nametag:
                 math.floor(margin_px + ((obj_offset[1] * usable_space['h']) - obj_center['h']))]
 
     @staticmethod
-    def nametag_from_prefs(text_line1: str, text_line2: str, prefs_dict: dict):
+    def nametag_from_profile(text_line1: str, text_line2: str, profile: BadgeProfile):
         nt = Nametag(text_line1=text_line1,
                      text_line2=text_line2,
-                     logo_scale=prefs_dict['logo_scale'],
-                     logo_x_offset_pct=prefs_dict['logo_x_offset_pct'],
-                     logo_y_offset_pct=prefs_dict['logo_y_offset_pct'],
-                     qr_max_width_pct=prefs_dict['qr_max_width_pct'],
-                     qr_x_offset_pct=prefs_dict['qr_x_offset_pct'],
-                     qr_y_offset_pct=prefs_dict['qr_y_offset_pct'],
-                     text_x_offset_pct=prefs_dict['text_x_offset_pct'],
-                     text_y_offset_pct=prefs_dict['text_y_offset_pct'],
-                     ttf_file=prefs_dict['font_file'],
+                     logo_scale=profile.logo_scale,
+                     logo_x_offset_pct=profile.logo_x_offset_pct,
+                     logo_y_offset_pct=profile.logo_y_offset_pct,
+                     qr_max_width_pct=profile.qr_max_width_pct,
+                     qr_x_offset_pct=profile.qr_x_offset_pct,
+                     qr_y_offset_pct=profile.qr_y_offset_pct,
+                     text_x_offset_pct=profile.text_x_offset_pct,
+                     text_y_offset_pct=profile.text_y_offset_pct,
+                     ttf_file=profile.font_file,
                      show_diag=False)
         return nt.output_as_base64()
 

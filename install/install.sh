@@ -14,6 +14,7 @@ sudo apt-get update
 sudo apt-get install -y \
     git \
     python3-dev \
+    python3-venv \
     zbar-tools \
     qrencode \
     libtool \
@@ -36,6 +37,8 @@ sudo apt-get install -y \
 curl -sSL https://get.docker.com | sh
 sudo usermod -aG docker pi
 
+docker pull redis
+
 #
 # Raspberry Pi config
 # enables serial, I2C, SPI, expands the file system, and sets the locale.
@@ -52,16 +55,23 @@ sudo raspi-config nonint do_expand_rootfs
 
 
 
+# libnfc install
+sudo apt-get install -y libnfc-dev
+
+# this should now list an NFC device
+sudo nfc-list
+
+
 
 # Python 3 install
-wget https://bootstrap.pypa.io/get-pip.py
-sudo python3 get-pip.py
-rm ./get-pip.py
+#wget https://bootstrap.pypa.io/get-pip.py
+#sudo python3 get-pip.py
+#rm ./get-pip.py
 # sudo ln -s /usr/bin/python /usr/bin/python3
 # sudo ln -s /usr/bin/pip3 /usr/bin/pip
 
 # clear the bash cache, because reasons
-hash -r
+#hash -r
 
 
 # Setup RabitMQ
@@ -96,16 +106,17 @@ sudo mkdir $PROJECT_DIR
 sudo chown -R pi $PROJECT_DIR
 cd $PROJECT_DIR
 
-sudo pip3 --default-timeout=1000 install --upgrade virtualenv
+#sudo pip3 --default-timeout=1000 install --upgrade virtualenv
 
 git clone https://github.com/codeforsanjose/CFSJ-Login-System.git src
 cd src
-virtualenv -p python3 venv
+python3 -m venv venv
 . venv/bin/activate
 pip3 --default-timeout=1000 install -r requirements.txt
 
 # normally we'd just use `pip install fclist`, but the official package is broken
-pip install git+git://github.com/Kyle-Falconer/python-fclist.git@9ce346d184f38b3b4780d6df50847897c32ed281
+pip3 install wheel
+pip3 install git+git://github.com/Kyle-Falconer/python-fclist.git@9ce346d184f38b3b4780d6df50847897c32ed281
 
 
 # test
@@ -116,10 +127,10 @@ pip install git+git://github.com/Kyle-Falconer/python-fclist.git@9ce346d184f38b3
 
 
 # supervisord configuration
-usermod -a -G supervisor
-usermod -a pi -G supervisor
-sudo cp install/supervisord.conf /etc/supervisord.conf
-service supervisor restart
+#usermod -a -G supervisor
+#usermod -a pi -G supervisor
+#sudo cp install/supervisord.conf /etc/supervisord.conf
+#service supervisor restart
 
 
 IP_ADDR=`ip route get 8.8.8.8 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}'`
