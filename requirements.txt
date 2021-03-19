@@ -8,7 +8,7 @@ google-auth==1.5.1
 google-auth-httplib2==0.0.3
 httplib2==0.11.3
 itsdangerous==0.24
-Jinja2==2.9.5
+Jinja2==2.11.3
 MarkupSafe==0.23
 oauth2client==4.1.2
 packaging==16.8
